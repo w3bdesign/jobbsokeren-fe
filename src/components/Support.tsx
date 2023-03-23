@@ -1,6 +1,5 @@
-import { ArrowSmallUpIcon, Bars2Icon, FilmIcon, VideoCameraIcon } from '@heroicons/react/24/outline';
-import { ArrowRightIcon, CpuChipIcon } from '@heroicons/react/24/solid';
-import supportImage from '../assets/background2.png';
+import {  FilmIcon } from '@heroicons/react/24/outline';
+import supportImage from '@/assets/images/png/background2.png';
 import { Element } from 'react-scroll';
 
 const Support = () => {

@@ -1,6 +1,5 @@
-import React from 'react'
 import { Element } from 'react-scroll';
-import { ClipboardDocumentCheckIcon, ClockIcon, CpuChipIcon } from '@heroicons/react/24/outline';
+import { ClockIcon, CpuChipIcon } from '@heroicons/react/24/outline';
 
 const Article = () => {
     return (

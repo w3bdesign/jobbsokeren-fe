@@ -1,6 +1,6 @@
 import { CheckIcon } from "@heroicons/react/24/solid";
 import { Element } from 'react-scroll';
-import { pricingArray } from "../data/prices";
+import { priceData } from "@/data/priceData";
 
 const Pricing = () => {
     return ( 
@@ -14,7 +14,7 @@ const Pricing = () => {
                         <p className="text-3xl">Vi tilbyr en rekke prispakker, inkludert en gratis løsing med litt begrenset antall, samt flere betalte pakker med mindre begrensninger.</p>
                     </div>
                     <div className="grid md:grid-cols-3 ">
-                        {pricingArray.map((item, index) => {
+                        {priceData.map((item, index) => {
                             return (
                                 <div key={index} className="bg-white text-slate-900 m-4 p-8 rounded-xl shadow-2xl relative">
                                     <span className="uppercase px-3 py-1 bg-indigo-200 rounded-2xl text-sm ">{item.title}</span>

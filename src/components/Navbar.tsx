@@ -1,15 +1,13 @@
 import {useState} from "react";
 import { Bars4Icon, XMarkIcon  } from "@heroicons/react/24/outline";
-import { Link, animateScroll as scroll } from 'react-scroll';
-
+import { Link } from 'react-scroll';
+import { navigationData } from "@/data/navigationData";
 
 const Navbar = () => {
 
-    const navigationLinks = [{name: "Hjem", link: "/", offset:0}, {name: "Spar tid", link: "/about", offset:-120}, {name: "Slik fungerer det", link: "/support", offset:-50}, {name: "Hva vi tilbyr", link: "/platforms", offset: -100}, {name: "Priser", link: "/pricing", offset:-50}]
     const [nav, setNav] = useState(false);
     const handleClick = () => setNav(!nav);
     const closeMobileMenu = () => setNav(false);
-
 
     return (
         <div className="w-screen h-[80px] z-10 bg-zinc-200 fixed drop-shadow-md">
@@ -20,7 +18,7 @@ const Navbar = () => {
                     </Link> 
                     <nav>
                         <ul className="hidden md:flex">
-                            {navigationLinks.map((link, index) =>
+                            {navigationData.map((link, index) =>
                                 <li className="cursor-pointer hover:text-indigo-600" key={index}>
                                     <Link activeClass="underline underline-offset-8 text-indigo-600" spy={true} to={link.link.slice(1)} smooth={true} offset={link.offset} duration={500}>
                                         {link.name}
@@ -40,7 +38,7 @@ const Navbar = () => {
             </div>
             <nav className={!nav ? 'hidden':  'md:hidden absolute bg-zinc-200 w-full px-8'}>                    
                 <ul>
-                    {navigationLinks.map((link, index) => 
+                    {navigationData.map((link, index) => 
                         <li className="border-b-2 border-zinc-300 w-full hover:cursor-pointer" key={index}>
                             <Link activeClass="active" 
                                 to={link.link.slice(1)} 
@@ -58,7 +56,6 @@ const Navbar = () => {
                     </div>
                 </ul>
             </nav>
-          
         </div>
     )
     
