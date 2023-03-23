@@ -1,11 +1,10 @@
-import { useState } from 'react'
 import './App.css'
 import Navbar from './components/Navbar'; 
 import Hero from './components/Hero';
-import Article from './components/Article';
-import Support from './components/Support';
-import AllInOne from './components/AllInOne';
-import Pricing from './components/pricing';
+import SaveTime from './components/SaveTime';
+import HowItWorks from './components/HowItWorks';
+import WhatWeOffer from './components/WhatWeOffer';
+import Pricing from './components/Pricing';
 import Footer from './components/Footer';
 
 function App() {
@@ -14,9 +13,9 @@ function App() {
     <>
       <Navbar />
       <Hero />
-      <Article />
-      <Support />
-      <AllInOne />
+      <SaveTime />
+      <HowItWorks />
+      <WhatWeOffer />
       <Pricing />
       <Footer />
 
