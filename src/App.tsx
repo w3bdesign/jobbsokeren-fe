@@ -1,25 +1,19 @@
 import './App.css'
 import Navbar from './components/Navbar'; 
-import Hero from './components/Hero';
-import SaveTime from './components/SaveTime';
-import HowItWorks from './components/HowItWorks';
-import WhatWeOffer from './components/WhatWeOffer';
-import Pricing from './components/Pricing';
 import Footer from './components/Footer';
+import LandingPage from './pages/landingPage';
+import {BrowserRouter,Routes, Route} from "react-router-dom";
 
 function App() {
   
   return (
-    <>
-      <Navbar />
-      <Hero />
-      <SaveTime />
-      <HowItWorks />
-      <WhatWeOffer />
-      <Pricing />
-      <Footer />
-
-    </>
+    <BrowserRouter>       
+          <Navbar/>
+            <Routes>
+                <Route path="/" element={<LandingPage/>}/>
+            </Routes>
+          <Footer/>   
+    </BrowserRouter>
   )
 } 
 
