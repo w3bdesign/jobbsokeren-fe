@@ -1,33 +1,9 @@
 import { CheckIcon } from "@heroicons/react/24/solid";
 import { Element } from 'react-scroll';
+import { pricingArray } from "../data/prices";
 
 const Pricing = () => {
-    // array of objects with pricing data
-    const pricingArray = [ 
-        {
-            id: 1,
-            title: "Basis",
-            description: "Perfekt for deg som bare vil teste ut vår tjeneste, men ikke har behov for mange søknader.",
-            price: 0,
-            amount: 5
-        },
-        {
-            id: 2,
-            title: "Standard",
-            description: "Perfekt for deg som har behov for flere søknader, men ikke har behov for veldig mange.",
-            price: 39,
-            amount: 50
-        },
-        {
-            id: 3,
-            title: "Premium",
-            description: "Perfekt for deg som har behov for mange søknader, og ønsker å bruke tjenesten i en lengre periode.",
-            price: 59,
-            amount: 200
-        }   
-    ]
-
-    return (
+    return ( 
         <Element name="pricing" className="w-full text-white my-24">
             <div className="w-full h-[800px] bg-slate-900 absolute">
             </div>
