@@ -30,7 +30,8 @@ const Pricing = () => {
     return (
         <Element name="pricing" className="w-full text-white my-24">
             <div className="w-full h-[800px] bg-slate-900 absolute">
-                <div className="max-w-[1240px] mx-auto py-12">
+            </div>
+                <div className="max-w-[1240px] m-auto py-12 relative">
                     <div className="text-center py-8 text-slate-300">
                         <h2 className="text-3xl uppercase">Priser</h2>
                         <h3 className="text-5xl font-bold text-white py-8">Finn riktig løsning for ditt behov</h3>
@@ -44,19 +45,19 @@ const Pricing = () => {
                                     <div>
                                         <p className="text-6xl font-bold py-4 flex">{item.price}<span className="text-xl text-slate-500 flex flex-col justify-end">,–/Mnd</span></p>
                                     </div>
-                                <p className="text-2xl text-slate-500 lg:h-[120px]">{item.description}</p>
-                                <div className="text-2xl my-3">
-                                        <p className="flex py-4 "><CheckIcon className="w-8 mr-5 text-green-600"/>{`Inkluderer ${item.amount}`} søknader </p>
-                                        <p className="flex py-4 "><CheckIcon className="w-8 mr-5 text-green-600"/>Siste generasjons AI GPT-4</p>
-                                        <p className="flex py-4 "><CheckIcon className="w-8 mr-5 text-green-600"/>Nedlastbare søknader </p>
-                                        <button className="w-full py-4 my-4">Kom i gang!</button>
-                                </div>
+                                    <p className="text-2xl text-slate-500 lg:h-[120px]">{item.description}</p>
+                                    <div className="text-2xl my-3">
+                                            <p className="flex py-4 "><CheckIcon className="w-8 mr-5 text-green-600"/>{`Inkluderer ${item.amount}`} søknader </p>
+                                            <p className="flex py-4 "><CheckIcon className="w-8 mr-5 text-green-600"/>Siste generasjons AI GPT-4</p>
+                                            <p className="flex py-4 "><CheckIcon className="w-8 mr-5 text-green-600"/>Nedlastbare søknader </p>
+                                            <button className="w-full py-4 my-4">Kom i gang!</button>
+                                    </div>
                                 </div> 
                             )
                         })}
                     </div>
                 </div>
-            </div>
+            
 
             
         </Element>
