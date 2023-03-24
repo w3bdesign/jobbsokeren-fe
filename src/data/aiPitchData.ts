@@ -1,4 +1,4 @@
-import { aiPitchModel } from "../models/aiPitchModel";
+import { aiPitchModel } from "@/models/aiPitchModel";
 
 export const aiPitchData: Array<aiPitchModel> = [
     {

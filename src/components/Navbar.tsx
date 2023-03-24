@@ -1,21 +1,28 @@
 import {useState} from "react";
 import { Bars4Icon, XMarkIcon  } from "@heroicons/react/24/outline";
 import { Link } from 'react-scroll';
+import {Link as RouterLink} from "react-router-dom";
 import { navigationData } from "@/data/navigationData";
+import {useLocation} from "react-router-dom";
 
 const Navbar = () => {
 
     const [nav, setNav] = useState(false);
     const handleClick = () => setNav(!nav);
     const closeMobileMenu = () => setNav(false);
+    const {pathname} = useLocation();
 
     return (
         <div className="w-screen h-[80px] z-10 bg-zinc-200 fixed drop-shadow-md">
             <div className="px-3 md:px-10 flex justify-between items-center w-full h-full">
                 <div className="flex items-center">
-                    <Link activeClass="active" to={""} smooth={true} offset={0} duration={500}>
-                        <h1 className="text-3xl font-bold mr-4 sm:text-4xl hover:cursor-pointer">JOBBSØKEREN</h1> 
-                    </Link> 
+                    {pathname === "/editor" ?
+                        <RouterLink to="/">
+                            <h1 className="text-3xl font-bold mr-4 sm:text-4xl hover:cursor-pointer">JOBBSØKEREN </h1>
+                        </RouterLink> :
+                        <Link activeClass="active" to="" smooth={true} offset={0} duration={500}>
+                            <h1 className="text-3xl font-bold mr-4 sm:text-4xl hover:cursor-pointer">JOBBSØKEREN </h1>
+                        </Link>}
                     <nav>
                         <ul className="hidden md:flex">
                             {navigationData.map((link, index) =>

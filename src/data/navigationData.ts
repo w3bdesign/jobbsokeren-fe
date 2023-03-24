@@ -1,4 +1,4 @@
-import { NavigationLink } from "../models/navigationModel";
+import { NavigationLink } from "@/models/navigationModel";
 
 export const navigationData: Array<NavigationLink> = [
     {

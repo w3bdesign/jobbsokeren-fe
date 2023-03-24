@@ -1,6 +1,7 @@
 import HeroImage from '@/assets/images/png/heroImage3.png'
 import { Element } from 'react-scroll';
 import { ClipboardDocumentCheckIcon, NewspaperIcon, PencilSquareIcon } from '@heroicons/react/24/solid';
+import {Link as RouterLink} from "react-router-dom";
 
 
 const Hero = () => {
@@ -13,7 +14,10 @@ const Hero = () => {
                 <h1 className='py-3 text-5xl md:text-7xl font-bold'>AI - Jobbsøknader</h1>
                 <p className='text-2xl'>Sikre deg drømmejobben</p>
                 <p className='text-2xl'>Unike og skreddersydde søknader</p>
-                <button className='py-3 px-6 sm:w-[60%] my-4'>Kom i gang</button>
+                
+                <RouterLink className='w-full' to="/editor">
+                    <button className='py-3 px-6 sm:w-[60%] my-4'>Kom i gang</button>
+                </RouterLink>
             </div>
             <div>
                 <img className='w-full' src={HeroImage} alt="/" />
