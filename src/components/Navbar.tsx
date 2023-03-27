@@ -23,7 +23,8 @@ const Navbar = () => {
                         <Link activeClass="active" to="" smooth={true} offset={0} duration={500}>
                             <h1 className="text-3xl font-bold mr-4 sm:text-4xl hover:cursor-pointer">JOBBSØKEREN </h1>
                         </Link>}
-                    <nav>
+                   {pathname !== "/editor" && 
+                   <nav>
                         <ul className="hidden md:flex">
                             {navigationData.map((link, index) =>
                                 <li className="cursor-pointer hover:text-indigo-600" key={index}>
@@ -33,7 +34,7 @@ const Navbar = () => {
                                 </li>
                             )}
                         </ul>
-                    </nav>
+                    </nav>}
                 </div>
                 <div className="hidden md:flex pr-4">
                     <button className="border-none bg-transparent text-black mr-6">Logg inn</button>

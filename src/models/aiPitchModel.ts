@@ -1,4 +1,4 @@
-export interface aiPitchModel {
+export interface AiPitchModel {
     title: string;
     description: string;
 }
