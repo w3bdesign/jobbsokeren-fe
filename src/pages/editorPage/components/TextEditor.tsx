@@ -5,19 +5,22 @@ import {ThreeCircles} from 'react-loader-spinner'
 
 // inputValuesModel is a type that is defined in models/inputValuesModel.ts
 // it is used to define the type of the states object
-const TextEdtiors : React.FC<EditorFormPropsModel> = ({formValues, formSubmited} )  =>  {
+const TextEdtiors : React.FC<EditorFormPropsModel> = ({formValues, formSubmited, setFormSubmited} )  =>  {
 
     const {name, email, address, city, postalcode, jobtitle} = formValues;
-    const [initialValue, setInitialValue] = useState('');
+    const [initialValue, setInitialValue] = useState("<h1>Fyll ut skjemaet til venstre for å generere søknaden</h1>");
     const [loading, setLoading] = useState(false);
    
       useEffect(() => {
+       
         if (formSubmited) {
           // wrap in setTimeout to simulate async call
+          setInitialValue("");
           setLoading(true);
           setTimeout(() => {
             setInitialValue(initValueEditor);
             setLoading(false);
+            setFormSubmited(false);
           }, 2500);
         }
       }, [formSubmited]);
@@ -88,12 +91,11 @@ const TextEdtiors : React.FC<EditorFormPropsModel> = ({formValues, formSubmited}
               />
             </div>
           }
-         
           <div className='p-2 bg-zinc-100 h-full '>
             <Editor
               initialValue={initialValue}
               init={{
-                menubar: false,
+                menubar: true,
                 content_css: "./src/pages/editorPage/components/TextEditor.css",
                 height: "100%",
                 importcss_append: true,
@@ -108,9 +110,7 @@ const TextEdtiors : React.FC<EditorFormPropsModel> = ({formValues, formSubmited}
                   alignleft aligncenter alignright | \
                   bullist numlist outdent indent | help'
               }}
-            
             />
-
           </div>
         </div>
      

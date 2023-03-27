@@ -11,5 +11,6 @@ export interface EditorFormModel {
 export interface EditorFormPropsModel {
     formValues: EditorFormModel;
     formSubmited: boolean;
+    setFormSubmited:  React.Dispatch<React.SetStateAction<boolean>>;
 }
 

@@ -1,5 +1,5 @@
 import InputBar from "./components/InputBar"
-import TextEdtior from "./components/TextEditor"
+import TextEditor from "./components/TextEditor"
 import { useState } from "react"
 import { EditorFormModel} from "@/models/editorFormModel"
 
@@ -27,20 +27,19 @@ const EditorPage = () => {
     };
 
     return (
-        <div className="w-full grid md:grid-cols-12 h-screen pt-[80px]">
+        <div className="w-full bg-zinc-100 pb-6 grid md:grid-cols-12 pt-[80px]">
             <div className="md:col-span-4">
                 <InputBar 
                     formValues={formValues} 
                     handleInputChange={handleInputChange}
-                    handleSubmit={handleSubmit}                 
-                    />
+                    handleSubmit={handleSubmit}/>
             </div>
-           <div className="md:col-span-8">
-            <TextEdtior
+            <div className="md:col-span-8 min-h-[600px] ">
+                <TextEditor
                     formValues={formValues}
                     formSubmited={formSubmited}
-                />
-           </div>
+                    setFormSubmited={setFormSubmited}/>
+            </div>
         </div>
     )
 }

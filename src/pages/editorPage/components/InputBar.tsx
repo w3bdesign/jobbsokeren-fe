@@ -4,7 +4,7 @@ import {EditorFormPropsModel} from "@/models/editorFormPropsModel";
 const InputBar : React.FC<EditorFormPropsModel> = ( { formValues, handleInputChange, handleSubmit}) => {
       
     return (
-        <div className="w-full h-full bg-zinc-100">
+        <div className="w-full bg-zinc-100">
             <form onSubmit={handleSubmit}>
                 <div className="w-[80%] justify-center mx-auto pt-4">
                     <div className="md:mb-20">

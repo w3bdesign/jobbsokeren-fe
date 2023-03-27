@@ -10,11 +10,14 @@ function App() {
   return (
     <BrowserRouter>       
           <Navbar/>
-            <Routes>
-                <Route path="/" element={<LandingPage/>}/>
-                <Route path="/editor" element={<EditorPage/>}/>
-            </Routes>
-          <Footer/>   
+          { /* Make footer stick to bottom */}
+          <div className='grid h-screen grid-rows-[1fr,auto]'>
+              <Routes>
+                  <Route path="/" element={<LandingPage/>}/>
+                  <Route path="/editor" element={<EditorPage/>}/>
+              </Routes>
+            <Footer/>
+          </div>   
     </BrowserRouter>
   )
 } 
