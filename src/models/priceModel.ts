@@ -1,5 +1,5 @@
 // type for price
-export interface Price {
+export interface PriceModel {
     id: number;
     title: string;
     description: string;

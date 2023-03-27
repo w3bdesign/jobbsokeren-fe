@@ -1,7 +1,7 @@
-import { Price } from "@/models/priceModel"
+import { PriceModel } from "@/models/priceModel"
 
 // 
-export const priceData : Array<Price> = [ 
+export const priceData : Array<PriceModel> = [ 
     {
         id: 1,
         title: "Basis",
