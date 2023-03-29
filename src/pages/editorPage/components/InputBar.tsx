@@ -1,7 +1,11 @@
 import {EditorFormPropsModel} from "@/models/editorFormPropsModel";
+import { ThreeDots } from "react-loader-spinner";
 
 
-const InputBar : React.FC<EditorFormPropsModel> = ( { formValues, handleInputChange, handleSubmit}) => {
+const InputBar : React.FC<EditorFormPropsModel> = ( { formValues, handleInputChange, handleSubmit, loading}) => {
+
+    const buttonLoading = loading ? "hover:bg-indigo-600" : "hover:bg-transparent";
+    
       
     return (
         <div className="w-full bg-zinc-100">
@@ -105,7 +109,18 @@ const InputBar : React.FC<EditorFormPropsModel> = ( { formValues, handleInputCha
                                     {false && <p className="mt-3 text-xs text-red-400">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>}
                             </div>
                         <div>
-                            <button type="submit" className="w-full py-4 my-4 text-white border bg-indigo-600 border-indigo-600 hover:bg-transparent hover:text-indigo-600 hover:border-indigo-600 rounded-md">Generer søknad</button>
+                            <button type="submit" disabled={loading} className={`w-full py-4 my-4 text-white border bg-indigo-600 border-indigo-600 hover:text-indigo-600 hover:border-indigo-600 rounded-md ${buttonLoading}`}>
+                                {loading ? <ThreeDots 
+                                    height="25" 
+                                    width="25" 
+                                    radius="9"
+                                    color="#FFFFFF" 
+                                    ariaLabel="three-dots-loading"
+                                    wrapperStyle={{display: "flex", justifyContent: "center", alignItems: "center"}}
+                                    visible={true}
+                                />
+                                : "Generer søknad"}
+                            </button>
                         </div>
                     </div>
                 </div>

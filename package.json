@@ -16,7 +16,8 @@
     "react-icons": "^4.8.0",
     "react-loader-spinner": "^5.3.4",
     "react-router-dom": "^6.9.0",
-    "react-scroll": "^1.8.9"
+    "react-scroll": "^1.8.9",
+    "swr": "^2.1.1"
   },
   "devDependencies": {
     "@types/node": "^18.15.5",
