@@ -2,31 +2,25 @@ import { Editor } from '@tinymce/tinymce-react';
 import React, {useState, useEffect} from 'react';
 import { EditorFormPropsModel } from '@/models/editorFormModel';
 import {ThreeCircles} from 'react-loader-spinner'
-import useContent from '../hooks/useContent';
+import generateEditorContent from '@/utils/generateEditorContent'
 
 
-const TextEdtiors : React.FC<EditorFormPropsModel> = ({formValues, formSubmited, setFormSubmited, setLoading, loading} )  =>  {
+const TextEdtiors : React.FC<EditorFormPropsModel> = ({fetchedData, formSubmited, setFormSubmited, isLoading} )  =>  {
+
 
     const [initialValue, setInitialValue] = useState("<h1>Fyll ut skjemaet til venstre for å generere søknaden</h1>");
-    const {content} = useContent(formValues);
-    
-   
+    const {content} = generateEditorContent(fetchedData);
+ 
       useEffect(() => {
         if (formSubmited) {
-          // wrap in setTimeout to simulate async call
-          setInitialValue("");
-          setLoading(true);
-          setTimeout(() => {
-            setInitialValue(content);
-            setLoading(false);
-            setFormSubmited(false);
-          }, 2500);
+          setInitialValue(content);
+          setFormSubmited(false);
         }
       }, [formSubmited]);
 
     return (
         <div className='h-full relative'>
-          {loading && 
+          {isLoading && 
             <div className='h-full absolute w-full z-40 grid'>
               <ThreeCircles
                   height="100"
@@ -34,7 +28,7 @@ const TextEdtiors : React.FC<EditorFormPropsModel> = ({formValues, formSubmited,
                   color="#4f46e5"
                   wrapperStyle={{}}
                   wrapperClass="m-auto "
-                  visible={loading}
+                  visible={isLoading}
                   ariaLabel="three-circles-rotating"
                 
               />

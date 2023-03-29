@@ -1,18 +1,19 @@
+import { FetchedDataModel } from "./fetchedDataModel";
+
 export interface EditorFormModel {
-    name: string;
-    email: string;
-    address: string;
-    city: string;
-    postalcode: string;
-    jobtitle: string;
-    finnlink: string;
+    applicant_name: string,
+    applicant_email: string,
+    applicant_address: string,
+    applicant_zip_code: string,
+    applicant_city: string,
+    applicant_job_advertisement_url: string,
+   
 }
 
 export interface EditorFormPropsModel {
-    formValues: EditorFormModel;
+    fetchedData: FetchedDataModel;
     formSubmited: boolean;
-    loading: boolean;
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+    isLoading: boolean;
     setFormSubmited:  React.Dispatch<React.SetStateAction<boolean>>;
 }
 
