@@ -11,6 +11,8 @@ export interface EditorFormModel {
 }
 
 export interface EditorFormPropsModel {
+    initialValue: string;
+    setInitialValue: React.Dispatch<React.SetStateAction<string>>;
     fetchedData: FetchedDataModel;
     formSubmited: boolean;
     isLoading: boolean;

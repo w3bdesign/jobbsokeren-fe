@@ -11,5 +11,6 @@ export interface FetchedDataModel {
     applicant_city: string,
     applicant_zip_code: string,
     applicant_job_advertisement_url: string,
+    applicant_cover_letter: string,
 }  
 

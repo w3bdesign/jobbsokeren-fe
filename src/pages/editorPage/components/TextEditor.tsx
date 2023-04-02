@@ -5,16 +5,16 @@ import {ThreeCircles} from 'react-loader-spinner'
 import generateEditorContent from '@/utils/generateEditorContent'
 
 
-const TextEdtiors : React.FC<EditorFormPropsModel> = ({fetchedData, formSubmited, setFormSubmited, isLoading} )  =>  {
+const TextEdtiors : React.FC<EditorFormPropsModel> = ({initialValue, setInitialValue, fetchedData, formSubmited, setFormSubmited, isLoading} )  =>  {
 
 
-    const [initialValue, setInitialValue] = useState("<h1>Fyll ut skjemaet til venstre for å generere søknaden</h1>");
+ 
     const {content} = generateEditorContent(fetchedData);
  
       useEffect(() => {
         if (formSubmited) {
-          setInitialValue(content);
-          setFormSubmited(false);
+            setInitialValue(content);
+            setFormSubmited(false);
         }
       }, [formSubmited]);
 

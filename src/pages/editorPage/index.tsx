@@ -18,7 +18,8 @@ const emptyFetchedData: FetchedDataModel = {
     applicant_address:  '',
     applicant_city:  '',
     applicant_zip_code:  '',
-    applicant_job_advertisement_url:  ''
+    applicant_job_advertisement_url:  '',
+    applicant_cover_letter:  '',
 }
 
 // empty formValues object
@@ -38,11 +39,12 @@ const EditorPage = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     const [formValues, setFormValues] = useState<EditorFormModel>(emptyFormValues);
+    const [initialValue, setInitialValue] = useState("<h1>Fyll ut skjemaet til venstre for å generere søknaden</h1>");
 
     const handleSubmit = (event  : React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setIsLoading(true);
-
+        setInitialValue("");
         axios({
             method: "post",
             url: "http://127.0.0.1:3000/api/jobApplicationData",
@@ -80,6 +82,8 @@ const EditorPage = () => {
             </div>
             <div className="md:col-span-8 min-h-[600px] ">
                 <TextEditor
+                    initialValue={initialValue}
+                    setInitialValue={setInitialValue}
                     fetchedData={fetchedData}
                     formSubmited={formSubmited}
                     isLoading={isLoading}
@@ -90,3 +94,5 @@ const EditorPage = () => {
 }
 
 export default EditorPage
+
+
