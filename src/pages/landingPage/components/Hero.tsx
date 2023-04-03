@@ -5,7 +5,7 @@ import {Link as RouterLink} from "react-router-dom";
 import Typewriter from 'typewriter-effect';
 
 
-const Hero = () => {
+const Hero = () => {  
 
     return (
     <Element name="" className='w-full pt-12 h-screen bg-zinc-200 flex flex-col justify-between'>

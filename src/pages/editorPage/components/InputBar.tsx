@@ -1,10 +1,60 @@
-import {EditorFormPropsModel} from "@/models/editorFormPropsModel";
 import { ThreeDots } from "react-loader-spinner";
+import { EditorFormModel} from "@/models/editorFormModel"
+import { useState } from "react";
+import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "@/store/store";
+import { toggleInputBarFormSubmit } from "@/store/slices/inputBarFormSubmitSlice";
+import {setEditorFetchedData} from "@/store/slices/editorFetchedDataSlice";
+import { toggleEditorIsLoading } from "@/store/slices/editorIsLoadingSlice";
+import { setEditorData } from '@/store/slices/editorDataSlice';
+
+const InputBar : React.FC = () => {
 
 
-const InputBar : React.FC<EditorFormPropsModel> = ( { formValues, handleInputChange, handleSubmit, isLoading}) => {
+    const emptyFormValues: EditorFormModel = {
+        applicant_name: '',
+        applicant_email: '',
+        applicant_address: '',
+        applicant_zip_code:'',
+        applicant_city: '',
+        applicant_job_advertisement_url: ''
+    }
+  
+    const [isError, setIsError] = useState(false);
+    const [formValues, setFormValues] = useState<EditorFormModel>(emptyFormValues);
+    const editorIsLoading = useSelector((state: RootState) => state.editorIsLoading.value);
+    const buttonLoading = editorIsLoading ? "hover:bg-indigo-600" : "hover:bg-transparent";
+    const dispatch = useDispatch();
+    
+    
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = event.target;
+        setFormValues({ ...formValues, [name]: value });
+    };
 
-    const buttonLoading = isLoading ? "hover:bg-indigo-600" : "hover:bg-transparent";
+    const handleSubmit = (event  : React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        dispatch(toggleEditorIsLoading(true));
+        dispatch(setEditorData(""));
+        // set initial value to empty string to avoid showing old data
+        axios({
+            method: "post",
+            url: "http://127.0.0.1:3000/api/jobApplicationData",
+            data: formValues,
+        })
+        .then(response => {
+            const { data } = response;
+            dispatch(toggleEditorIsLoading(false));
+            dispatch(setEditorFetchedData(data));
+            dispatch(toggleInputBarFormSubmit(true));
+        })
+        .catch(response => {
+            setIsError(response.status);
+            dispatch(toggleInputBarFormSubmit(true));            
+            dispatch(toggleEditorIsLoading(false));
+        });
+    };
     
       
     return (
@@ -98,8 +148,8 @@ const InputBar : React.FC<EditorFormPropsModel> = ( { formValues, handleInputCha
                                     {false && <p className="mt-3 text-xs text-red-400">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>}
                             </div>
                         <div>
-                            <button type="submit" disabled={isLoading} className={`w-full py-4 my-4 text-white border bg-indigo-600 border-indigo-600 hover:text-indigo-600 hover:border-indigo-600 rounded-md ${buttonLoading}`}>
-                                {isLoading ? <ThreeDots 
+                            <button type="submit" disabled={editorIsLoading} className={`w-full py-4 my-4 text-white border bg-indigo-600 border-indigo-600 hover:text-indigo-600 hover:border-indigo-600 rounded-md ${buttonLoading}`}>
+                                {editorIsLoading ? <ThreeDots 
                                     height="25" 
                                     width="25" 
                                     radius="9"
