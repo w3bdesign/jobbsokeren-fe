@@ -13,7 +13,6 @@ export const editorDataSlice = createSlice({
     initialState,
     reducers: {
         setEditorData: (state, action: PayloadAction<string>) => {
-            console.log("setEditorData", action.payload);
             state.value = action.payload;
         }
     }

@@ -1,5 +1,5 @@
 import {  FilmIcon } from '@heroicons/react/24/outline';
-import BackgroundImage from '@/assets/images/png/background2.png';
+import BackgroundImage from '@/assets/images/png/howItWorksBackground.png';
 import { Element } from 'react-scroll';
 
 const HowItWorks = () => {

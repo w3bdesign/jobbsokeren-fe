@@ -1,27 +1,25 @@
 import { Editor } from '@tinymce/tinymce-react';
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {ThreeCircles} from 'react-loader-spinner'
 import generateEditorContent from '@/utils/generateEditorContent'
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/store/store';
-import { toggleInputBarFormSubmit } from "@/store/slices/inputBarFormSubmitSlice";
-import { setEditorData } from '@/store/slices/editorDataSlice';
+import { setEditorData } from '@/store/slices/editor/editorDataSlice';
 
 
 const TextEdtiors : React.FC = ()  =>  {
     const  dispatch = useDispatch();
     const editorIsLoading = useSelector((state: RootState) => state.editorIsLoading.value);
-    const formSubmitedStatus =  useSelector((state: RootState) => state.inputBarFormSubmitStatus.value);
     const fetchedData = useSelector((state: RootState) => state.editorFetchedData.value);
     const editorData = useSelector((state: RootState) => state.editorData.value);
 
-      useEffect(() => {
-        if (formSubmitedStatus) {
-            const {content} = generateEditorContent(fetchedData);
-            dispatch(setEditorData(content)); 
-            dispatch(toggleInputBarFormSubmit(false));
-        }
-      }, [formSubmitedStatus]);
+    useEffect(() => {
+      // only set editor data if there is a cover letter
+      if (fetchedData.applicant_cover_letter != "") { 
+          const {content} = generateEditorContent(fetchedData);
+          dispatch(setEditorData(content)); 
+      }
+    }, [fetchedData]);
 
     return (
         <div className='h-full relative'>
@@ -35,7 +33,6 @@ const TextEdtiors : React.FC = ()  =>  {
                   wrapperClass="m-auto "
                   visible={editorIsLoading}
                   ariaLabel="three-circles-rotating"
-                
               />
             </div>
           }

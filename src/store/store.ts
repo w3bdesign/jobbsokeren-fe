@@ -1,12 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import inputBarFormSubmitReducer from "./slices/inputBarFormSubmitSlice";
-import editorFetchedDataReducer from "./slices/editorFetchedDataSlice";
-import editorIsLoadingReducer from "./slices/editorIsLoadingSlice";
-import editorDataReducer from "./slices/editorDataSlice";
+import editorFetchedDataReducer from "./slices/editor/editorFetchedDataSlice";
+import editorIsLoadingReducer from "./slices/editor/editorIsLoadingSlice";
+import editorDataReducer from "./slices/editor/editorDataSlice";
 
 export const store = configureStore({ 
     reducer: {
-        inputBarFormSubmitStatus: inputBarFormSubmitReducer,
         editorFetchedData: editorFetchedDataReducer,
         editorIsLoading: editorIsLoadingReducer,
         editorData: editorDataReducer,

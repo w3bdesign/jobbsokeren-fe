@@ -13,7 +13,6 @@ export const editorIsLoadingSlice = createSlice({
     initialState,
     reducers: {
         toggleEditorIsLoading: (state, action : PayloadAction<boolean>) => {
-            console.log("changing editorIsLoading to: " + action.payload);
             state.value = action.payload;
         }
     }
