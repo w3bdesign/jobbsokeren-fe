@@ -1,6 +1,6 @@
-import { aiPitchModel } from "@/models/aiPitchModel";
+import { AiPitchModel } from "@/models/aiPitchModel";
 
-export const aiPitchData: Array<aiPitchModel> = [
+export const aiPitchData: Array<AiPitchModel> = [
     {
         title: "Spar tid på å skrive jobbsøknader",
         description: "Vår AI kan hjelpe deg med å lage en grunnleggende mal for jobbsøknaden din på kort tid. Dette kan være spesielt nyttig hvis du sender mange søknader på en gang."
