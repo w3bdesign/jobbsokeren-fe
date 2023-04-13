@@ -1,4 +1,3 @@
-import { ThreeDots } from "react-loader-spinner";
 import { EditorFormModel} from "@/models/editorFormModel"
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,8 +7,10 @@ import { toggleEditorIsLoading } from "@/store/slices/editor/editorIsLoadingSlic
 import { setEditorData } from '@/store/slices/editor/editorDataSlice';
 import TextInput from "./TextInput";
 import useApi from "@/hooks/useApi";
+import SubmitButton  from "@/components/SubmitButton";
 
 
+const errorMessage = "<p>Something went wrong fetching data, please try again later</p>";
 const emptyFormValues: EditorFormModel = {
     applicant_name: '',
     applicant_email: '',
@@ -19,20 +20,12 @@ const emptyFormValues: EditorFormModel = {
     applicant_job_advertisement_url: ''
 }
 
-const errorMessage = "<p>Something went wrong fetching data, please try again later</p>";
-
-
 const InputBar : React.FC = () => {
-
 
     const [formValues, setFormValues] = useState<EditorFormModel>(emptyFormValues);
     const editorIsLoading = useSelector((state: RootState) => state.editorIsLoading.value);
     const dispatch = useDispatch();
-    const buttonLoading = editorIsLoading ? "hover:bg-indigo-600" : "hover:bg-transparent";
-    const postJobApplicationData = useApi(
-        'jobApplicationData',
-        'post',
-    );
+    const postJobApplicationData = useApi('jobApplicationData','post' );
     
     
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -99,7 +92,7 @@ const InputBar : React.FC = () => {
                             onChange={handleInputChange}
                             required
                             label="Gate adresse"/>
-                        <div className="grid md:grid-cols-2 gap-4 my-6">     
+                        <div className="grid md:grid-cols-2 gap-4">     
                             <TextInput
                                 id="applicant_zip_code"
                                 name="applicant_zip_code"
@@ -141,21 +134,10 @@ const InputBar : React.FC = () => {
                                 onChange={handleInputChange}
                                 required
                                 label="FINN.no lenke"/>   
-                        <div>
-                            <button type="submit" disabled={editorIsLoading} className={`w-full py-4 my-4 text-white border bg-indigo-600 border-indigo-600 hover:text-indigo-600 hover:border-indigo-600 rounded-md ${buttonLoading}`}>
-                                {editorIsLoading ? <ThreeDots 
-                                    height="25" 
-                                    width="25" 
-                                    radius="9"
-                                    color="#FFFFFF" 
-                                    ariaLabel="three-dots-loading"
-                                    wrapperStyle={{display: "flex", justifyContent: "center", alignItems: "center"}}
-                                    visible={true}
-                                />
-                                : "Generer søknad"}
-                            </button>
-                        </div>
-                    </div>
+                            <SubmitButton
+                                isLoading={editorIsLoading}
+                                buttonText="Generer søknad"/>
+                    </div>    
                 </div>
             </form>
         </div>
