@@ -1,5 +1,6 @@
 import React from "react";
 
+
 interface TextInputProps {
   id: string;
   name: string;
@@ -13,6 +14,7 @@ interface TextInputProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   required?: boolean;
   label: string;
+  width: number;
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -28,9 +30,10 @@ const TextInput: React.FC<TextInputProps> = ({
   onChange,
   required,
   label,
+  width,
 }) => {
   return (
-    <div className="mt-6">
+    <div style={{ width: `${width}%` }} className="inline-block">
       <label htmlFor={id} className="block text-sm font-medium leading-6 text-gray-900">
         {label}
       </label>

@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export interface editorIsLoading {
     value: boolean;
@@ -12,9 +12,9 @@ export const editorIsLoadingSlice = createSlice({
     name: "editorIsLoading",
     initialState,
     reducers: {
-        toggleEditorIsLoading: (state, action : PayloadAction<boolean>) => {
-            state.value = action.payload;
-        }
+        toggleEditorIsLoading: (state) => {
+            state.value = !state.value;
+          },
     }
 });
 

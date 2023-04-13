@@ -1,5 +1,5 @@
-import InputBar from "./components/InputBar"
-import TextEditor from "./components/TextEditor"
+import InputBar from "./components/inputBar/InputBar"
+import TextEditor from "./components/textEditor/TextEditor"
 
 
 const EditorPage = () => {
