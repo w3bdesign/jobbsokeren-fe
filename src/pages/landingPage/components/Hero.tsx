@@ -13,15 +13,15 @@ const Hero = () => {
             <div className='flex flex-col justify-center md:items-start w-full px-2 py-8'>
                
                 <h1 className='py-3 text-5xl md:text-7xl font-bold'>AI - Jobbsøknader</h1>
-                <p className='text-2xl'> 
-                 <p className='text-2xl'>Sikre deg drømmejobben</p> 
+                <p className='text-2xl'>Sikre deg drømmejobben</p> 
+                <div className='text-2xl'> 
                 <Typewriter
                     options={{
                         strings: ['Unike og skreddersydde søknader', 'Jobbsøknad på minutter', "Siste generasjon AI GPT-4"],
                         autoStart: true,
                         loop: true,
                     }} />
-                </p>
+                </div>
                 <RouterLink className='w-full' to="/editor">
                     <button className='py-3 px-6 sm:w-[60%] my-4'>Kom i gang</button>
                 </RouterLink>

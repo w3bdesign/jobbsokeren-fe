@@ -41,7 +41,7 @@ const TextEditor: React.FC = (): ReactElement => {
               initialValue={editorData}
               init={{
                 menubar: true,
-                content_css: "./src/pages/editorPage/components/textEditor/TextEditor.css",
+                content_css: "/src/pages/editorPage/components/textEditor/TextEditor.css",
                 height: "100%",
                 importcss_append: true,
                 plugins: [

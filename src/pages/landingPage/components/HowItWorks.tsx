@@ -18,7 +18,11 @@ const HowItWorks = () => {
                         <div className='hidden sm:block sm:w-full p-8 absolute'>
                             <FilmIcon className='w-16 p-4 mx-auto bg-indigo-600 text-white rounded-lg mt-[-4rem]'/>
                         </div>
-                        <iframe className='w-full h-[300px] sm:h-[505px] rounded-xl shadow-2xl' src="https://www.youtube.com/embed/aIUv6LoMIdY?autoplay=1&mute=1"  title="YouTube video player"></iframe>
+                        <iframe
+                            className="w-full h-[300px] sm:h-[505px] rounded-xl shadow-2xl"
+                            src="https://www.youtube-nocookie.com/embed/aIUv6LoMIdY?autoplay=1&mute=1"
+                            title="YouTube video player">
+                        </iframe>
                     </div>
                 </div>
             </div>  
