@@ -9,8 +9,6 @@ import { setEditorData } from '@/store/slices/editor/editorDataSlice';
 
 const TextEditor: React.FC = (): ReactElement => {
     const ApiKey = import.meta.env.VITE_TINY_API_KEY;
-    const EditorCss = import.meta.env.VITE_TINY_CSS_URL;
-    console.log(EditorCss);
     const  dispatch = useDispatch();
     const { editorIsLoading, editorFetchedData, editorData } = useSelector((state: RootState) => ({
       editorIsLoading: state.editorIsLoading.value,
@@ -40,20 +38,20 @@ const TextEditor: React.FC = (): ReactElement => {
               />
             </div>
           }
+          
           <div className='p-2 bg-zinc-100 h-full'>
-            <Editor
+            <Editor          
               initialValue={editorData}
               apiKey={ApiKey}
               init={{
                 menubar: true,
-                content_css: "src/assets/css/tinymce.css",
-             //  content_css: "src/pages/editorPage/components/textEditor/textEditor.css",
+                content_css: "document",
                 height: "100%",
                 plugins: [
                   'importcss', 'advlist', 'autolink', 'lists', 'link', 'image',
-                  'charmap', 'print', 'preview', 'anchor', 'help',
+                  'charmap', 'preview', 'anchor', 'help',
                   'searchreplace', 'visualblocks', 'code',
-                  'insertdatetime', 'media', 'table', 'paste', 'wordcount'
+                  'insertdatetime', 'media', 'table', 'wordcount'
                 ],
                 toolbar:
                   'undo redo | formatselect | bold italic | \

@@ -15,27 +15,29 @@ import { FetchedDataModel  } from "@/models/fetchedDataModel";
 
         const todaysDate = new Date().toLocaleDateString();
         const content = `
-        <div class="personalInfoDiv">   
-           <p> ${applicant_name} </p> 
-           <p> ${applicant_address} </p> 
-           <p> ${applicant_zip_code} ${applicant_city} </p> 
-           <p> ${applicant_email} </p> 
-         </div>
-         <div class="firmInfoDiv">
-           <p> ${employer_name} </p>
-           <p> ${employeer_address} </p>
-           <p> ${employer_zip_code} </p>
-         </div>
-         <p class="todaysDate"> ${todaysDate} </p>
+        <div style="line-height: 0.8rem; color: #6c757d; padding-bottom: 1.2rem;">   
+          <p> ${applicant_name} </p> 
+          <p> ${applicant_address} </p> 
+          <p> ${applicant_zip_code} ${applicant_city} </p> 
+          <p> ${applicant_email} </p> 
+        </div>
+        <div style="line-height: 0.8rem; color: #6c757d; padding-bottom: 1.2rem;">
+          <p> ${employer_name} </p>
+          <p> ${employeer_address} </p>
+          <p> ${employer_zip_code} </p>
+        </div>
+        <p style="text-align: right;"> ${todaysDate} </p>
         <h2 style="text-transform: uppercase">SØKNAD PÅ LEDIG STILLING SOM ${employer_job_title} </h2>
-        <div class="jobDescriptionDiv">
-            ${applicant_cover_letter} 
-         </div>
-         <div class="signatureDiv">
-         <p> Med vennlig hilsen, </p>
-         <p> ${applicant_name} </p>
-         </div>
-        `;
+        <div style="padding-top: 1.2rem; padding-bottom: 1.2rem; line-height: 1.5rem;">
+          ${applicant_cover_letter} 
+        </div>
+        <div style="padding-top: 1.2rem; padding-bottom: 1.2rem; line-height: 1.5rem;">
+          <p> Med vennlig hilsen, </p>
+          <p> ${applicant_name} </p>
+        </div>
+      `;
+      
+      
 
         return {
             content

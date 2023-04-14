@@ -25,5 +25,6 @@ export const navigationData: Array<NavigationLinksModel> = [
         name: "Priser", 
         link: "/pricing", 
         offset:-50
-    }
+    },
+
 ]
