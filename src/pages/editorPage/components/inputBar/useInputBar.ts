@@ -22,7 +22,7 @@ export const UseInputBar = () => {
     const [formValues, setFormValues] = useState<EditorFormModel>(emptyFormValues);
     const editorIsLoading = useSelector((state: RootState) => state.editorIsLoading.value);
     const dispatch = useDispatch();
-    const postJobApplicationData = useApi('jobApplicationData','post' );
+    const postJobApplicationData = useApi('job-application-data','post' );
     
     
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {

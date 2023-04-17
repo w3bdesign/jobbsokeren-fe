@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 interface ApiOptions extends AxiosRequestConfig {
   data?: any;
@@ -6,14 +6,20 @@ interface ApiOptions extends AxiosRequestConfig {
 
 const APiUrl = import.meta.env.VITE_MAIN_BACKEND_API_URL;
 
-const useApi = (endPointUrl: string, method: 'get' | 'post' | 'put' | 'delete', options: ApiOptions = {}) => {
+const useApi = (
+  endPointUrl: string,
+  method: "get" | "post" | "put" | "delete",
+  responseType?: "arraybuffer" | "blob" | "document" | "json" | "text" | "stream",
+  options: ApiOptions = {},
+) => {
   const apiCall = async (data?: any): Promise<AxiosResponse> => {
     const config: AxiosRequestConfig = {
       url: APiUrl + endPointUrl,
       method,
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
+      responseType, // Add responseType to the config object
       ...options,
     };
 
