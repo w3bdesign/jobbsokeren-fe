@@ -1,5 +1,5 @@
 import { Element } from 'react-scroll';
-import { ClockIcon, CpuChipIcon } from '@heroicons/react/24/outline';
+import { ClockIcon, CpuChipIcon, InformationCircleIcon } from '@heroicons/react/24/outline';
 
 const SaveTime = () => {
     return (
@@ -19,8 +19,9 @@ const SaveTime = () => {
                         <p className='text-gray-400'>Siste generasjon AI GPT-4</p>
                     </div>
                     <div className='border py-8 rounded-xl shadow-xl'>
-                        <p className='text-6xl font-blod text-indigo-600 '>5</p>
-                        <p className='text-gray-400' >Første 5 søknader er gratis!</p>
+                        <InformationCircleIcon className='w-16 text-indigo-600 mx-auto pb-2 '/>
+                        {/* <p className='text-6xl font-blod text-indigo-600 '>0,–</p> */}
+                        <p className='text-gray-400' >Prøv vår jobbsøker gratis</p>
                     </div> 
                 </div> 
             </div>

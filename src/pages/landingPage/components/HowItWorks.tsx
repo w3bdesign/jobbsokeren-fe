@@ -20,7 +20,7 @@ const HowItWorks = () => {
                         </div>
                         <iframe
                             className="w-full h-[300px] sm:h-[505px] rounded-xl shadow-2xl"
-                            src="https://www.youtube-nocookie.com/embed/aIUv6LoMIdY?autoplay=1&mute=1"
+                            src="https://www.youtube-nocookie.com/embed/IO03KrHNhCo?autoplay=1&mute=1"
                             title="YouTube video player">
                         </iframe>
                     </div>

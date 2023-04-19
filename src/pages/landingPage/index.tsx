@@ -11,7 +11,7 @@ const LandingPage = () => {
             <SaveTime />
             <HowItWorks />
             <WhatWeOffer />
-            <Pricing />
+            {/* <Pricing /> */}
         </>
     )
 }

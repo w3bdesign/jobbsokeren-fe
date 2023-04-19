@@ -37,8 +37,10 @@ const Navbar = () => {
                     </nav>}
                 </div>
                 <div className="hidden md:flex pr-4">
-                    <button className="border-none bg-transparent text-black mr-6">Logg inn</button>
-                    <button className="px-8 py-3">Registrer deg</button>
+                {/* <button className="border-none bg-transparent text-black mr-6">Logg inn</button> */}
+              {pathname !== "/editor" &&  <RouterLink className='w-full' to="/editor">
+                    <button className="px-8 py-3">Prøv jobbsøkeren nå</button>
+                </RouterLink> }
                 </div>
                 <div className="md:hidden mr-5 hover:cursor-pointer" onClick={handleClick}>
                     {!nav ? <Bars4Icon className="w-7"/> : <XMarkIcon className="w-7"/>}
@@ -59,8 +61,10 @@ const Navbar = () => {
                         </li>
                     )}
                     <div className="flex flex-col my-4">
-                        <button className="mb-4 px-8 py-3 bg-transparent text-indigo-600 border-indigo-600 ">Logg inn</button>
-                        <button className="px-8 py-3">Registrer deg</button>
+                        {/* <button className="mb-4 px-8 py-3 bg-transparent text-indigo-600 border-indigo-600 ">Logg inn</button> */}
+                    <RouterLink className='w-full' to="/editor">
+                        <button className="px-8 py-3">Prøv jobbsøkeren nå</button>
+                    </RouterLink> 
                     </div>
                 </ul>
             </nav>
