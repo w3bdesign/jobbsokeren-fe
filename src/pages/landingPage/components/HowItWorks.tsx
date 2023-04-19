@@ -19,9 +19,10 @@ const HowItWorks = () => {
                             <FilmIcon className='w-16 p-4 mx-auto bg-indigo-600 text-white rounded-lg mt-[-4rem]'/>
                         </div>
                         <iframe
-                            className="w-full h-[300px] sm:h-[505px] rounded-xl shadow-2xl"
-                            src="https://www.youtube-nocookie.com/embed/IO03KrHNhCo?autoplay=1&mute=1"
-                            title="YouTube video player">
+                            className="w-full h-[300px] sm:h-[505px] rounded-xl shadow-2xl non-interactive"
+                            src="https://www.youtube-nocookie.com/embed/IO03KrHNhCo?autoplay=1&mute=1&loop=1&playlist=IO03KrHNhCo&controls=0&modestbranding=1&rel=0"
+                            title="YouTube video player"
+                            style={{ pointerEvents: "none" }}>
                         </iframe>
                     </div>
                 </div>
