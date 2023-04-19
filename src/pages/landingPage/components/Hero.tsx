@@ -1,4 +1,4 @@
-import HeroImage from '@/assets/images/png/heroImage.png'
+import HeroImage from '@/assets/images/png/heroImage.webp'
 import { Element } from 'react-scroll';
 import { ClipboardDocumentCheckIcon, NewspaperIcon, PencilSquareIcon } from '@heroicons/react/24/solid';
 import {Link as RouterLink} from "react-router-dom";
