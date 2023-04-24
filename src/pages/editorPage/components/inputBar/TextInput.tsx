@@ -33,7 +33,7 @@ const TextInput: React.FC<TextInputProps> = ({
   width,
 }) => {
   return (
-    <div style={{ width: `${width}%` }} className="inline-block">
+    <div style={{ width: `${width}%` }} className="my-3">
       <label htmlFor={id} className="block text-sm font-medium leading-6 text-gray-900">
         {label}
       </label>

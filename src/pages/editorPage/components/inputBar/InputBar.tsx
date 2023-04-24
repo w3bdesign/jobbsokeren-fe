@@ -4,65 +4,64 @@ import { UseInputBar } from "./useInputBar";
 import { EditorFormModel } from "@/models/editorFormModel";
 
 
+const textInputConfigs = [
+    {
+      id: "applicant_name",
+      name: "applicant_name",
+      autoComplete: "on",
+      type: "text",
+      placeholder: "Ola Norman",
+      required: true,
+      label: "Navn",
+      width: 100,
+    },
+    {
+      id: "applicant_email",
+      name: "applicant_email",
+      autoComplete: "on",
+      type: "email",
+      placeholder: "olanorman@gmail.com",
+      required: true,
+      label: "E-post",
+      width: 100,
+    },
+    {
+      id: "applicant_address",
+      name: "applicant_address",
+      autoComplete: "on",
+      type: "text",
+      placeholder: "Slottsparken 1",
+      required: true,
+      label: "Gate adresse",
+      width: 100,
+    },
+    {
+      id: "applicant_zip_code",
+      name: "applicant_zip_code",
+      autoComplete: "on",
+      type: "text",
+      pattern: "[0-9]*",
+      minLength: 4,
+      maxLength: 4,
+      placeholder: "5071",
+      required: true,
+      label: "Postnummer",
+      width: 48,
+    },
+    {
+      id: "applicant_city",
+      name: "applicant_city",
+      autoComplete: "on",
+      type: "text",
+      placeholder: "Bergen",
+      required: true,
+      label: "By",
+      width: 48,
+    },
+  ];
+
+
 const InputBar : React.FC = () => {
-
-    const textInputConfigs = [
-        {
-          id: "applicant_name",
-          name: "applicant_name",
-          autoComplete: "on",
-          type: "text",
-          placeholder: "Ola Norman",
-          required: true,
-          label: "Navn",
-          width: 100,
-        },
-        {
-          id: "applicant_email",
-          name: "applicant_email",
-          autoComplete: "on",
-          type: "email",
-          placeholder: "olanorman@gmail.com",
-          required: true,
-          label: "E-post",
-          width: 100,
-        },
-        {
-          id: "applicant_address",
-          name: "applicant_address",
-          autoComplete: "on",
-          type: "text",
-          placeholder: "Slottsparken 1",
-          required: true,
-          label: "Gate adresse",
-          width: 100,
-        },
-        {
-          id: "applicant_zip_code",
-          name: "applicant_zip_code",
-          autoComplete: "on",
-          type: "text",
-          pattern: "[0-9]*",
-          minLength: 4,
-          maxLength: 4,
-          placeholder: "5071",
-          required: true,
-          label: "Postnummer",
-          width: 47,
-        },
-        {
-          id: "applicant_city",
-          name: "applicant_city",
-          autoComplete: "on",
-          type: "text",
-          placeholder: "Bergen",
-          required: true,
-          label: "By",
-          width: 47,
-        },
-      ];
-      
-
     const {
         formValues,
         editorIsLoading,
@@ -71,7 +70,7 @@ const InputBar : React.FC = () => {
     } = UseInputBar();
 
     return (
-        <div className="w-full bg-zinc-100">
+        <div className="w-full md:max-w-[650px] bg-zinc-100 ">
             <form onSubmit={handleSubmit}>
                 <div className="w-[80%] justify-center mx-auto pt-4">
                     <div className="md:mb-20">
@@ -81,7 +80,7 @@ const InputBar : React.FC = () => {
                                 <p className="mt-1 text-sm leading-6 text-gray-600">Denne informasjonen vil vår AI bruke for å skreddersy søknaden din i henhold til dine personlige opplysninger.</p>
                             </div>
                         </div>
-                        <div className="flex flex-wrap gap-4">
+                        <div className="flex flex-wrap justify-between">
                         {textInputConfigs.map((textInputConfig, index) => (
                             <TextInput
                                 key={index}
