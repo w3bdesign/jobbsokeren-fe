@@ -8,7 +8,7 @@ import Typewriter from 'typewriter-effect';
 const Hero = () => {  
 
     return (
-    <Element name="" className='w-full pt-12 h-screen bg-zinc-200 flex flex-col justify-between'>
+    <Element name="" className='w-full pt-20 md:pt-12 px-4 min-h-screen bg-zinc-200 flex flex-col justify-between'>
         <div className='grid md:grid-cols-2 max-w-[1240px] m-auto'>
             <div className='flex flex-col justify-center md:items-start w-full px-2 py-8'>
                
@@ -23,13 +23,13 @@ const Hero = () => {
                     }} />
                 </div>
                 <RouterLink className='w-full' to="/editor">
-                    <button className='py-3 px-6 sm:w-[60%] my-4'>Kom i gang</button>
+                    <button className='py-3 px-6 w-full  md:w-[60%] my-4'>Kom i gang</button>
                 </RouterLink>
             </div>
             <div>
                 <img className='w-full' src={HeroImage} alt="/" />
             </div>
-            <div className='hidden absolute md:flex flex-col py-8 md:min-w-[650px] md:max-w-[500px] bottom-[5%]
+            <div className='hidden absolute lg:flex flex-col py-8 md:min-w-[650px] md:max-w-[500px] bottom-[5%]
             mx-1 md:left-1/2 transform md:-translate-x-1/2 bg-zinc-100
             border border-slate-300 rounded-xl text-center shadow-2xl '>
                 <div className='flex justify-between flex-wrap px-4'>
