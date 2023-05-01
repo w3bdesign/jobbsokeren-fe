@@ -21,6 +21,8 @@ const HowItWorks = () => {
                         <iframe
                             className="w-full h-[300px] sm:h-[505px] rounded-xl shadow-2xl non-interactive"
                             src="https://www.youtube-nocookie.com/embed/IO03KrHNhCo?autoplay=1&mute=1&loop=1&playlist=IO03KrHNhCo&controls=0&modestbranding=1&rel=0"
+                            allow="autoplay; encrypted-media" 
+                            allowFullScreen 
                             title="YouTube video player"
                             style={{ pointerEvents: "none" }}>
                         </iframe>
