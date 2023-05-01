@@ -25,7 +25,7 @@ const Navbar = () => {
                         </Link>}
                    {pathname !== "/editor" && 
                    <nav>
-                        <ul className="hidden md:flex">
+                        <ul className="hidden lg:flex">
                             {navigationData.map((link, index) =>
                                 <li className="cursor-pointer hover:text-indigo-600" key={index}>
                                     <Link activeClass="underline underline-offset-8 text-indigo-600" spy={true} to={link.link.slice(1)} smooth={true} offset={link.offset} duration={500}>
@@ -36,17 +36,18 @@ const Navbar = () => {
                         </ul>
                     </nav>}
                 </div>
-                <div className="hidden md:flex pr-4">
+                <div className="hidden lg:flex pr-4">
                 {/* <button className="border-none bg-transparent text-black mr-6">Logg inn</button> */}
               {pathname !== "/editor" &&  <RouterLink className='w-full' to="/editor">
                     <button className="px-8 py-3">Prøv jobbsøkeren nå</button>
                 </RouterLink> }
                 </div>
-                <div className="md:hidden mr-5 hover:cursor-pointer" onClick={handleClick}>
+                { pathname !== "/editor" && 
+                <div className="lg:hidden mr-5 hover:cursor-pointer" onClick={handleClick}>
                     {!nav ? <Bars4Icon className="w-7"/> : <XMarkIcon className="w-7"/>}
-                </div>
+                </div>} 
             </div>
-            <nav className={!nav ? 'hidden':  'md:hidden absolute bg-zinc-200 w-full px-8'}>                    
+            <nav className={!nav ? 'hidden':  'lg:hidden absolute bg-zinc-200 w-full px-8'}>                    
                 <ul>
                     {navigationData.map((link, index) => 
                         <li className="border-b-2 border-zinc-300 w-full hover:cursor-pointer" key={index}>
@@ -63,7 +64,7 @@ const Navbar = () => {
                     <div className="flex flex-col my-4">
                         {/* <button className="mb-4 px-8 py-3 bg-transparent text-indigo-600 border-indigo-600 ">Logg inn</button> */}
                     <RouterLink className='w-full' to="/editor">
-                        <button className="px-8 py-3">Prøv jobbsøkeren nå</button>
+                        <button  onClick={closeMobileMenu} className="px-8 py-3">Prøv jobbsøkeren nå</button>
                     </RouterLink> 
                     </div>
                 </ul>
