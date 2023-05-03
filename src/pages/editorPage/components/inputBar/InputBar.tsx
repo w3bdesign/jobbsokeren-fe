@@ -100,7 +100,7 @@ const InputBar : React.FC = () => {
                         <div>
                             <div className="my-8">
                                 <h2 className="text-base font-semibold leading-7 text-gray-900">Annonse informasjon</h2>
-                                <p className="mt-1 text-sm leading-6 text-gray-600">Legg inn lenken til FINN.no Annonsen. Så order vi resten!</p>
+                                <p className="mt-1 text-sm leading-6 text-gray-600">Legg inn lenken til FINN.no Annonsen. Så ordner vi resten!</p>
                             </div>
                             <TextInput
                                 id="applicant_job_advertisement_url"
