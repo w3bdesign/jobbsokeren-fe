@@ -32,7 +32,7 @@ const textInputConfigs = [
       type: "text",
       placeholder: "Slottsparken 1",
       required: true,
-      label: "Gate adresse",
+      label: "Gateadresse",
       width: 100,
     },
     {
