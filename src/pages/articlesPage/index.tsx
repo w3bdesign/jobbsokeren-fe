@@ -2,6 +2,7 @@ import ArticleCard from './components/ArticleCard';
 import React from 'react';
 
 
+
 const article = {
     title: 'Slik skriver du en god søknad',
     createdAt: '2021-09-01',
