@@ -25,15 +25,13 @@ const ArticleCard: React.FC<Props> = ({ article }) => {
             </div>
             <div>
                 <span
-                className="border bg-indigo-600 border-indigo-600 mb-5 inline-block rounded py-1 px-4 text-center text-xs font-semibold leading-loose text-white"
-                >
+                className="border bg-indigo-600 border-indigo-600 mb-5 inline-block rounded py-1 px-4 text-center text-xs font-semibold leading-loose text-white">
                {createdAt}
                 </span>
                 <h3>
                 <a
-                    href="javascript:void(0)"
-                    className="text-dark hover:text-primary mb-4 inline-block text-xl font-semibold sm:text-2xl lg:text-xl xl:text-2xl"
-                >
+                    href=""
+                    className="text-dark hover:text-primary mb-4 inline-block text-xl font-semibold sm:text-2xl lg:text-xl xl:text-2xl">
                     {title}
                 </a>
                 </h3>
