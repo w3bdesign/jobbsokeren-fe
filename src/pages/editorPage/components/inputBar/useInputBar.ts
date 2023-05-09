@@ -6,6 +6,7 @@ import {setEditorFetchedData} from "@/store/slices/editor/editorFetchedDataSlice
 import { toggleEditorIsLoading } from "@/store/slices/editor/editorIsLoadingSlice";
 import { setEditorData } from '@/store/slices/editor/editorDataSlice';
 import useApi from "@/hooks/useApi";
+import { AxiosResponse } from 'axios';
 
 const errorMessage = "<p>Something went wrong fetching data, please try again later</p>";
 const emptyFormValues: EditorFormModel = {
@@ -35,7 +36,7 @@ export const UseInputBar = () => {
         dispatch(toggleEditorIsLoading());
         dispatch(setEditorData(""));
         try {
-            const response = await postJobApplicationData(formValues);
+            const response : AxiosResponse = await postJobApplicationData(formValues);
             if (response.status === 200) {
                 const { data } = response;
                 dispatch(setEditorFetchedData(data));
