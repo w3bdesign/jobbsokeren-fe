@@ -1,3 +1,5 @@
+import { PortableTextBlockComponent } from "@portabletext/react";
+
 export interface Article {
     articleType: string;
     title: string;
@@ -14,5 +16,5 @@ export interface Article {
         url: string;
       }
     };
-    body: any; // Replace this with the actual type of your block content
+    body: PortableTextBlockComponent[]; 
   }
