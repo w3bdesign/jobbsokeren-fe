@@ -11,7 +11,7 @@ const WhatWeOffer = () => {
                 <h2 className="text-5xl font-bold text-center">Hva vår AI løsning kan tilby</h2>
                 <p className="text-2xl py-8 text-gray-500 text-center">Det er viktig å huske på at det å bruke AI til å skrive jobbsøknader ikke erstatter behovet for å tilpasse søknaden din til den spesifikke jobben du søker på og arbeidsgiverens behov. Men med riktig tilnærming kan AI være en nyttig ressurs i jobbsøknadsprosessen.</p>
                 <div className=" text-center mb-10">
-                <RouterLink className="text-xl underline underline-offset-8 text-indigo-600" to="/articles">  
+                <RouterLink className="text-xl hover:text-indigo-500 underline underline-offset-8 text-indigo-600" to="/articles">  
                         CV og søknadstips
                 </RouterLink>
                 <LinkIcon className="w-6 ml-3 inline-block text-indigo-600" />

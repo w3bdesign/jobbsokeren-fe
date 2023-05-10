@@ -1,20 +1,32 @@
 import ArticleCard from './components/ArticleCard';
 import React from 'react';
+import useSanity from '@/hooks/useSanity';
+import { Article } from '@/models/articleModel';
 
-
-
-const article = {
-    title: 'Slik skriver du en god søknad',
-    createdAt: '2021-09-01',
-    description: 'Søknaden er det første arbeidsgiveren ser av deg. Den skal vekke interesse og gi et godt førsteinntrykk. Her er noen tips til hvordan du kan skrive en god søknad.',
-    image: 'https://cdn.tailgrids.com/2.0/image/application/images/blogs/blog-01/image-03.jpg'
-}
+  const query = `*[_type == "article"]{
+    articleType,
+    title,
+    slug,
+    publishedAt,
+    intro,
+    image{
+      asset->{
+        _id,
+        url
+      }
+    },
+    body
+  }`;
+  
 
 const Articles: React.FC = () => {
+
+    const { data: articles, error } = useSanity<Article[]>(query);
+
     return (
         <>  
             <section className="pt-20 pb-10 lg:pt-[120px] lg:pb-20 bg-zinc-100">
-                <div className="bg-zinc-100 h-[70px]"></div>
+                <div className="bg-zinc-100 h-[40px]"></div>
                 <div className="container mx-auto">
                     <div className="-mx-4 flex flex-wrap justify-center">
                     <div className="w-full px-4">
@@ -34,12 +46,11 @@ const Articles: React.FC = () => {
                     </div>
                     </div>
                     <div className="-mx-4 flex flex-wrap gap-y-6">
-                        <ArticleCard article={article} />
-                        <ArticleCard article={article} />
-                        <ArticleCard article={article} />
-                        <ArticleCard article={article} />
-                        <ArticleCard article={article} />
-                        <ArticleCard article={article} />
+                        {!articles && !error && <p>Loading...</p>}
+                        {error && <p>Error: {error}</p>}
+                        {articles && articles.map((article, index) => (
+                            <ArticleCard key={index} article={article} />
+                        ))}
                     </div>
                 </div>
             </section>  

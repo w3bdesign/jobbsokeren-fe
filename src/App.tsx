@@ -18,7 +18,7 @@ function App() {
                   <Route path="/" element={<LandingPage/>}/>
                   <Route path="/editor" element={<EditorPage/>}/>
                   <Route path="/articles" element={<Articles/>}/>
-                  <Route path="/articles/:id" element={<Article/>}/>
+                  <Route path="/articles/:slug" element={<Article/>}/>
                   <Route path="*" element={<NotFoundPage/>}/>
               </Routes>
             <Footer/>

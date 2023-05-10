@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import client from '../sanityClient.config';
+import client from '/sanityClient.config.ts';
 
 interface UseSanityDataResult<T> {
     data: T | undefined;
@@ -20,7 +20,7 @@ const useSanityData = <T>(query: string | undefined): UseSanityDataResult<T> => 
         try {
             const result = await client.fetch(query);
             if(result.length > 0) {
-                const data : T = result[0];
+                const data : T = result;
                 setData(data);
             } else {
                 setError("No data found");
