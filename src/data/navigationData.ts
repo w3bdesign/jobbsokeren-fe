@@ -15,7 +15,12 @@ export const navigationData: Array<NavigationLinksModel> = [
         name: "Hva vi tilbyr", 
         link: "/platforms", 
         offset: -100
-    }, 
+    },
+    {
+        name: "CV og søknadstips", 
+        link: "/tips", 
+        offset: -50
+    },  
     // {
     //     name: "Priser", 
     //     link: "/pricing", 

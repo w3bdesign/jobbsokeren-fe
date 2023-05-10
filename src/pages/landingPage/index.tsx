@@ -3,6 +3,7 @@ import SaveTime from './components/SaveTime';
 import HowItWorks from './components/HowItWorks';
 import WhatWeOffer from './components/WhatWeOffer';
 import Pricing from './components/Pricing';
+import Articles from './components/Articles';
 
 const LandingPage = () => {
     return  (
@@ -11,7 +12,8 @@ const LandingPage = () => {
             <SaveTime />
             <HowItWorks />
             <WhatWeOffer />
-            {/* <Pricing /> */}
+            <Articles/>
+            {/* <Pricing />  */}
         </>
     )
 }

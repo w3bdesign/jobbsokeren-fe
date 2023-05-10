@@ -27,7 +27,7 @@ const Articles: React.FC = () => {
         <>  
             <section className="pt-20 pb-10 lg:pt-[120px] lg:pb-20 bg-zinc-100">
                 <div className="bg-zinc-100 h-[40px]"></div>
-                <div className="container mx-auto">
+                <div className="max-w-[1240px] mx-auto">
                     <div className="-mx-4 flex flex-wrap justify-center">
                     <div className="w-full px-4">
                         <div className="mx-auto mb-[60px] max-w-[510px] text-center lg:mb-20">

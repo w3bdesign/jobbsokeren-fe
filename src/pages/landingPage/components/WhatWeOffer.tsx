@@ -10,17 +10,11 @@ const WhatWeOffer = () => {
             <div className="max-w-[1240px] px-2">
                 <h2 className="text-5xl font-bold text-center">Hva vår AI løsning kan tilby</h2>
                 <p className="text-2xl py-8 text-gray-500 text-center">Det er viktig å huske på at det å bruke AI til å skrive jobbsøknader ikke erstatter behovet for å tilpasse søknaden din til den spesifikke jobben du søker på og arbeidsgiverens behov. Men med riktig tilnærming kan AI være en nyttig ressurs i jobbsøknadsprosessen.</p>
-                <div className=" text-center mb-10">
-                <RouterLink className="text-xl hover:text-indigo-500 underline underline-offset-8 text-indigo-600" to="/articles">  
-                        CV og søknadstips
-                </RouterLink>
-                <LinkIcon className="w-6 ml-3 inline-block text-indigo-600" />
-                </div>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-14  pt-12 ">
                 {aiPitchData.map((item, index) => {
                     return (
                         <div key={index} className="border rounded-xl shadow-xl relative ">
-                             <div className="absolute mx-auto w-full  mt-[-2rem]">
+                             <div className="absolute mx-auto w-full mt-[-2rem]">
                                     <CheckCircleIcon className="w-16 text-indigo-600 mx-auto pb-2" />  
                                 </div> 
                             <div className="p-8 mt-5">
