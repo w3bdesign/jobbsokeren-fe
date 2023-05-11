@@ -34,7 +34,7 @@ const BreadCrumbNav = ({pathname} : LogoNavProps) => {
   const pathSegments = pathname.split('/').filter(segment => segment !== '');
 
   return (
-    <nav className="flex" aria-label="Breadcrumb">
+    <nav className="hidden md:flex" aria-label="Breadcrumb">
       <ol className="inline-flex items-center space-x-1 md:space-x-3">
         <li className="inline-flex items-center ">
           <RouterLink to="/" className="inline-flex items-center text-gray-500 hover:text-indigo-600">
