@@ -16,9 +16,9 @@ function App() {
           <div className='grid h-screen grid-rows-[1fr,auto]'>
               <Routes>
                   <Route path="/" element={<LandingPage/>}/>
-                  <Route path="/editor" element={<EditorPage/>}/>
-                  <Route path="/articles" element={<Articles/>}/>
-                  <Route path="/articles/:slug" element={<Article/>}/>
+                  <Route path="/jobbsokeren" element={<EditorPage/>}/>
+                  <Route path="/artikler" element={<Articles/>}/>
+                  <Route path="/artikler/:slug" element={<Article/>}/>
                   <Route path="*" element={<NotFoundPage/>}/>
               </Routes>
             <Footer/>

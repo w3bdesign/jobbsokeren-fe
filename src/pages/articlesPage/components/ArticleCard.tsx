@@ -23,7 +23,7 @@ interface Props {
 const ArticleCard: React.FC<Props> = ({ article }) => {
     const {title, slug, intro, publishedAt, image} = article;
     return (
-        <RouterLink to={`/articles/${slug.current}`} className="w-full px-4 md:w-1/2 lg:w-1/3 cursor-pointer">
+        <RouterLink to={`/artikler/${slug.current}`} className="w-full px-4 md:w-1/2 lg:w-1/3 cursor-pointer">
             <div className="mx-auto mb-10 max-w-[370px]">
                 <div className="mb-8 overflow-hidden rounded">
                     <img

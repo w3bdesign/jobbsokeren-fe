@@ -35,7 +35,7 @@ const Articles = () => {
                         <h3 className="text-5xl font-bold text-white py-8">CV og søknadstips</h3>
                         <p className="text-3xl">Les våre artikler for å mestre kunsten å skrive overbevisende søknader og CV-er som utmerker seg i konkurransen.</p>
                         <div className=" text-center my-5 hover:text-indigo-500">
-                            <RouterLink className="text-xl  underline underline-offset-8 " to="/articles">  
+                            <RouterLink className="text-xl  underline underline-offset-8 " to="/artikler">  
                                 CV og søknadstips
                             </RouterLink>
                             <LinkIcon className="w-6 ml-3 inline-block" />
@@ -45,7 +45,7 @@ const Articles = () => {
                     <div className="flex flex-wrap">
                         {articles?.map((article, index) => {
                             return (
-                            <RouterLink key={index} to={`/articles/${article?.slug.current}`} className="w-full sm:w-1/2 md:w-1/3 flex flex-col">
+                            <RouterLink key={index} to={`/artikler/${article?.slug.current}`} className="w-full sm:w-1/2 md:w-1/3 flex flex-col">
                                 <div className="flex flex-col bg-white rounded-xl shadow-xl flex-1 m-5">
                                 <img className="rounded-t-lg h-[250px] w-full object-cover"
                                     src={article?.image.asset.url}

@@ -22,7 +22,7 @@ const Hero = () => {
                         loop: true,
                     }} />
                 </div>
-                <RouterLink className='w-full' to="/editor">
+                <RouterLink className='w-full' to="/jobbsokeren">
                     <button className='py-3 px-6 w-full  md:w-[60%] my-4'>Kom i gang</button>
                 </RouterLink>
             </div>
