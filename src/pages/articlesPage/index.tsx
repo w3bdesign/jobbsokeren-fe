@@ -3,7 +3,7 @@ import React from 'react';
 import useSanity from '@/hooks/useSanity';
 import { Article } from '@/models/articleModel';
 import ErrorDisplayer from '@/components/ErrorDisplayer';
-import LoadingPage from '@/components/LoadingDisplayer';
+import LoadingDisplayer from '@/components/LoadingDisplayer';
 
   const query = `*[_type == "article"]{
     articleType,
@@ -28,7 +28,7 @@ const Articles: React.FC = () => {
     return (
         <>  
           {error && <ErrorDisplayer title="ups!" errorMessage="Noe gikk galt når vi prøvde å hente artikler. Prøv igjen senere." errorCode={500} /> }
-          {!articles && !error && <LoadingPage />}
+          {!articles && !error && <LoadingDisplayer />}
           {articles && 
             <section className="pt-20 pb-10 lg:pt-[120px] lg:pb-20 bg-zinc-100">
                 <div className="bg-zinc-100 h-[40px]"></div>
