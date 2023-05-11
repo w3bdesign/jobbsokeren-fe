@@ -29,7 +29,7 @@ const ArticleCard: React.FC<Props> = ({ article }) => {
                     <img
                         src={image.asset.url}
                         alt={title}
-                        className="w-full"
+                        className="w-full h-[250px] object-cover"
                     />
                 </div>
                 <div>

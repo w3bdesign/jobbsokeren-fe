@@ -2,6 +2,8 @@ import ArticleCard from './components/ArticleCard';
 import React from 'react';
 import useSanity from '@/hooks/useSanity';
 import { Article } from '@/models/articleModel';
+import ErrorDisplayer from '@/components/ErrorDisplayer';
+import LoadingPage from '@/components/LoadingDisplayer';
 
   const query = `*[_type == "article"]{
     articleType,
@@ -25,6 +27,9 @@ const Articles: React.FC = () => {
 
     return (
         <>  
+          {error && <ErrorDisplayer title="ups!" errorMessage="Noe gikk galt når vi prøvde å hente artikler. Prøv igjen senere." errorCode={500} /> }
+          {!articles && !error && <LoadingPage />}
+          {articles && 
             <section className="pt-20 pb-10 lg:pt-[120px] lg:pb-20 bg-zinc-100">
                 <div className="bg-zinc-100 h-[40px]"></div>
                 <div className="max-w-[1240px] mx-auto">
@@ -46,14 +51,13 @@ const Articles: React.FC = () => {
                     </div>
                     </div>
                     <div className="-mx-4 flex flex-wrap gap-y-6">
-                        {!articles && !error && <p>Loading...</p>}
-                        {error && <p>Error: {error}</p>}
                         {articles && articles.map((article, index) => (
                             <ArticleCard key={index} article={article} />
                         ))}
                     </div>
                 </div>
             </section>  
+          }
         </>
     )
 }

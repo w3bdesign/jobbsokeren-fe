@@ -3,7 +3,7 @@ import { ArrowRightIcon, LinkIcon } from "@heroicons/react/24/outline";
 import {Link as RouterLink} from "react-router-dom";
 import { Article } from '@/models/articleModel';
 import useSanity from '@/hooks/useSanity';
-
+import ErrorDisplayer from '@/components/ErrorDisplayer';
 
 const query = `*[_type == "article"] | order(publishedAt desc) [0..2] {
     articleType,

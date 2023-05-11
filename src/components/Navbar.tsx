@@ -21,9 +21,10 @@ interface LogoNavProps {
     pathname: string;
 }
 
+
 const BreadCrumbNav = ({pathname} : LogoNavProps) => {
   // Helper function to unslugify a string
-  const unslugify = (str) =>
+  const unslugify = (str : string) =>
     str
       .split('-')
       .map(word => word.charAt(0)+ word.slice(1))
@@ -35,8 +36,8 @@ const BreadCrumbNav = ({pathname} : LogoNavProps) => {
   return (
     <nav className="flex" aria-label="Breadcrumb">
       <ol className="inline-flex items-center space-x-1 md:space-x-3">
-        <li className="inline-flex items-center">
-          <RouterLink to="/" className="inline-flex items-center text-gray-500">
+        <li className="inline-flex items-center ">
+          <RouterLink to="/" className="inline-flex items-center text-gray-500 hover:text-indigo-600">
             <HomeIcon className="w-5 h-5 mr-3 text-gray-500" aria-hidden="true" />
             hjem
           </RouterLink>
@@ -45,7 +46,7 @@ const BreadCrumbNav = ({pathname} : LogoNavProps) => {
           <li key={segment}>
             <div className="flex items-center">
              <ChevronRightIcon className="flex-shrink-0 w-5 h-5 mx-1 text-gray-500" aria-hidden="true" />
-              <RouterLink to={`/${pathSegments.slice(0, index + 1).join('/')}`} className="text-gray-500">
+             <RouterLink to={`/${pathSegments.slice(0, index + 1).join('/')}`} className={`hover:text-indigo-600 ${index === pathSegments.length - 1 ? "text-gray-400" : "text-gray-500"}`}>
                 {index === pathSegments.length - 1 ? unslugify(segment) : segment}
               </RouterLink>
             </div>
