@@ -1,9 +1,12 @@
-import { useState } from "react";
+import React, { useState, useEffect, useRef, FormEvent } from "react";
 import { Bars4Icon, XMarkIcon, ChevronRightIcon, HomeIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-scroll";
 import { Link as RouterLink } from "react-router-dom";
 import { navigationData } from "@/data/navigationData";
 import { useLocation } from "react-router-dom";
+import jsonp from "jsonp";
+import { Transition } from '@headlessui/react';
+import SuccessToast from "./SuccessToast";
 
 
 interface MobileNavProps {
@@ -17,12 +20,17 @@ interface MobileNavProps {
     }[];
 }
 
-interface LogoNavProps {
+interface PathProps {
     pathname: string;
 }
 
+interface JsonpResponse  {
+   msg: string; 
+   result: string 
+  };
 
-const BreadCrumbNav = ({pathname} : LogoNavProps) => {
+
+const BreadCrumbNav : React.FC<PathProps> = ({pathname}) => {
   // Helper function to unslugify a string
   const unslugify = (str : string) =>
     str
@@ -44,9 +52,9 @@ const BreadCrumbNav = ({pathname} : LogoNavProps) => {
         </li>
         {pathSegments.map((segment, index) => (
           <li key={segment}>
-            <div className="flex items-center">
-             <ChevronRightIcon className="flex-shrink-0 w-5 h-5 mx-1 text-gray-500" aria-hidden="true" />
-             <RouterLink to={`/${pathSegments.slice(0, index + 1).join('/')}`} className={`hover:text-indigo-600 ${index === pathSegments.length - 1 ? "text-gray-400" : "text-gray-500"}`}>
+            <div className="flex items-center">      
+             <ChevronRightIcon className={`flex-shrink-0 w-5 h-5 mx-1 ${index === pathSegments.length - 1 ? "text-gray-400" : "text-gray-500"}`} aria-hidden="true" />
+             <RouterLink to={`/${pathSegments.slice(0, index + 1).join('/')}`} className="hover:text-indigo-600 text-gray-500">
                 {index === pathSegments.length - 1 ? unslugify(segment) : segment}
               </RouterLink>
             </div>
@@ -57,8 +65,102 @@ const BreadCrumbNav = ({pathname} : LogoNavProps) => {
   )
 }
 
+const NewsLetterBanner : React.FC = () => {
+  const emailRef = useRef<HTMLInputElement | null>(null);
+  
+  // Storing in local store to respect user preference
+  const [isVisible, setIsVisible] = useState<boolean>(() => {
+    const saved = localStorage.getItem("isVisible");
+    const initialValue = saved ? JSON.parse(saved) : false;
+    // return true;
+    return initialValue;
+  });
 
-const MobileNav = ({pathname, closeMobileMenu, nav, navigationData }: MobileNavProps) => {
+  const [submitted, setSubmitted] = useState<boolean>(false);
+
+  useEffect(() => {
+    const checkScroll = () => {
+       // Get the stored value
+       const storedValue = localStorage.getItem("isVisible");
+      // If the user has scrolled, set isVisible to true
+      if (window.scrollY > 500 && (!storedValue || JSON.parse(storedValue) !== false)) {
+        setIsVisible(true);
+      }
+    };
+
+    // Add the event listener when the component mounts
+    window.addEventListener('scroll', checkScroll);
+
+    // Remove the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('scroll', checkScroll);
+    };
+  }, []);
+
+  const handleClose = () => {
+    setIsVisible(false);
+    localStorage.setItem("isVisible", JSON.stringify(false));
+  }
+
+  
+ 
+  const onSubmit = (e: FormEvent) => {
+    const mailChimpUrl = import.meta.env.VITE_MAILCHIMP_URL;
+    const email = emailRef.current?.value;
+    const url = mailChimpUrl + "&EMAIL=" + email;
+    e.preventDefault();
+    jsonp(url, { param: 'c' }, (_, data : JsonpResponse) => {
+      const { msg, result } = data
+      // do something with response
+      // make a 
+      alert(msg);
+    });
+    handleClose();
+    setSubmitted(true);
+
+    // Set 'submitted' back to false after 2 seconds
+    setTimeout(() => {
+      setSubmitted(false);
+    }, 6000);
+  };
+
+  return (
+    <>
+      <div className="flex flex-col items-center">
+      <Transition
+          show={isVisible}
+          enter="transition-opacity duration-1000"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="transition-opacity duration-500"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0">
+          <div id="newsletter-banner" tabIndex={-1} className="fixed left-0 z-50 flex justify-between w-full p-4 border-b border-gray-200 bg-gray-50">
+              <div className="flex items-center flex-shrink-0 w-full mx-auto sm:w-auto">
+              <form onSubmit={onSubmit} method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="flex flex-col items-center w-full md:flex-row">
+                    <label htmlFor="email" id="mce-EMAIL" className="flex-shrink-0 mb-2 mr-auto text-sm text-gray-500 md:mb-0 md:mr-4  md:m-0">Få gratis jobbsøker tips og triks</label>
+                    <input ref={emailRef} type="email" name="EMAIL" id="email" placeholder="Skriv inn e-post adresse" className="bg-white border border-gray-300 text-gray-900 md:w-64 mb-2 md:mb-0 md:mr-4 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
+                    <button type="submit" className="px-5 py-2.5 font-medium rounded-lg text-sm w-full sm:w-auto text-white border bg-indigo-600 border-indigo-600 hover:text-indigo-600 hover:border-indigo-600 hover:bg-transparent ">Ja, takk!</button>
+                  </form>
+              </div>
+              <div className="flex items-center absolute top-2.5 right-2.5 md:relative md:top-auto md:right-auto">
+                  <button onClick={handleClose} type="button" className=" border-none flex-shrink-0 inline-flex justify-center items-center text-gray-400 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ">
+                      <XMarkIcon className="w-6 h-6 text-gray-600" aria-hidden="true" />
+                      <span className="sr-only">Lukk</span>
+                  </button>
+              </div>
+          </div>
+        </Transition>
+        <SuccessToast 
+          display={submitted} 
+          text="Takk for at du meldte deg på nyhetsbrevet!" />
+        </div>
+    </>
+  )
+}
+
+
+const MobileNav : React.FC<MobileNavProps> = ({pathname, closeMobileMenu, nav, navigationData }) => {
     return (
         <div>
             {pathname === "/" && (
@@ -93,7 +195,7 @@ const MobileNav = ({pathname, closeMobileMenu, nav, navigationData }: MobileNavP
     )
 }
 
-const LogoNav = ({pathname} : LogoNavProps) => {
+const LogoNav : React.FC<PathProps> = ({pathname}) => {
     return (
         <div>
             {pathname !== "/" ? (
@@ -119,7 +221,7 @@ const LogoNav = ({pathname} : LogoNavProps) => {
 }
 
 
-const Navbar = () => {
+const Navbar : React.FC = () => {
   const [nav, setNav] = useState(false);
   const handleClick = () => setNav(!nav);
   const closeMobileMenu = () => setNav(false);
@@ -176,6 +278,7 @@ const Navbar = () => {
         closeMobileMenu={closeMobileMenu} 
         nav={nav} 
         navigationData={navigationData} />
+    <NewsLetterBanner />
     </div>
     );
 };

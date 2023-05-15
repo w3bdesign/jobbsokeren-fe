@@ -9,6 +9,9 @@ module.exports = {
       screens: {
         '3xl': '1900px',
       },
+      transitionDuration: {
+        '4000': '4000ms',
+      },
     },
   },
   plugins: [],
