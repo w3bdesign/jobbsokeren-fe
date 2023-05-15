@@ -35,8 +35,6 @@ jobs:
           VITE_MAIN_BACKEND_API_URL: ${{ secrets.VITE_MAIN_BACKEND_API_URL }} 
           VITE_TINY_API_KEY: ${{ secrets.VITE_TINY_API_KEY }}
           VITE_SANITY_PROJECT_ID: ${{ secrets.VITE_SANITY_PROJECT_ID }}
-          VITE_MAILCHIMP_URL: ${{ secrets.VITE_MAILCHIMP_URL }}
-
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
