@@ -8,8 +8,6 @@ interface Props {
 }
 
 const SuccessToast: React.FC<Props> = ({display, text}) => {
-
-    console.log(display);
     return (
         <Transition
           show={display}
@@ -29,7 +27,6 @@ const SuccessToast: React.FC<Props> = ({display, text}) => {
             </div>
           </div>  
         </Transition>
-
     )
 }
 

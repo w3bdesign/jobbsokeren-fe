@@ -4,10 +4,11 @@ import { Link } from "react-scroll";
 import { Link as RouterLink } from "react-router-dom";
 import { navigationData } from "@/data/navigationData";
 import { useLocation } from "react-router-dom";
-import jsonp from "jsonp";
 import { Transition } from '@headlessui/react';
 import SuccessToast from "./SuccessToast";
-import MailchimpSubscribe from "react-mailchimp-subscribe";
+import useApi from "@/hooks/useApi";
+import { AxiosError } from 'axios';
+import { useApiInterface } from "@/models/useApiModel";
 
 
 
@@ -72,22 +73,22 @@ const NewsLetterBanner : React.FC = () => {
   const emailRef = useRef<HTMLInputElement | null>(null);
   
   // Storing in local store to respect user preference
-  const [isVisible, setIsVisible] = useState<boolean>(() => {
+  const [newsLetterIsVisible, setNewsLetterIsVisible] = useState<boolean>(() => {
     const saved = localStorage.getItem("isVisible");
     const initialValue = saved ? JSON.parse(saved) : false;
-     return true;
-    //return initialValue;
+    return initialValue;
   });
 
   const [submitted, setSubmitted] = useState<boolean>(false);
+  const [apiStatus, setApiStatus] = useState<string>('');
 
   useEffect(() => {
     const checkScroll = () => {
        // Get the stored value
-       const storedValue = localStorage.getItem("isVisible");
+       const storedValue = localStorage.getItem("newsLetterIsVisible");
       // If the user has scrolled, set isVisible to true
       if (window.scrollY > 500 && (!storedValue || JSON.parse(storedValue) !== false)) {
-        setIsVisible(true);
+        setNewsLetterIsVisible(true);
       }
     };
 
@@ -101,30 +102,42 @@ const NewsLetterBanner : React.FC = () => {
   }, []);
 
   const handleClose = () => {
-    setIsVisible(false);
-    localStorage.setItem("isVisible", JSON.stringify(false));
+    setNewsLetterIsVisible(false);
+    localStorage.setItem("newsLetterIsVisible", JSON.stringify(false));
   }
 
   
  
-  const onSubmit = (e: FormEvent) => {
-    const mailChimpUrl = import.meta.env.VITE_MAILCHIMP_URL;
-    const email = emailRef.current?.value;
-    const url = mailChimpUrl + "&EMAIL=" + email;
-    e.preventDefault();
-    jsonp(url, { param: 'c' }, (_, data : JsonpResponse) => {
-      const { msg, result } = data
-      // do something with response
-      // make a 
-      alert(msg);
-    });
-    handleClose();
-    setSubmitted(true);
-
-    // Set 'submitted' back to false after 2 seconds
-    setTimeout(() => {
-      setSubmitted(false);
-    }, 6000);
+  const onSubmit  = async (e: FormEvent)  =>  {
+      e.preventDefault();
+      const email_address = emailRef.current?.value;
+      const status = "subscribed";
+      const exportEditorContentAPI = useApi('/subscribe-to-mailchimp','post');
+      try {
+        const response = await exportEditorContentAPI({email_address, status});
+        if (response.data.statusCode === 200) {
+          console.log(response);
+          handleClose();
+          setSubmitted(true);
+      
+          // Set 'submitted' back to false after 2 seconds
+          setTimeout(() => {
+            setSubmitted(false);
+          }, 6000);
+        }  else if (response.data.statusCode === 400) {
+          setApiStatus('Denne e-postadressen er allerede registrert.');
+        }
+      } catch (error) {
+        const axiosError = error as AxiosError;
+        if (axiosError.response) {
+          const data = axiosError.response.data as useApiInterface;
+          if (data.statusCode === 422) {
+            setApiStatus('Vennligst skriv inn en gyldig e-postadresse.');
+          } else {
+            setApiStatus('Noe gikk galt. Prøv igjen senere.');
+          }
+        }
+      }
   };
 
 
@@ -132,7 +145,7 @@ const NewsLetterBanner : React.FC = () => {
     <>
       <div className="flex flex-col items-center">
       <Transition
-          show={isVisible}
+          show={newsLetterIsVisible}
           enter="transition-opacity duration-1000"
           enterFrom="opacity-0"
           enterTo="opacity-100"
@@ -146,6 +159,7 @@ const NewsLetterBanner : React.FC = () => {
                       <input ref={emailRef} type="email" name="EMAIL" id="email" placeholder="Skriv inn e-post adresse" className="bg-white border border-gray-300 text-gray-900 md:w-64 mb-2 md:mb-0 md:mr-4 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
                       <button type="submit" className="px-5 py-2.5 font-medium rounded-lg text-sm w-full sm:w-auto text-white border bg-indigo-600 border-indigo-600 hover:text-indigo-600 hover:border-indigo-600 hover:bg-transparent ">Ja, takk!</button>
                     </form>
+                   {apiStatus && <div className="text-xs text-red-500">{apiStatus}</div>}
                 </div>
                 <div className="flex items-center absolute top-2.5 right-2.5 md:relative md:top-auto md:right-auto">
                     <button onClick={handleClose} type="button" className=" border-none flex-shrink-0 inline-flex justify-center items-center text-gray-400 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ">
