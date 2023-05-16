@@ -10,7 +10,7 @@ const NewsLetterBanner : React.FC = () => {
     
     // Storing in local store to respect user preference
     const [newsLetterIsVisible, setNewsLetterIsVisible] = useState<boolean>(() => {
-      const saved = localStorage.getItem("isVisible");
+      const saved = localStorage.getItem("newsLetterIsVisible");
       const initialValue = saved ? JSON.parse(saved) : false;
       return initialValue;
     });

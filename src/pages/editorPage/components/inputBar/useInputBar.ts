@@ -5,6 +5,7 @@ import { RootState } from "@/store/store";
 import {setEditorFetchedData} from "@/store/slices/editor/editorFetchedDataSlice";
 import { toggleEditorIsLoading } from "@/store/slices/editor/editorIsLoadingSlice";
 import { setEditorData } from '@/store/slices/editor/editorDataSlice';
+import { incrementSubmitCount } from '@/store/slices/editor/editorSubmitCountSlice'; // new import
 import useApi from "@/hooks/useApi";
 import { AxiosResponse } from 'axios';
 
@@ -33,8 +34,11 @@ export const UseInputBar = () => {
     
     const handleSubmit = async (event  : React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+
+        dispatch(incrementSubmitCount());
         dispatch(toggleEditorIsLoading());
         dispatch(setEditorData(""));
+
         try {
             const response : AxiosResponse = await postJobApplicationData(formValues);
             if (response.status === 200) {
@@ -46,7 +50,9 @@ export const UseInputBar = () => {
         } catch (error) {
             dispatch(setEditorData(errorMessage));
         }
+
         dispatch(toggleEditorIsLoading());
+
     };
 
     return {
