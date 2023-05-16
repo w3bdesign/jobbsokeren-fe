@@ -21,11 +21,11 @@ const NewsLetterBannerForm: React.FC<Props>  = ({newsLetterIsVisible, onSubmit, 
           leave="transition-opacity duration-500"
           leaveFrom="opacity-100"
           leaveTo="opacity-0">
-            <div id="newsletter-banner" tabIndex={-1} className="fixed left-0 z-50 flex justify-between w-full p-4 border-b border-gray-200 bg-gray-50">
+            <div id="newsletter-banner" className="fixed left-0 z-50 flex justify-between w-full p-4 border-b border-gray-200 bg-gray-50">
                 <div className="flex items-center flex-shrink-0 w-full mx-auto sm:w-auto">
                 <form onSubmit={onSubmit} method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="flex flex-col items-center w-full md:flex-row">
                       <label htmlFor="email" id="mce-EMAIL" className="flex-shrink-0 mb-2 mr-auto text-sm text-gray-500 md:mb-0 md:mr-4  md:m-0">Få gratis jobbsøker tips og triks</label>
-                      <input ref={emailRef} type="email" name="EMAIL" id="email" placeholder="Skriv inn e-post adresse" className="bg-white border border-gray-300 text-gray-900 md:w-64 mb-2 md:mb-0 md:mr-4 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
+                      <input ref={emailRef} type="email" name="EMAIL" id="email" placeholder="Skriv inn e-post adresse" className="bg-white border border-gray-300 text-gray-900 md:w-64 mb-2 md:mb-0 md:mr-4 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder:text-indigo-600/40 " required />
                       <button type="submit" className="px-5 py-2.5 font-medium rounded-lg text-sm w-full sm:w-auto text-white border bg-indigo-600 border-indigo-600 hover:text-indigo-600 hover:border-indigo-600 hover:bg-transparent ">Ja, takk!</button>
                     </form>
                    {apiStatus && <div className="text-xs text-red-500">{apiStatus}</div>}
