@@ -1,14 +1,10 @@
-import React, { useState, useEffect, useRef, FormEvent } from "react";
+import React, { useState} from "react";
 import { Bars4Icon, XMarkIcon, ChevronRightIcon, HomeIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-scroll";
 import { Link as RouterLink } from "react-router-dom";
 import { navigationData } from "@/data/navigationData";
 import { useLocation } from "react-router-dom";
-import { Transition } from '@headlessui/react';
-import SuccessToast from "./SuccessToast";
-import useApi from "@/hooks/useApi";
-import { AxiosError } from 'axios';
-import { useApiInterface } from "@/models/useApiModel";
+import NewsLetterBanner from "./NewsLetterBanner";
 
 
 
@@ -69,115 +65,6 @@ const BreadCrumbNav : React.FC<PathProps> = ({pathname}) => {
 }
 
 
-const NewsLetterBanner : React.FC = () => {
-  const emailRef = useRef<HTMLInputElement | null>(null);
-  
-  // Storing in local store to respect user preference
-  const [newsLetterIsVisible, setNewsLetterIsVisible] = useState<boolean>(() => {
-    const saved = localStorage.getItem("isVisible");
-    const initialValue = saved ? JSON.parse(saved) : false;
-    return initialValue;
-  });
-
-  const [submitted, setSubmitted] = useState<boolean>(false);
-  const [apiStatus, setApiStatus] = useState<string>('');
-
-  useEffect(() => {
-    const checkScroll = () => {
-       // Get the stored value
-       const storedValue = localStorage.getItem("newsLetterIsVisible");
-      // If the user has scrolled, set isVisible to true
-      if (window.scrollY > 500 && (!storedValue || JSON.parse(storedValue) !== false)) {
-        setNewsLetterIsVisible(true);
-      }
-    };
-
-    // Add the event listener when the component mounts
-    window.addEventListener('scroll', checkScroll);
-
-    // Remove the event listener when the component unmounts
-    return () => {
-      window.removeEventListener('scroll', checkScroll);
-    };
-  }, []);
-
-  const handleClose = () => {
-    setNewsLetterIsVisible(false);
-    localStorage.setItem("newsLetterIsVisible", JSON.stringify(false));
-  }
-
-  
- 
-  const onSubmit  = async (e: FormEvent)  =>  {
-      e.preventDefault();
-      const email_address = emailRef.current?.value;
-      const status = "subscribed";
-      const exportEditorContentAPI = useApi('/subscribe-to-mailchimp','post');
-      try {
-        const response = await exportEditorContentAPI({email_address, status});
-        if (response.data.statusCode === 200) {
-          console.log(response);
-          handleClose();
-          setSubmitted(true);
-      
-          // Set 'submitted' back to false after 2 seconds
-          setTimeout(() => {
-            setSubmitted(false);
-          }, 6000);
-        }  else if (response.data.statusCode === 400) {
-          setApiStatus('Denne e-postadressen er allerede registrert.');
-        }
-      } catch (error) {
-        const axiosError = error as AxiosError;
-        if (axiosError.response) {
-          const data = axiosError.response.data as useApiInterface;
-          if (data.statusCode === 422) {
-            setApiStatus('Vennligst skriv inn en gyldig e-postadresse.');
-          } else {
-            setApiStatus('Noe gikk galt. Prøv igjen senere.');
-          }
-        }
-      }
-  };
-
-
-  return (
-    <>
-      <div className="flex flex-col items-center">
-      <Transition
-          show={newsLetterIsVisible}
-          enter="transition-opacity duration-1000"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="transition-opacity duration-500"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0">
-            <div id="newsletter-banner" tabIndex={-1} className="fixed left-0 z-50 flex justify-between w-full p-4 border-b border-gray-200 bg-gray-50">
-                <div className="flex items-center flex-shrink-0 w-full mx-auto sm:w-auto">
-                <form onSubmit={onSubmit} method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="flex flex-col items-center w-full md:flex-row">
-                      <label htmlFor="email" id="mce-EMAIL" className="flex-shrink-0 mb-2 mr-auto text-sm text-gray-500 md:mb-0 md:mr-4  md:m-0">Få gratis jobbsøker tips og triks</label>
-                      <input ref={emailRef} type="email" name="EMAIL" id="email" placeholder="Skriv inn e-post adresse" className="bg-white border border-gray-300 text-gray-900 md:w-64 mb-2 md:mb-0 md:mr-4 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
-                      <button type="submit" className="px-5 py-2.5 font-medium rounded-lg text-sm w-full sm:w-auto text-white border bg-indigo-600 border-indigo-600 hover:text-indigo-600 hover:border-indigo-600 hover:bg-transparent ">Ja, takk!</button>
-                    </form>
-                   {apiStatus && <div className="text-xs text-red-500">{apiStatus}</div>}
-                </div>
-                <div className="flex items-center absolute top-2.5 right-2.5 md:relative md:top-auto md:right-auto">
-                    <button onClick={handleClose} type="button" className=" border-none flex-shrink-0 inline-flex justify-center items-center text-gray-400 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ">
-                        <XMarkIcon className="w-6 h-6 text-gray-600" aria-hidden="true" />
-                        <span className="sr-only">Lukk</span>
-                    </button>
-                </div>
-                <div>
-                </div>
-            </div>
-        </Transition>
-        <SuccessToast 
-          display={submitted} 
-          text="Takk for at du meldte deg på nyhetsbrevet!" />
-        </div>
-    </>
-  )
-}
 
 
 const MobileNav : React.FC<MobileNavProps> = ({pathname, closeMobileMenu, nav, navigationData }) => {
