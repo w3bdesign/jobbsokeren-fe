@@ -19,7 +19,7 @@ export const navigationData: Array<NavigationLinksModel> = [
     {
         name: "CV og søknadstips", 
         link: "/tips", 
-        offset: -50
+        offset: -150
     },  
     // {
     //     name: "Priser", 
