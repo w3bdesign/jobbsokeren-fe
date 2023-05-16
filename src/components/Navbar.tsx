@@ -23,12 +23,6 @@ interface PathProps {
     pathname: string;
 }
 
-interface JsonpResponse  {
-   msg: string; 
-   result: string 
-  };
-
-
 const BreadCrumbNav : React.FC<PathProps> = ({pathname}) => {
   // Helper function to unslugify a string
   const unslugify = (str : string) =>

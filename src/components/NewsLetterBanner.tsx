@@ -52,7 +52,6 @@ const NewsLetterBanner : React.FC = () => {
         try {
           const response = await exportEditorContentAPI({email_address, status});
           if (response.data.statusCode === 200) {
-            console.log(response);
             handleClose();
             setSubmitted(true);
         
