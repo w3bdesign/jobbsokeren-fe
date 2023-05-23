@@ -3,13 +3,15 @@ import editorFetchedDataReducer from "./slices/editor/editorFetchedDataSlice";
 import editorIsLoadingReducer from "./slices/editor/editorIsLoadingSlice";
 import editorDataReducer from "./slices/editor/editorDataSlice";
 import editorSubmitCountReducer from "./slices/editor/editorSubmitCountSlice";
+import authReducer from "./slices/authentication/authSlice";
 
 export const store = configureStore({ 
     reducer: {
         editorFetchedData: editorFetchedDataReducer,
         editorIsLoading: editorIsLoadingReducer,
         editorData: editorDataReducer,
-        editorSubmitCount: editorSubmitCountReducer
+        editorSubmitCount: editorSubmitCountReducer,
+        auth: authReducer
 
     }
 });

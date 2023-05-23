@@ -2,7 +2,7 @@ import {PortableText} from '@portabletext/react'
 import {PortableTextComponents} from '@portabletext/react'
 import urlBuilder from '@sanity/image-url'
 import {getImageDimensions} from '@sanity/asset-utils'
-import client from '@/utils/sanityClient.config'
+import client from '@/sanityClient.config'
 
 
 interface ComponentProps {

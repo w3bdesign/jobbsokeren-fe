@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import client from '@/utils/sanityClient.config';
+import client from '@/sanityClient.config';
 
 interface UseSanityDataResult<T> {
     data: T | undefined;
