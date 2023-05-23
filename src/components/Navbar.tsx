@@ -168,17 +168,17 @@ const Navbar : React.FC = () => {
               <button className="px-8 py-3">Prøv jobbsøkeren nå</button>
             </RouterLink>
              )}
-            {/* <div onClick={handleSideBar} className="relative ml-10">
+            <div onClick={handleSideBar} className="relative ml-10">
               {!showSideBar && <BiUserCircle className="w-9 h-9 text-indigo-600 hover:cursor-pointer" />}
               {showSideBar && <RxCrossCircled className="w-9 h-9 text-indigo-600 hover:cursor-pointer" />}
-            </div> */}
+            </div>
         </div>
       
         <div className="lg:hidden flex gap-3 mr-5 hover:cursor-pointer">
-          {/* <div onClick={handleSideBar} className="relative ml-10">
+          <div onClick={handleSideBar} className="relative ml-10">
             {!showSideBar && <BiUserCircle className="w-7 h-7 text-indigo-600 hover:cursor-pointer" />}
             {showSideBar && <RxCrossCircled className="w-7 h-7 text-indigo-600 hover:cursor-pointer" />}
-          </div> */}
+          </div>
           {!nav && pathname === "/" && <Bars4Icon onClick={handleClick} className="w-7" /> }
           {nav && pathname === "/" && <XMarkIcon onClick={handleClick} className="w-7" /> }
         </div>
