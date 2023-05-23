@@ -2,7 +2,7 @@
 import React from "react";
 import { Link } from "react-scroll";
 import { navigationData } from "@/data/navigationData";
-import BreadCrumbNav from "./NavBarBreadCrumbs";
+import BreadCrumbNav from "./NavbarBreadCrumbs";
 
 interface PathProps {
     pathname: string;
