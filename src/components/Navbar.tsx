@@ -38,15 +38,15 @@ const Navbar : React.FC = () => {
           showSideBar={showSideBar}
         />
       </div>
-    <MobileNav 
-      pathname={pathname} 
-      closeMobileMenu={closeMobileMenu} 
-      nav={nav} 
-      navigationData={navigationData} />
-    <NewsLetterBanner />
-    <SideBar 
-      showSideBar={showSideBar} 
-      handleSideBar={handleSideBar} />
+      <MobileNav 
+        pathname={pathname} 
+        closeMobileMenu={closeMobileMenu} 
+        nav={nav} 
+        navigationData={navigationData} />
+      <NewsLetterBanner />
+      <SideBar 
+        showSideBar={showSideBar} 
+        handleSideBar={handleSideBar} />
     </div>
   );
 };
