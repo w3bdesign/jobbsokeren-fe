@@ -1,10 +1,13 @@
 import React, { useState} from "react";
 import { Bars4Icon, XMarkIcon, ChevronRightIcon, HomeIcon } from "@heroicons/react/24/outline";
+import { BiUserCircle } from "react-icons/bi";
+import { RxCrossCircled } from "react-icons/rx";
 import { Link } from "react-scroll";
 import { Link as RouterLink } from "react-router-dom";
 import { navigationData } from "@/data/navigationData";
 import { useLocation } from "react-router-dom";
 import NewsLetterBanner from "./NewsLetterBanner";
+import SideBar from "./SideBar";
 
 
 
@@ -123,8 +126,10 @@ const LogoNav : React.FC<PathProps> = ({pathname}) => {
 
 
 const Navbar : React.FC = () => {
+  const [showSideBar, setShowSideBar] = useState(false);
   const [nav, setNav] = useState(false);
   const handleClick = () => setNav(!nav);
+  const handleSideBar = () => setShowSideBar(!showSideBar);
   const closeMobileMenu = () => setNav(false);
   const { pathname } = useLocation();
 
@@ -157,29 +162,38 @@ const Navbar : React.FC = () => {
            <BreadCrumbNav pathname={pathname} />
           )}
         </div>
-        <div className="hidden lg:flex pr-4">
+        <div className="hidden lg:flex pr-4 items-center ">
           {pathname !== "/jobbsokeren" && (
             <RouterLink className="w-full" to="/jobbsokeren">
               <button className="px-8 py-3">Prøv jobbsøkeren nå</button>
             </RouterLink>
-          )}
+             )}
+            {/* <div onClick={handleSideBar} className="relative ml-10">
+              {!showSideBar && <BiUserCircle className="w-9 h-9 text-indigo-600 hover:cursor-pointer" />}
+              {showSideBar && <RxCrossCircled className="w-9 h-9 text-indigo-600 hover:cursor-pointer" />}
+            </div> */}
         </div>
-        {pathname === "/" && (
-          <div className="lg:hidden mr-5 hover:cursor-pointer" onClick={handleClick}>
-            {!nav ? (
-              <Bars4Icon className="w-7" />
-            ) : (
-              <XMarkIcon className="w-7" />
-            )}
-          </div>
-        )}
+      
+        <div className="lg:hidden flex gap-3 mr-5 hover:cursor-pointer">
+          {/* <div onClick={handleSideBar} className="relative ml-10">
+            {!showSideBar && <BiUserCircle className="w-7 h-7 text-indigo-600 hover:cursor-pointer" />}
+            {showSideBar && <RxCrossCircled className="w-7 h-7 text-indigo-600 hover:cursor-pointer" />}
+          </div> */}
+          {!nav && pathname === "/" && <Bars4Icon onClick={handleClick} className="w-7" /> }
+          {nav && pathname === "/" && <XMarkIcon onClick={handleClick} className="w-7" /> }
+        </div>
+   
     </div>
+    {/* Submenues */}
     <MobileNav 
         pathname={pathname} 
         closeMobileMenu={closeMobileMenu} 
         nav={nav} 
         navigationData={navigationData} />
     <NewsLetterBanner />
+    <SideBar 
+      showSideBar={showSideBar} 
+      handleSideBar={handleSideBar}/>
     </div>
     );
 };
