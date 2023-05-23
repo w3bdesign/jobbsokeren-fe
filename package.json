@@ -19,6 +19,7 @@
     "@tinymce/tinymce-react": "^4.3.0",
     "axios": "^1.3.4",
     "dotenv": "^16.0.3",
+    "firebase": "^9.22.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
