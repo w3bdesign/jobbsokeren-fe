@@ -22,8 +22,10 @@ const Navbar : React.FC = () => {
   return (
     <div className="w-screen h-[80px] z-10 bg-zinc-200 fixed drop-shadow-md">
       <div className="px-3 md:px-10 flex justify-between items-center w-full h-full">
-        <LogoNav pathname={pathname} /> 
-        <DesktopNav pathname={pathname} />
+          <div className="flex items-center">
+            <LogoNav pathname={pathname}/> 
+            <DesktopNav pathname={pathname} />
+          </div>
         <div className="hidden lg:flex pr-4 items-center ">
           <JobbsokerenButton pathname={pathname} />
           <UserIcon handleSideBar={handleSideBar} showSideBar={showSideBar} />
