@@ -18,7 +18,6 @@ function App() {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      console.log('User state changed. Current user: ', user)
       if (user) {
         const firebaseUser: FirebaseUser = {
           uid: user.uid,

@@ -26,7 +26,7 @@ const Navbar : React.FC = () => {
             <LogoNav pathname={pathname}/> 
             <DesktopNav pathname={pathname} />
           </div>
-        <div className="hidden lg:flex pr-4 items-center ">
+        <div className="hidden lg:flex items-center justify-center">
           <JobbsokerenButton pathname={pathname} />
           <UserIcon handleSideBar={handleSideBar} showSideBar={showSideBar} />
         </div>
