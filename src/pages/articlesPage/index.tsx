@@ -21,7 +21,7 @@ import LoadingDisplayer from '@/components/LoadingDisplayer';
   }`;
   
 
-const Articles: React.FC = () => {
+const ArticlesPage: React.FC = () => {
 
     const { data: articles, error } = useSanity<Article[]>(query);
 
@@ -62,4 +62,4 @@ const Articles: React.FC = () => {
     )
 }
 
-export default Articles
+export default ArticlesPage

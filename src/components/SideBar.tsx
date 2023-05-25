@@ -26,7 +26,7 @@ const SideBar : React.FC<SideBarProps> =({showSideBar, handleSideBar}) => {
             <div className="py-8 overflow-y-auto">
                 <ul className="space-y-2 font-medium text-gray-900">
                 <li>
-                    <RouterLink to="/" className={`inline-flex items-center p-2 hover:text-indigo-600 ${user ? '' : 'opacity-50 cursor-not-allowed'}`}>
+                    <RouterLink to="/profil" className={`inline-flex items-center p-2 hover:text-indigo-600 ${user ? '' : 'opacity-50 cursor-not-allowed'}`}>
                     <div className="flex items-center">
                         <UserIcon className="w-6 h-6 mr-3 text-indigo-600" aria-hidden="true" />
                             Min profil
@@ -34,7 +34,7 @@ const SideBar : React.FC<SideBarProps> =({showSideBar, handleSideBar}) => {
                     </RouterLink>
                 </li>
                 <li>
-                    <RouterLink to="/" className={`inline-flex items-center p-2 hover:text-indigo-600 ${user ? '' : 'opacity-50 cursor-not-allowed'}`}>
+                    <RouterLink to="#" className={`inline-flex items-center p-2 hover:text-indigo-600 ${user ? '' : 'opacity-50 cursor-not-allowed'}`}>
                     <div className="flex items-center">
                         <NewspaperIcon className="w-6 h-6 mr-3 text-indigo-600" aria-hidden="true" />
                             Mine søknader
@@ -44,7 +44,7 @@ const SideBar : React.FC<SideBarProps> =({showSideBar, handleSideBar}) => {
                
                {!user && <li>
                     <Login>
-                        <RouterLink to="/" className="inline-flex justify-between w-full items-center p-2 hover:text-indigo-600">
+                        <RouterLink to="#" className="inline-flex justify-between w-full items-center p-2 hover:text-indigo-600">
                             <div className="flex items-center">
                                 <ArrowRightOnRectangleIcon className="w-6 h-6 mr-3 text-indigo-600" aria-hidden="true" />
                                 Logg inn
