@@ -8,6 +8,9 @@ import SubmitButton from "@/components/SubmitButton";
 import useFetchFirebaseUserData from "@/hooks/useFetchFirebaseUserData";
 import LoadingDisplayer from "@/components/LoadingDisplayerBackground";
 import ErrorDisplayer from "@/components/ErrorDisplayer";
+import usePostFirebaseUserData from "@/hooks/usePostFirebaseUserData";
+import SuccessBottomBanner from "@/components/SuccessBottomBanner";
+
 
 
 const textInputConfigs = [
@@ -78,30 +81,38 @@ const PersonalInfoForm: React.FC = () => {
 
     const user = useSelector((state: RootState) => state.auth.user);
     const [formValues, setFormValues] = useState<FirebasePersonalUserData>(emptyFormValues);
-    // simulate loading
     const { loading, error, data } = useFetchFirebaseUserData(user);
-    console.log(loading, error, data)
-
+    const { postData, isLoading : postLoading,  error: postError } = usePostFirebaseUserData();
+    const [success, setSuccess] = useState(false);
+   
     useEffect(() => {
         if (data) {
             setFormValues(data);
         }
     }, [data]);
 
-   
-
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setFormValues({ ...formValues, [name]: value });
     };
+
+    const handleSubmit = async (event: React.FormEvent) => {
+        event.preventDefault();
+        if(user) {
+          const result = await postData('personalInformation', user.uid, formValues);
+          setSuccess(true)
+            setTimeout(() => {
+                setSuccess(false)
+            }, 3000);
+        }
+      };
+    
     return (
         <>
-        {loading && <LoadingDisplayer />}
-        {error && <ErrorDisplayer title={"Feil!"} 
-                errorMessage="Det skjedde en feil når vi prøvde å hente din profil. Prøv igjen senere" 
-                errorCode={500}  />}
+            {loading && <LoadingDisplayer />}
+            {error && <ErrorDisplayer title={"Feil!"} errorMessage="Det skjedde en feil når vi prøvde å hente din profil. Prøv igjen senere"  errorCode={500}  />}
             <div className="w-full">
-                <form >
+                <form onSubmit={handleSubmit} >
                     <div className="justify-center sm:p-28">
                     <div className="my-6 flex flex-col sm:flex-row justify-between">
                         <h2 className="text-dark mb-12 text-3xl font-bold sm:text-5xl">Min profil</h2>
@@ -132,11 +143,12 @@ const PersonalInfoForm: React.FC = () => {
                             </div>
                         </div>
                         <div className="sm:w-1/3 ml-auto">
-                            <SubmitButton isLoading={false} buttonText={"Lagre endringer"}/>
+                            <SubmitButton isLoading={postLoading} buttonText={"Lagre endringer"}/>
                         </div>
                     </div>
                 </form>
             </div>
+            <SuccessBottomBanner success={success} />
         </>
         );
     };
