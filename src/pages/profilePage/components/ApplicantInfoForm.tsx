@@ -73,9 +73,8 @@ const textInputConfigs = [
 
 const ApplicantInfoForm: React.FC = () => {
     const user = useSelector((state: RootState) => state.auth.user);
-
     const [formValues, setFormValues] = useState<EditorFormModel>(emptyFormValues);
-
+    
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setFormValues({ ...formValues, [name]: value });
@@ -85,19 +84,11 @@ const ApplicantInfoForm: React.FC = () => {
             <div className="w-full">
                 <form >
                     <div className="justify-center sm:p-28">
-                    <div className="my-6 flex flex-col sm:flex-row justify-between">
-                        <h2 className="text-dark mb-12 text-3xl font-bold sm:text-5xl">Min profil</h2>
-                        <div className="hidden sm:block">
-                            <AvatarText name={user?.displayName} email={user?.email} image={user?.photoURL} />
-                        </div>
-                    </div>
                         <div className="mb-5">
-                            
                                 <div className="my-8 sm:w-1/2">
-                                    <h2 className="text-base font-semibold leading-7 text-gray-900">Personlig jobbsøker informasjon</h2>
-                                    <p className="mt-1 text-sm leading-6 text-gray-600">Denne informasjonen vil vår AI bruke for å skreddersy søknaden din i henhold til dine personlige opplysninger.</p>
+                                    <h2 className="text-base font-semibold leading-7 text-gray-900">Erfaring og personlige egenskaper</h2>
+                                    <p className="mt-1 text-sm leading-6 text-gray-600">Denne informasjonen vil vår AI bruke for å skreddersy søknaden din i henhold til dine kvalifikasjoner og personlige egenskaper.</p>
                                 </div>
-                          
                             <div className="flex flex-wrap justify-between">
                             {textInputConfigs.map((textInputConfig, index) => (
                                 <TextInput

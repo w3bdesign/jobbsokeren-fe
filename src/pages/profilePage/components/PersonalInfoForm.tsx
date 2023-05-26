@@ -1,10 +1,13 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import TextInput from "@/components/TextInput";
-import { EditorFormModel } from "@/models/editorFormModel";
+import { FirebasePersonalUserData } from "@/models/firebasePersonalUserDataModel";
 import AvatarText from "@/components/AvatarText";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import SubmitButton from "@/components/SubmitButton";
+import useFetchFirebaseUserData from "@/hooks/useFetchFirebaseUserData";
+import LoadingDisplayer from "@/components/LoadingDisplayerBackground";
+import ErrorDisplayer from "@/components/ErrorDisplayer";
 
 
 const textInputConfigs = [
@@ -63,20 +66,29 @@ const textInputConfigs = [
     },
   ];
 
-  const emptyFormValues: EditorFormModel = {
+  const emptyFormValues: FirebasePersonalUserData = {
     applicant_name: '',
     applicant_email: '',
     applicant_address: '',
     applicant_zip_code:'',
     applicant_city: '',
-    applicant_job_advertisement_url: ''
 }
 
 const PersonalInfoForm: React.FC = () => {
 
     const user = useSelector((state: RootState) => state.auth.user);
+    const [formValues, setFormValues] = useState<FirebasePersonalUserData>(emptyFormValues);
+    // simulate loading
+    const { loading, error, data } = useFetchFirebaseUserData(user);
+    console.log(loading, error, data)
 
-    const [formValues, setFormValues] = useState<EditorFormModel>(emptyFormValues);
+    useEffect(() => {
+        if (data) {
+            setFormValues(data);
+        }
+    }, [data]);
+
+   
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -84,6 +96,10 @@ const PersonalInfoForm: React.FC = () => {
     };
     return (
         <>
+        {loading && <LoadingDisplayer />}
+        {error && <ErrorDisplayer title={"Feil!"} 
+                errorMessage="Det skjedde en feil når vi prøvde å hente din profil. Prøv igjen senere" 
+                errorCode={500}  />}
             <div className="w-full">
                 <form >
                     <div className="justify-center sm:p-28">
@@ -94,19 +110,17 @@ const PersonalInfoForm: React.FC = () => {
                         </div>
                     </div>
                         <div className="mb-5">
-                            
                                 <div className="my-8 sm:w-1/2">
                                     <h2 className="text-base font-semibold leading-7 text-gray-900">Personlig jobbsøker informasjon</h2>
                                     <p className="mt-1 text-sm leading-6 text-gray-600">Denne informasjonen vil vår AI bruke for å skreddersy søknaden din i henhold til dine personlige opplysninger.</p>
                                 </div>
-                          
                             <div className="flex flex-wrap justify-between">
                             {textInputConfigs.map((textInputConfig, index) => (
                                 <TextInput
                                     key={index}
                                     id={textInputConfig.id}
                                     name={textInputConfig.name}
-                                    value={formValues[textInputConfig.id as keyof EditorFormModel]}
+                                    value={formValues[textInputConfig.id as keyof FirebasePersonalUserData]}
                                     autoComplete={textInputConfig.autoComplete}
                                     type={textInputConfig.type}
                                     placeholder={textInputConfig.placeholder}

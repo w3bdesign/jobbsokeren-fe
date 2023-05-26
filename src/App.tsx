@@ -6,7 +6,7 @@ import ArticlesPage from './pages/articlesPage';
 import ArticlePage from './pages/articlePage';
 import ProfilePage from './pages/profilePage';
 import NotFoundPage from './pages/notFoundpage';
-import LoadingDisplayer from './components/LoadingDisplayer';
+import LoadingDisplayer from './components/LoadingDisplayerTransparent';
 import {BrowserRouter,Routes, Route} from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';

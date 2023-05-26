@@ -4,7 +4,7 @@
  import useSanity from '@/hooks/useSanity';
  import RichTextComponent from "@/components/RichText";
  import ErrorDisplayer from "@/components/ErrorDisplayer";
-  import LoadingDisplayer from "@/components/LoadingDisplayer";
+  import LoadingDisplayer from "@/components/LoadingDisplayerTransparent";
 
 
 const ArticlePage : React.FC = () => {

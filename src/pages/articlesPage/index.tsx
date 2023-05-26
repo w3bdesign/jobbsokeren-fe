@@ -3,7 +3,7 @@ import React from 'react';
 import useSanity from '@/hooks/useSanity';
 import { Article } from '@/models/articleModel';
 import ErrorDisplayer from '@/components/ErrorDisplayer';
-import LoadingDisplayer from '@/components/LoadingDisplayer';
+import LoadingDisplayer from '@/components/LoadingDisplayerTransparent';
 
   const query = `*[_type == "article"]{
     articleType,
