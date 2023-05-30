@@ -28,8 +28,10 @@ const useFetchFirebaseUserData = (user: { uid: string } | null): UseFetchUserDat
                 }
             }).catch((error) => {
                 setError(error);
+                setLoading(false);
             });
         }
+        setLoading(false);
     }, [user]);
 
     return { loading, error, data };
