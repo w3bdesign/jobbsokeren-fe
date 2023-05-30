@@ -1,8 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { FirebaseUser } from '@/models/firebaseUserModel';
 
-
-  
   interface AuthState {
     user: FirebaseUser | null;
     loading: boolean;

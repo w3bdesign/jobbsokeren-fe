@@ -10,7 +10,7 @@ interface TextInputProps {
   pattern?: string;
   minLength?: number;
   maxLength?: number;
-  value: string;
+  value: string | undefined;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   required?: boolean;
   label: string;

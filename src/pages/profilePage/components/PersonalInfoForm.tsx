@@ -123,7 +123,7 @@ const PersonalInfoForm: React.FC = () => {
                         <div className="mb-5">
                                 <div className="my-8 sm:w-1/2">
                                     <h2 className="text-base font-semibold leading-7 text-gray-900">Personlig jobbsøker informasjon</h2>
-                                    <p className="mt-1 text-sm leading-6 text-gray-600">Denne informasjonen vil vår AI bruke for å skreddersy søknaden din i henhold til dine personlige opplysninger.</p>
+                                    <p className="mt-1 text-sm leading-6 text-gray-600">Denne informasjonen vil vår AI bruke for å skreddersy søknaden din i henhold til dine personlige opplysninger. Du slipper da å fylle ut dette i jobbsøkeren.</p>
                                 </div>
                             <div className="flex flex-wrap justify-between">
                             {textInputConfigs.map((textInputConfig, index) => (
