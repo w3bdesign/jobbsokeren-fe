@@ -24,15 +24,17 @@ const useFetchFirebaseUserData = (user: { uid: string } | null): UseFetchUserDat
                     setData(docSnapshot.data() as FirebasePersonalUserData);
                 } else {
                     console.log("No such document!");
-                    setError(error);
+                    setError(new Error("No such document!"));
                 }
             }).catch((error) => {
                 setError(error);
                 setLoading(false);
             });
+        } else {
+            setLoading(false);
         }
-        setLoading(false);
     }, [user]);
+    
 
     return { loading, error, data };
 };
