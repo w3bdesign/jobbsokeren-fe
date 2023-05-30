@@ -86,8 +86,8 @@ const ApplicantInfoForm: React.FC = () => {
                     <div className="justify-center sm:p-28">
                         <div className="mb-5">
                                 <div className="my-8 sm:w-1/2">
-                                    <h2 className="text-base font-semibold leading-7 text-gray-900">Erfaring og personlige egenskaper</h2>
-                                    <p className="mt-1 text-sm leading-6 text-gray-600">Denne informasjonen vil vår AI bruke for å skreddersy søknaden din i henhold til dine kvalifikasjoner og personlige egenskaper.</p>
+                                    <h2 className="text-base font-semibold leading-7 text-gray-900">Min CV</h2>
+                                    <p className="mt-1 text-sm leading-6 text-gray-600">Vennligst last opp din CV. Vi vil hente informasjon fra CV-en når vi lager jobbsøknad for å skreddersy din søknad så mye som mulig ut i fra dine erfaringer, kompetanse og personlige egenskaper.</p>
                                 </div>
                             <div className="flex flex-wrap justify-between">
                             {textInputConfigs.map((textInputConfig, index) => (
