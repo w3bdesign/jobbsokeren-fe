@@ -1,11 +1,16 @@
 import { ThreeDots } from "react-loader-spinner";
 
-const LoadingIndicator = () => (
+
+interface LoadingIndicatorProps {
+    color?: string;
+}
+const LoadingIndicator: React.FC<LoadingIndicatorProps> = ( {color} ) => (
+  
     <ThreeDots
       height="25"
       width="25"
       radius="9"
-      color="#FFFFFF"
+      color={color ? color : "white"}
       ariaLabel="three-dots-loading"
       wrapperStyle={{
         display: 'flex',

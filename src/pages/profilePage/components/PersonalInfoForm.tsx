@@ -11,6 +11,7 @@ import ErrorDisplayer from "@/components/ErrorDisplayer";
 import usePostFirebaseUserData from "@/hooks/usePostFirebaseUserData";
 import SuccessBottomBanner from "@/components/SuccessBottomBanner";
 import DeleteButton from "@/components/DeleteButton";
+import useDeleteUser from "@/hooks/useDeleteFirebaseUserData";
 
 
 
@@ -83,6 +84,7 @@ const PersonalInfoForm: React.FC = () => {
     const user = useSelector((state: RootState) => state.auth.user);
     const [formValues, setFormValues] = useState<FirebasePersonalUserData>(emptyFormValues);
     const { loading, error, data } = useFetchFirebaseUserData(user);
+    const {loading: loadingDelete, error: errorDelete, success: successDelete, deleteUserAndData } = useDeleteUser();
     const { postData, isLoading : postLoading,  error: postError } = usePostFirebaseUserData();
     const [success, setSuccess] = useState(false);
    
@@ -107,6 +109,12 @@ const PersonalInfoForm: React.FC = () => {
             }, 3000);
         }
       };
+
+      const handleDelete = () => {
+        if(user) {
+            deleteUserAndData(user);
+        }
+      }
     
     return (
         <>
@@ -144,7 +152,7 @@ const PersonalInfoForm: React.FC = () => {
                             </div>
                         </div>
                         <div className="sm:w-1/2 ml-auto flex gap-3">
-                            <DeleteButton isLoading={success} buttonText="Slett min bruker" />
+                            <DeleteButton handleDelete={handleDelete} isLoading={loadingDelete} buttonText="Slett min bruker" />
                             <SubmitButton isLoading={postLoading} buttonText={"Lagre endringer"}/>
                         </div>
                     </div>

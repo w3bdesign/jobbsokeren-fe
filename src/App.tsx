@@ -9,12 +9,11 @@ import NotFoundPage from './pages/notFoundpage';
 import LoadingDisplayer from './components/LoadingDisplayerTransparent';
 import {BrowserRouter,Routes, Route} from "react-router-dom";
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { auth } from '@/firebase.config';
 import { loginSuccess, logout } from '@/store/slices/authentication/authSlice';
-import { FirebaseUser } from '@/models/firebaseUserModel';
+import { User } from "firebase/auth";
 import ProtectedRoute from './components/ProtectedRoute';
-import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 
 
@@ -29,13 +28,7 @@ function App() {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        const firebaseUser: FirebaseUser = {
-          uid: user.uid,
-          displayName: user.displayName,
-          email: user.email,
-          photoURL: user.photoURL,
-          // include other properties as needed
-        };
+        const firebaseUser: User = user;
         dispatch(loginSuccess(firebaseUser));
       } else {
         dispatch(logout());

@@ -5,6 +5,7 @@ import editorDataReducer from "./slices/editor/editorDataSlice";
 import editorSubmitCountReducer from "./slices/editor/editorSubmitCountSlice";
 import authReducer from "./slices/authentication/authSlice";
 
+
 export const store = configureStore({ 
     reducer: {
         editorFetchedData: editorFetchedDataReducer,
@@ -13,7 +14,11 @@ export const store = configureStore({
         editorSubmitCount: editorSubmitCountReducer,
         auth: authReducer
 
-    }
+    },
+        middleware: getDefaultMiddleware =>
+        getDefaultMiddleware({
+        serializableCheck: false,
+    }),
 });
 
 export type RootState = ReturnType<typeof store.getState>; 
