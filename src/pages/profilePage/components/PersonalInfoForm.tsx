@@ -10,6 +10,7 @@ import LoadingDisplayer from "@/components/LoadingDisplayerBackground";
 import ErrorDisplayer from "@/components/ErrorDisplayer";
 import usePostFirebaseUserData from "@/hooks/usePostFirebaseUserData";
 import SuccessBottomBanner from "@/components/SuccessBottomBanner";
+import DeleteButton from "@/components/DeleteButton";
 
 
 
@@ -142,7 +143,8 @@ const PersonalInfoForm: React.FC = () => {
                                 ))}
                             </div>
                         </div>
-                        <div className="sm:w-1/3 ml-auto">
+                        <div className="sm:w-1/2 ml-auto flex gap-3">
+                            <DeleteButton isLoading={success} buttonText="Slett min bruker" />
                             <SubmitButton isLoading={postLoading} buttonText={"Lagre endringer"}/>
                         </div>
                     </div>
