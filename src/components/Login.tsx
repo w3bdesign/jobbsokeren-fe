@@ -2,18 +2,12 @@ import { useDispatch } from 'react-redux';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { loginStart, loginSuccess, loginFailure } from '@/store/slices/authentication/authSlice';
 import ErrorDisplayer from './ErrorDisplayer';
+import { User } from "firebase/auth";
+
 
 interface LoginProps {
   children: React.ReactNode;
 }
-
-interface FirebaseUser {
-  uid: string;
-  displayName: string | null;
-  email: string | null;
-  photoURL: string | null;
-}
-
 const Login: React.FC<LoginProps> = ({ children }) => {
   const dispatch = useDispatch();
   const auth = getAuth();
@@ -26,14 +20,7 @@ const Login: React.FC<LoginProps> = ({ children }) => {
     
       .then((result) => {
         if (result.user) {
-          const firebaseUser: FirebaseUser = {
-            uid: result.user.uid,
-            displayName: result.user.displayName,
-            email: result.user.email,
-            photoURL: result.user.photoURL,
-          };
-
-          dispatch(loginSuccess(firebaseUser));
+          dispatch(loginSuccess(result.user as User));
         }
       })
       .catch((error) => {

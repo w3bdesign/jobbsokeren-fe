@@ -32,15 +32,18 @@ const useDeleteUser = (): UseDeleteUserProps => {
                 await deleteDoc(userRef);
                 
                 if (authUser) {
-                    authUser.delete().then(() => {
-                        console.log("User deleted");
+                    console.log("authUser", authUser);
+                    authUser.delete().then((result) => {
+                        console.log("User deleted", result);
                         dispatch(logout());
                     }).catch((error) => {
+                        console.log("Error deleting user", error);
                         if (error.code === 'auth/requires-recent-login') {
                             // The user's last sign-in time does not meet the security threshold. 
                             // You must prompt the user to reauthenticate.
                             reauthenticateUser(authUser);
                         } else {
+                            console.log("Error deleting user", error);
                             setError("Det skjedde en feil under sletting av bruker. Prøv igjen senere.");
                         }
                     });

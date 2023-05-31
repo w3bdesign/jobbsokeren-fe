@@ -102,7 +102,7 @@ const PersonalInfoForm: React.FC = () => {
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         if(user) {
-          const result = await postData('personalInformation', user.uid, formValues);
+          await postData('personalInformation', user.uid, formValues);
           setSuccess(true)
             setTimeout(() => {
                 setSuccess(false)
@@ -158,7 +158,8 @@ const PersonalInfoForm: React.FC = () => {
                     </div>
                 </form>
             </div>
-            <SuccessBottomBanner success={success} />
+            <SuccessBottomBanner success={success} text="Din profil er oppdatert!" />
+            <SuccessBottomBanner success={successDelete} text="Din profil er nå slettet!" />
         </>
         );
     };
