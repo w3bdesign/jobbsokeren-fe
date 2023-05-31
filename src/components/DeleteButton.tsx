@@ -14,11 +14,11 @@ const DeleteButton: React.FC<SubmitButtonProps> = ({ isLoading, buttonText, hand
     const buttonLoading = isLoading ? "hover:bg-indigo-600" : "hover:bg-transparent";
     return (
         <button
-            type="submit"
+            type="button"
             onClick={handleDelete}
             disabled={isLoading}
             className={`${baseButtonClass} ${buttonLoading}`}>
-            {isLoading ? <ButtonLoadingIndicator color="black" /> : buttonText}
+            {isLoading ? <ButtonLoadingIndicator color="black"/> : buttonText}
             <TrashIcon className="w-5 h-5 inline-block" />
         </button>
     );

@@ -12,6 +12,7 @@ import usePostFirebaseUserData from "@/hooks/usePostFirebaseUserData";
 import SuccessBottomBanner from "@/components/SuccessBottomBanner";
 import DeleteButton from "@/components/DeleteButton";
 import useDeleteUser from "@/hooks/useDeleteFirebaseUserData";
+import WarningModal from "@/components/WarningModal";
 
 
 
@@ -87,6 +88,8 @@ const PersonalInfoForm: React.FC = () => {
     const {loading: loadingDelete, error: errorDelete, success: successDelete, deleteUserAndData } = useDeleteUser();
     const { postData, isLoading : postLoading,  error: postError } = usePostFirebaseUserData();
     const [success, setSuccess] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+
    
     useEffect(() => {
         if (data) {
@@ -111,15 +114,27 @@ const PersonalInfoForm: React.FC = () => {
       };
 
       const handleDelete = () => {
-        if(user) {
-            deleteUserAndData(user);
-        }
-      }
+        setShowModal(true);
+    }
+    
     
     return (
         <>
             {loading && <LoadingDisplayer />}
             {error && <ErrorDisplayer title={"Feil!"} errorMessage="Det skjedde en feil når vi prøvde å hente din profil. Prøv igjen senere"  errorCode={500}  />}
+            <WarningModal 
+                show={showModal} 
+                setShow={setShowModal} 
+                title={"Er du sikker på at du vil slette din bruker?"} 
+                confirmMessage={"Ja, slett min bruker"} 
+                closeMessage={"Nei, behold min bruker"}
+                onConfirm={() => {
+                    deleteUserAndData(user);
+                    setShowModal(false);
+                }} 
+                onCancel={() => setShowModal(false)} 
+                />
+
             <div className="w-full">
                 <form onSubmit={handleSubmit} >
                     <div className="justify-center sm:p-28">
@@ -152,7 +167,7 @@ const PersonalInfoForm: React.FC = () => {
                             </div>
                         </div>
                         <div className="sm:w-1/2 ml-auto flex gap-3">
-                            <DeleteButton handleDelete={handleDelete} isLoading={loadingDelete} buttonText="Slett min bruker" />
+                            <DeleteButton handleDelete={handleDelete} isLoading={loadingDelete} buttonText="Slett min bruker"/>
                             <SubmitButton isLoading={postLoading} buttonText={"Lagre endringer"}/>
                         </div>
                     </div>

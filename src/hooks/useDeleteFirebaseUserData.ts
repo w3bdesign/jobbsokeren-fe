@@ -22,6 +22,8 @@ const useDeleteUser = (): UseDeleteUserProps => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState(false);
+    const errorMessage = "Det skjedde en feil under sletting av bruker. Prøv igjen senere.";
+
     const deleteUserAndData = async (user: { uid: string } | null) => {
       
         if (user && user.uid) {
@@ -32,27 +34,23 @@ const useDeleteUser = (): UseDeleteUserProps => {
                 await deleteDoc(userRef);
                 
                 if (authUser) {
-                    console.log("authUser", authUser);
-                    authUser.delete().then((result) => {
-                        console.log("User deleted", result);
+                    authUser.delete().then(() => {
                         dispatch(logout());
                     }).catch((error) => {
-                        console.log("Error deleting user", error);
                         if (error.code === 'auth/requires-recent-login') {
                             // The user's last sign-in time does not meet the security threshold. 
                             // You must prompt the user to reauthenticate.
                             reauthenticateUser(authUser);
-                        } else {
-                            console.log("Error deleting user", error);
-                            setError("Det skjedde en feil under sletting av bruker. Prøv igjen senere.");
+                        } else {                          
+                            setError(errorMessage);
                         }
                     });
                 } else {
-                    setError("Det skjedde en feil under sletting av bruker. Prøv igjen senere.");
+                    setError(errorMessage);
                 }
                 setSuccess(true);
             } catch (error) {
-                setError("Det skjedde en feil under sletting av bruker. Prøv igjen senere.");
+                setError(errorMessage);
             } finally {
                 setLoading(false);
             }
@@ -60,7 +58,7 @@ const useDeleteUser = (): UseDeleteUserProps => {
     };
 
     const reauthenticateUser = async (user: User) => {
-        // Prompt the user to reauthenticate. Here's an example using Google Auth provider.
+        // Prompt the user to reauthenticate.
         const provider = new GoogleAuthProvider();
         await reauthenticateWithPopup(user, provider).then(() => {
             // User reauthenticated.
