@@ -23,8 +23,7 @@ const useFetchFirebaseUserData = (user: { uid: string } | null): UseFetchUserDat
                 if (docSnapshot.exists()) {
                     setData(docSnapshot.data() as FirebasePersonalUserData);
                 } else {
-                    console.log("No such document!");
-                    setError(new Error("No such document!"));
+                    console.log("No such document!");                 
                 }
             }).catch((error) => {
                 setError(error);
