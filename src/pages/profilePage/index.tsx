@@ -9,9 +9,9 @@ const profilePage: React.FC = () => {
                 <div className="w-full 3xl:col-start-3 3xl:col-span-6 row-span-1 bg-white p-2 rounded-xl shadow-xl">
                     <PersonalInfoForm/>
                 </div>
-                {/* <div className="w-full 3xl:col-start-3 3xl:col-span-6 row-span-1 bg-white p-2 md:p-16  rounded-xl shadow-xl">
+                <div className="w-full 3xl:col-start-3 3xl:col-span-6 row-span-1 bg-white p-2 md:p-16  rounded-xl shadow-xl">
                     <ApplicantInfoForm/>
-                </div> */}
+                </div>
             </div>
         </>
     )

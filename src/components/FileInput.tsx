@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
 import { DocumentTextIcon } from '@heroicons/react/24/outline';
 
 interface FileInputProps {
     name?: string | undefined | null;
     image?: string | undefined | null;
+    onFileUpload: (file: File) => void;
+    setFile: (file: File) => void;
+    file: File | null;
 }
 
-const FileInput: React.FC<FileInputProps> = (props: FileInputProps) => {
-    const [file, setFile] = useState<File | null>(null);
-
+const FileInput: React.FC<FileInputProps> = ({file, setFile, onFileUpload}) => {
     const handleDragOver = (event: React.DragEvent<HTMLLabelElement>) => {
         event.preventDefault();
     };
@@ -27,6 +27,16 @@ const FileInput: React.FC<FileInputProps> = (props: FileInputProps) => {
             }
         }
     };
+
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files && event.target.files[0].type === 'application/pdf') {
+            setFile(event.target.files[0]);
+            setFile && setFile(event.target.files[0]);
+        } else {
+            alert('Please upload a PDF file.');
+        }
+    };
+    
 
     return (
         <div className="flex items-center justify-center w-full">
