@@ -36,7 +36,6 @@ const ApplicantInfoForm: React.FC = () => {
 
     return (
         <>
-            {isLoading && <LoadingDisplayer />}
             {error && <ErrorDisplayer title={"Feil!"} errorMessage="Det skjedde en feil når vi prøvde å hente din profil. Prøv igjen senere"  errorCode={500}  />}
             <div className="w-full">
                 <form onSubmit={handleSubmit}>
