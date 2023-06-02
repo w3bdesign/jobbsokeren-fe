@@ -122,7 +122,7 @@ const PersonalInfoForm: React.FC = () => {
         <>
             {loading && <LoadingDisplayer />}
             {error && <ErrorDisplayer title={"Feil!"} errorMessage="Det skjedde en feil når vi prøvde å hente din profil. Prøv igjen senere"  errorCode={500}  />}
-            <WarningModal 
+            <WarningModal  
                 show={showModal} 
                 setShow={setShowModal} 
                 title={"Er du sikker på at du vil slette din bruker?"} 
