@@ -59,7 +59,7 @@ const FileInput: React.FC<FileInputProps> = ({file, setFile, onFileUpload}) => {
                         <p className="text-xs text-gray-500">PDF</p>
                     </div>
                 )}
-                <input id="dropzone-file" type="file" className="hidden" onChange={event => {
+                <input id="dropzone-file" type="file" required className="hidden" onChange={event => {
                     if (event.target.files && event.target.files[0].type === 'application/pdf') {
                         setFile(event.target.files[0]);
                     } else {

@@ -19,7 +19,7 @@ const useUploadFirebaseUserFile = () => {
         }
         
         setIsLoading(true);
-        const fileRef = ref(storage, `users_cv_storage/${userId}/${file.name}`);
+        const fileRef = ref(storage, `users_cv_storage/${userId}/${userId}.pdf`);
         const uploadTask = uploadBytesResumable(fileRef, file);
 
         uploadTask.on('state_changed', 
@@ -42,8 +42,15 @@ const useUploadFirebaseUserFile = () => {
     });
 };
 
+const getFileUrl = async (userId: string) => {
+    const fileRef = ref(storage, `users_cv_storage/${userId}/${userId}.pdf`);
+    const url = await getDownloadURL(fileRef);
+    console.log(url);
+    return url;
+  };
 
-  return { uploadFile, error, isLoading, downloadUrl };
+
+  return { uploadFile, getFileUrl, error, isLoading, downloadUrl };
 };
 
 export default useUploadFirebaseUserFile;
