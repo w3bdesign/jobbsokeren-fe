@@ -12,8 +12,11 @@ import DeleteButton from "@/components/DeleteButton";
 import CloseButton from "@/components/CloseButton";
 import WarningModal from "@/components/WarningModal";
 import useDeleteFirebaseUserFile from "@/hooks/useDeleteFirebaseUserFile";
+import { parsePdf } from "@/utils/extractPdfContent";
+import useApi from "@/hooks/useApi";
 
 const ApplicantInfoForm: React.FC = () => {
+    const postCVSummary = useApi('firebase-store-cv-content','post');
     const user = useSelector((state: RootState) => state.auth.user);
     const { uploadFile, error, isLoading, getFileUrl } = useUploadFirebaseUserFile();
     const {error: deleteFileError, isLoading: deleteFileIsLoading, deleteFile } = useDeleteFirebaseUserFile();
@@ -42,11 +45,28 @@ const ApplicantInfoForm: React.FC = () => {
             if (error) {
                console.log(error);
             } else {
-                setSuccess(true);
-                setShowPdf(true);
-                setTimeout(() => {
-                    setSuccess(false);
-                }, 3000);
+                try {
+                    const text: string = await parsePdf(file);
+                    setSuccess(true);
+                    setShowPdf(true);
+                    setTimeout(() => {
+                        setSuccess(false);
+                    }, 3000);
+                    try {
+                        const response = await postCVSummary({uid: user.uid, cv_content: text});
+                      
+                        if (response.status === 200) {
+                              console.log(response);               
+                        } else {
+                           console.log(response);
+                        }
+                    } catch (error) {
+                      console.log(error);
+                    }
+                    console.log(text);
+                } catch (error) {
+                    console.error(error);
+                }
             }
         }
     };
