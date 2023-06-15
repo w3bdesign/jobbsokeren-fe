@@ -33,6 +33,7 @@ jobs:
           ###### End of Repository/Build Configurations ######
         env:
           VITE_MAIN_BACKEND_API_URL: ${{ secrets.VITE_MAIN_BACKEND_API_URL }} 
+          VITE_MAIN_BACKEND_API_KEY: ${{ secrets.VITE_MAIN_BACKEND_API_KEY }}
           VITE_TINY_API_KEY: ${{ secrets.VITE_TINY_API_KEY }}
           VITE_SANITY_PROJECT_ID: ${{ secrets.VITE_SANITY_PROJECT_ID }}
           VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}

@@ -11,7 +11,7 @@ import {browserDownloadFile} from '@/utils/browserDownloadFile';
 
 const TextEditor: React.FC = (): ReactElement => {
    
-    const exportEditorContentAPI = useApi('generate-export-file','post','arraybuffer');
+    const exportEditorContentAPI = useApi('openai/generate-export-file','post','arraybuffer');
     const ApiKey = import.meta.env.VITE_TINY_API_KEY;
     const editor = useRef<TinyMCEEditor | null>(null);
     const  dispatch = useDispatch();

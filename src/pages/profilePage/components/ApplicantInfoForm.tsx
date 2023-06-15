@@ -16,7 +16,7 @@ import { parsePdf } from "@/utils/extractPdfContent";
 import useApi from "@/hooks/useApi";
 
 const ApplicantInfoForm: React.FC = () => {
-    const postCVSummary = useApi('firebase-store-cv-content','post');
+    const postCVSummary = useApi('firebase/firebase-store-cv-content','post');
     const user = useSelector((state: RootState) => state.auth.user);
     const { uploadFile, error, isLoading, getFileUrl } = useUploadFirebaseUserFile();
     const {error: deleteFileError, isLoading: deleteFileIsLoading, deleteFile } = useDeleteFirebaseUserFile();

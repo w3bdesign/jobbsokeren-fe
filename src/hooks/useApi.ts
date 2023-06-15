@@ -5,6 +5,7 @@ interface ApiOptions extends AxiosRequestConfig {
 }
 
 const APiUrl = import.meta.env.VITE_MAIN_BACKEND_API_URL;
+const API_KEY = import.meta.env.VITE_MAIN_BACKEND_API_KEY; 
 
 const useApi = (
   endPointUrl: string,
@@ -18,6 +19,7 @@ const useApi = (
       method,
       headers: {
         "Content-Type": "application/json",
+        "x-api-key": API_KEY, 
       },
       responseType, // Add responseType to the config object
       ...options,

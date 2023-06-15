@@ -28,7 +28,7 @@ export const UseInputBar = () => {
     const editorIsLoading = useSelector((state: RootState) => state.editorIsLoading.value);
     const user = useSelector((state: RootState) => state.auth.user);
     const dispatch = useDispatch();
-    const postJobApplicationData = useApi('job-application-data','post');
+    const postJobApplicationData = useApi('openai/job-application-data','post');
     const { error: personalDataError, data : personalData } = useFetchFirebaseUserData(user);
 
     const normalizeData = (data: any): EditorFormModel => {
@@ -64,8 +64,9 @@ export const UseInputBar = () => {
 
         try {
             const response : AxiosResponse = await postJobApplicationData(formValues);
+            console.log(response);
             if (response.status === 200) {
-                const { data } = response;
+                const { data } = response.data;
                 dispatch(setEditorFetchedData(data));
             } else {
                 dispatch(setEditorData(errorMessage));
