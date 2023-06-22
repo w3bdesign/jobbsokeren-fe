@@ -19,6 +19,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "firebase.config.ts", "sanityClient.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -84,7 +84,7 @@ const PersonalInfoForm: React.FC = () => {
 
     const user = useSelector((state: RootState) => state.auth.user);
     const [formValues, setFormValues] = useState<FirebasePersonalUserData>(emptyFormValues);
-    const { loading, error, data } = useFetchFirebaseUserData(user);
+    const { loading, error, data } = useFetchFirebaseUserData(user, 'personalInformation');
     const {loading: loadingDelete, error: errorDelete, success: successDelete, deleteUserAndData } = useDeleteUser();
     const { postData, isLoading : postLoading,  error: postError } = usePostFirebaseUserData();
     const [success, setSuccess] = useState(false);

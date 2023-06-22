@@ -4,4 +4,5 @@ export interface FirebasePersonalUserData {
     applicant_address: string,
     applicant_zip_code: string,
     applicant_city: string,
+    applicant_cv_summary: string,
 }

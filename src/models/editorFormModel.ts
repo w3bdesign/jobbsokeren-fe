@@ -4,5 +4,6 @@ export interface EditorFormModel {
     applicant_address: string,
     applicant_zip_code: string,
     applicant_city: string,
+    applicant_cv_summary?: string,
     applicant_job_advertisement_url?: string,
 }

@@ -9,7 +9,7 @@ type UseFetchUserDataProps = {
     data: FirebasePersonalUserData | null
 }
 
-const useFetchFirebaseUserData = (user: { uid: string } | null): UseFetchUserDataProps => {
+const useFetchFirebaseUserData = (user: { uid: string } | null, database: string): UseFetchUserDataProps => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<Error | null>(null);
     const [data, setData] = useState<FirebasePersonalUserData | null>(null);
@@ -17,7 +17,7 @@ const useFetchFirebaseUserData = (user: { uid: string } | null): UseFetchUserDat
     useEffect(() => {
         if (user && user.uid) {
             setLoading(true);
-            const docRef = doc(db, 'personalInformation', user.uid);
+            const docRef = doc(db, database, user.uid);
             getDoc(docRef).then((docSnapshot) => {
                 setLoading(false);
                 if (docSnapshot.exists()) {

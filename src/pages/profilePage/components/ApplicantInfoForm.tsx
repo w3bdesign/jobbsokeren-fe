@@ -30,7 +30,6 @@ const ApplicantInfoForm: React.FC = () => {
     useEffect(() => {
         if (user) {
             getFileUrl(user.uid).then(setFileUrl);
-            console.log(fileUrl);
         }
     }, [user, getFileUrl]);
 
@@ -63,7 +62,6 @@ const ApplicantInfoForm: React.FC = () => {
                     } catch (error) {
                       console.log(error);
                     }
-                    console.log(text);
                 } catch (error) {
                     console.error(error);
                 }

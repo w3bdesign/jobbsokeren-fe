@@ -44,9 +44,12 @@ const useUploadFirebaseUserFile = () => {
 
 const getFileUrl = async (userId: string) => {
     const fileRef = ref(storage, `users_cv_storage/${userId}/${userId}.pdf`);
-    const url = await getDownloadURL(fileRef);
-    console.log(url);
-    return url;
+    try {
+      const url = await getDownloadURL(fileRef);
+      return url;
+    } catch (error) {
+       console.log(error);
+    }
   };
 
 

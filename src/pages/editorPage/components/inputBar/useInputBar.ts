@@ -18,18 +18,19 @@ const emptyFormValues: EditorFormModel = {
     applicant_address: '',
     applicant_zip_code:'',
     applicant_city: '',
+    applicant_cv_summary: '',
     applicant_job_advertisement_url: ''
 }
 
 
 export const UseInputBar = () => {
     const [formValues, setFormValues] = useState<EditorFormModel>(emptyFormValues);
-    const [personalDataFetched, setPersonalDataFetched] = useState<boolean>(false);
     const editorIsLoading = useSelector((state: RootState) => state.editorIsLoading.value);
     const user = useSelector((state: RootState) => state.auth.user);
     const dispatch = useDispatch();
     const postJobApplicationData = useApi('openai/job-application-data','post');
-    const { error: personalDataError, data : personalData } = useFetchFirebaseUserData(user);
+    const { error: personalDataError, data : personalData } = useFetchFirebaseUserData(user, 'personalInformation');
+    const {error: cvDataError, data: cvData} = useFetchFirebaseUserData(user, 'cvSummaries');
 
     const normalizeData = (data: any): EditorFormModel => {
         return {
@@ -38,6 +39,7 @@ export const UseInputBar = () => {
             applicant_address: data.applicant_address || '',
             applicant_zip_code: data.applicant_zip_code || '',
             applicant_city: data.applicant_city || '',
+            applicant_cv_summary: data.applicant_cv_summary || '',
             applicant_job_advertisement_url: data.applicant_job_advertisement_url || ''
         };
     }
@@ -46,9 +48,10 @@ export const UseInputBar = () => {
     useEffect(() => {
         if (personalData && !personalDataError) {
             setFormValues(normalizeData(personalData));
-            setPersonalDataFetched(true);
         }
+      
     }, [personalData]);
+    
     
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -57,14 +60,19 @@ export const UseInputBar = () => {
     
     const handleSubmit = async (event  : React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
+    
+        // Merge formValues with cvData
+        const dataToSubmit = {
+            ...formValues,
+            applicant_cv_summary: cvData?.applicant_cv_summary || formValues.applicant_cv_summary
+        };
+    
         dispatch(incrementSubmitCount());
         dispatch(toggleEditorIsLoading());
         dispatch(setEditorData(""));
-
+    
         try {
-            const response : AxiosResponse = await postJobApplicationData(formValues);
-            console.log(response);
+            const response : AxiosResponse = await postJobApplicationData(dataToSubmit);
             if (response.status === 200) {
                 const { data } = response.data;
                 dispatch(setEditorFetchedData(data));
@@ -74,10 +82,11 @@ export const UseInputBar = () => {
         } catch (error) {
             dispatch(setEditorData(errorMessage));
         }
-
+    
         dispatch(toggleEditorIsLoading());
-
+    
     };
+    
 
     return {
         formValues,
