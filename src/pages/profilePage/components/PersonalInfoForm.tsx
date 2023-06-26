@@ -73,12 +73,13 @@ const textInputConfigs = [
   ];
 
   const emptyFormValues: FirebasePersonalUserData = {
-    applicant_name: '',
-    applicant_email: '',
-    applicant_address: '',
-    applicant_zip_code:'',
-    applicant_city: '',
-}
+      applicant_name: '',
+      applicant_email: '',
+      applicant_address: '',
+      applicant_zip_code: '',
+      applicant_city: '',
+      applicant_cv_summary: '',
+  }
 
 const PersonalInfoForm: React.FC = () => {
 
