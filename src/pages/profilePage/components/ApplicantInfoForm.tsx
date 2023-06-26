@@ -29,7 +29,11 @@ const ApplicantInfoForm: React.FC = () => {
 
     useEffect(() => {
         if (user) {
-            getFileUrl(user.uid).then(setFileUrl);
+            getFileUrl(user.uid).then((url) => {
+                if (url !== undefined) {
+                    setFileUrl(url);
+                } 
+            });
         }
     }, [user, getFileUrl]);
 
