@@ -5,7 +5,7 @@ interface AvatarTextProps {
 }
 
 const AvatarText: React.FC<AvatarTextProps> = ({ name = 'Default Name', email = 'default@email.com', image = '@/assets/images/png/blank-profile-picture-973460_640.png' }) => {
-    const defaultImage = "@/assets/images/png/blank-profile-picture-973460_640.png"; 
+    const defaultImage = '@/assets/images/png/blank-profile-picture-973460_640.png'; 
     return (
         <div className="flex items-center space-x-4">
             <img className="w-10 h-10 rounded-full" src={image || defaultImage}  alt="profile picture"/>

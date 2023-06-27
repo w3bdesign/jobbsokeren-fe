@@ -18,6 +18,7 @@ export const parsePdf = async (file: File): Promise<string> => {
     for (let i = 1; i <= pdf.numPages; i++) {
       const page: PDFPageProxy = await pdf.getPage(i);
       const content = await page.getTextContent();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       text += content.items.map((item: any) => item.str).join(' ');
     }
     

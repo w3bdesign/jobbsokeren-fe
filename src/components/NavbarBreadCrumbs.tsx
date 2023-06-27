@@ -1,6 +1,6 @@
+import { ChevronRightIcon, HomeIcon } from '@heroicons/react/24/outline';
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { ChevronRightIcon, HomeIcon } from "@heroicons/react/24/outline";
 
 interface PathProps {
     pathname: string;
@@ -30,7 +30,7 @@ const BreadCrumbNav : React.FC<PathProps> = ({pathname}) => {
           {pathSegments.map((segment, index) => (
             <li key={segment}>
               <div className="flex items-center">      
-               <ChevronRightIcon className={`flex-shrink-0 w-5 h-5 mx-1 ${index === pathSegments.length - 1 ? "text-gray-400" : "text-gray-500"}`} aria-hidden="true" />
+               <ChevronRightIcon className={`flex-shrink-0 w-5 h-5 mx-1 ${index === pathSegments.length - 1 ? 'text-gray-400' : 'text-gray-500'}`} aria-hidden="true" />
                <RouterLink to={`/${pathSegments.slice(0, index + 1).join('/')}`} className="hover:text-indigo-600 text-gray-500">
                   {index === pathSegments.length - 1 ? unslugify(segment) : segment}
                 </RouterLink>

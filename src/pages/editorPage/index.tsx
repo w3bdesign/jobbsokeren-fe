@@ -1,6 +1,6 @@
-import InputBar from "./components/inputBar/InputBar"
-import TextEditor from "./components/textEditor/TextEditor"
-import EditorNewsLetterModal from "./components/newsLetterModal/EditorNewsletterModal"
+import InputBar from './components/inputBar/InputBar'
+import EditorNewsLetterModal from './components/newsLetterModal/EditorNewsletterModal'
+import TextEditor from './components/textEditor/TextEditor'
 
 
 const EditorPage = () => {

@@ -1,4 +1,4 @@
-import { PortableTextBlockComponent } from "@portabletext/react";
+import { PortableTextBlockComponent } from '@portabletext/react';
 
 export interface Article {
     articleType: string;

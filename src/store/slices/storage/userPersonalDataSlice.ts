@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface UserPersonalData {
     applicant_name: string,
@@ -9,15 +9,15 @@ interface UserPersonalData {
 }
 
 const initialState : UserPersonalData  = {
-    applicant_name: "",
-    applicant_email: "",
-    applicant_address: "",
-    applicant_zip_code: "",
-    applicant_city: ""
+    applicant_name: '',
+    applicant_email: '',
+    applicant_address: '',
+    applicant_zip_code: '',
+    applicant_city: ''
 }
 
 export const userPersonalDataSlice = createSlice({
-    name: "userPersonalData",
+    name: 'userPersonalData',
     initialState,
     reducers: {
         setUserPersonalDataSlice: (state, action: PayloadAction<UserPersonalData>) => {

@@ -1,4 +1,4 @@
-import { FetchedDataModel  } from "@/models/fetchedDataModel";
+import { FetchedDataModel  } from '@/models/fetchedDataModel';
 
     const generateEditorContent = ( { 
         employer_job_title,

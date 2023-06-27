@@ -1,11 +1,13 @@
 import {PortableText} from '@portabletext/react'
 import {PortableTextComponents} from '@portabletext/react'
-import urlBuilder from '@sanity/image-url'
 import {getImageDimensions} from '@sanity/asset-utils'
+import urlBuilder from '@sanity/image-url'
+
 import client from '@/sanityClient.config'
 
 
 interface ComponentProps {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     value: any;
     isInline: boolean;
     children?: React.ReactNode;

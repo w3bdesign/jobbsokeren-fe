@@ -5,4 +5,5 @@ export interface FirebasePersonalUserData {
     applicant_zip_code: string,
     applicant_city: string,
     applicant_cv_summary: string,
+    applicant_job_advertisement_url?: string
 }

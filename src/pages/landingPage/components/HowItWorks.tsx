@@ -1,6 +1,7 @@
 import {  FilmIcon } from '@heroicons/react/24/outline';
-import BackgroundImage from '@/assets/images/png/howItWorksBackground.webp';
 import { Element } from 'react-scroll';
+
+import BackgroundImage from '@/assets/images/png/howItWorksBackground.webp';
 
 const HowItWorks = () => {
     return (

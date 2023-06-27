@@ -1,10 +1,11 @@
- import React from "react";
- import { useParams } from "react-router-dom";
- import { Article } from '@/models/articleModel';
+ import React from 'react';
+ import { useParams } from 'react-router-dom';
+
+ import ErrorDisplayer from '@/components/ErrorDisplayer';
+  import LoadingDisplayer from '@/components/LoadingDisplayerTransparent';
+ import RichTextComponent from '@/components/RichText';
  import useSanity from '@/hooks/useSanity';
- import RichTextComponent from "@/components/RichText";
- import ErrorDisplayer from "@/components/ErrorDisplayer";
-  import LoadingDisplayer from "@/components/LoadingDisplayerTransparent";
+ import { Article } from '@/models/articleModel';
 
 
 const ArticlePage : React.FC = () => {

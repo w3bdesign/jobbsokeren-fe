@@ -1,5 +1,5 @@
-import {Link as RouterLink} from "react-router-dom";
 import React from 'react';
+import {Link as RouterLink} from 'react-router-dom';
 
 const NotFoundPage : React.FC = () => {
     return (

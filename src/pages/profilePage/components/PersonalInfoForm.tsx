@@ -1,73 +1,74 @@
-import React, {useState, useEffect} from "react";
-import TextInput from "@/components/TextInput";
-import { FirebasePersonalUserData } from "@/models/firebasePersonalUserDataModel";
-import AvatarText from "@/components/AvatarText";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
-import SubmitButton from "@/components/SubmitButton";
-import useFetchFirebaseUserData from "@/hooks/useFetchFirebaseUserData";
-import LoadingDisplayer from "@/components/LoadingDisplayerBackground";
-import ErrorDisplayer from "@/components/ErrorDisplayer";
-import usePostFirebaseUserData from "@/hooks/usePostFirebaseUserData";
-import SuccessBottomBanner from "@/components/SuccessBottomBanner";
-import DeleteButton from "@/components/DeleteButton";
-import useDeleteUser from "@/hooks/useDeleteFirebaseUserData";
-import WarningModal from "@/components/WarningModal";
+import React, {useState, useEffect} from 'react';
+import { useSelector } from 'react-redux';
+
+import AvatarText from '@/components/AvatarText';
+import DeleteButton from '@/components/DeleteButton';
+import ErrorDisplayer from '@/components/ErrorDisplayer';
+import LoadingDisplayer from '@/components/LoadingDisplayerBackground';
+import SubmitButton from '@/components/SubmitButton';
+import SuccessBottomBanner from '@/components/SuccessBottomBanner';
+import TextInput from '@/components/TextInput';
+import WarningModal from '@/components/WarningModal';
+import useDeleteUser from '@/hooks/useDeleteFirebaseUserData';
+import useFetchFirebaseUserData from '@/hooks/useFetchFirebaseUserData';
+import usePostFirebaseUserData from '@/hooks/usePostFirebaseUserData';
+import { FirebasePersonalUserData } from '@/models/firebasePersonalUserDataModel';
+import { RootState } from '@/store/store';
 
 
 
 const textInputConfigs = [
     {
-      id: "applicant_name",
-      name: "applicant_name",
-      autoComplete: "on",
-      type: "text",
-      placeholder: "Ola Norman",
+      id: 'applicant_name',
+      name: 'applicant_name',
+      autoComplete: 'on',
+      type: 'text',
+      placeholder: 'Ola Norman',
       required: true,
-      label: "Navn",
+      label: 'Navn',
       width: 48,
     },
     {
-      id: "applicant_email",
-      name: "applicant_email",
-      autoComplete: "on",
-      type: "email",
-      placeholder: "olanorman@gmail.com",
+      id: 'applicant_email',
+      name: 'applicant_email',
+      autoComplete: 'on',
+      type: 'email',
+      placeholder: 'olanorman@gmail.com',
       required: true,
-      label: "E-post",
+      label: 'E-post',
       width: 48,
     },
     {
-      id: "applicant_address",
-      name: "applicant_address",
-      autoComplete: "on",
-      type: "text",
-      placeholder: "Slottsparken 1",
+      id: 'applicant_address',
+      name: 'applicant_address',
+      autoComplete: 'on',
+      type: 'text',
+      placeholder: 'Slottsparken 1',
       required: true,
-      label: "Gateadresse",
+      label: 'Gateadresse',
       width: 48,
     },
     {
-      id: "applicant_zip_code",
-      name: "applicant_zip_code",
-      autoComplete: "on",
-      type: "text",
-      pattern: "[0-9]*",
+      id: 'applicant_zip_code',
+      name: 'applicant_zip_code',
+      autoComplete: 'on',
+      type: 'text',
+      pattern: '[0-9]*',
       minLength: 4,
       maxLength: 4,
-      placeholder: "5071",
+      placeholder: '5071',
       required: true,
-      label: "Postnummer",
+      label: 'Postnummer',
       width: 48,
     },
     {
-      id: "applicant_city",
-      name: "applicant_city",
-      autoComplete: "on",
-      type: "text",
-      placeholder: "Bergen",
+      id: 'applicant_city',
+      name: 'applicant_city',
+      autoComplete: 'on',
+      type: 'text',
+      placeholder: 'Bergen',
       required: true,
-      label: "By",
+      label: 'By',
       width: 48,
     },
   ];
@@ -86,8 +87,8 @@ const PersonalInfoForm: React.FC = () => {
     const user = useSelector((state: RootState) => state.auth.user);
     const [formValues, setFormValues] = useState<FirebasePersonalUserData>(emptyFormValues);
     const { loading, error, data } = useFetchFirebaseUserData(user, 'personalInformation');
-    const {loading: loadingDelete, error: errorDelete, success: successDelete, deleteUserAndData } = useDeleteUser();
-    const { postData, isLoading : postLoading,  error: postError } = usePostFirebaseUserData();
+    const {loading: loadingDelete, success: successDelete, deleteUserAndData } = useDeleteUser();
+    const { postData, isLoading : postLoading } = usePostFirebaseUserData();
     const [success, setSuccess] = useState(false);
     const [showModal, setShowModal] = useState(false);
 
@@ -122,13 +123,13 @@ const PersonalInfoForm: React.FC = () => {
     return (
         <>
             {loading && <LoadingDisplayer />}
-            {error && <ErrorDisplayer title={"Feil!"} errorMessage="Det skjedde en feil når vi prøvde å hente din profil. Prøv igjen senere"  errorCode={500}  />}
+            {error && <ErrorDisplayer title={'Feil!'} errorMessage="Det skjedde en feil når vi prøvde å hente din profil. Prøv igjen senere"  errorCode={500}  />}
             <WarningModal  
                 show={showModal} 
                 setShow={setShowModal} 
-                title={"Er du sikker på at du vil slette din bruker?"} 
-                confirmMessage={"Ja, slett min bruker"} 
-                closeMessage={"Nei, behold min bruker"}
+                title={'Er du sikker på at du vil slette din bruker?'} 
+                confirmMessage={'Ja, slett min bruker'} 
+                closeMessage={'Nei, behold min bruker'}
                 onConfirm={() => {
                     deleteUserAndData(user);
                     setShowModal(false);
@@ -169,7 +170,7 @@ const PersonalInfoForm: React.FC = () => {
                         </div>
                         <div className="sm:w-1/2 ml-auto flex gap-3">
                             <DeleteButton handleDelete={handleDelete} isLoading={loadingDelete} buttonText="Slett min bruker"/>
-                            <SubmitButton isLoading={postLoading} buttonText={"Lagre endringer"}/>
+                            <SubmitButton isLoading={postLoading} buttonText={'Lagre endringer'}/>
                         </div>
                     </div>
                 </form>

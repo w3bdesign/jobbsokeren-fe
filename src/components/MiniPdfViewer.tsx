@@ -1,10 +1,11 @@
-import { Document, Page, pdfjs } from 'react-pdf';
+import { Transition } from '@headlessui/react';
+import { ArrowSmallLeftIcon, ArrowSmallRightIcon } from '@heroicons/react/24/outline';
+import type { PDFDocumentProxy } from 'pdfjs-dist';
 import React, { useState } from 'react';
+import { Document, Page, pdfjs } from 'react-pdf';
+
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
-import type { PDFDocumentProxy } from 'pdfjs-dist';
-import { ArrowSmallLeftIcon, ArrowSmallRightIcon } from '@heroicons/react/24/outline';
-import { Transition } from '@headlessui/react';
 import '@/assets/styles/miniPdfViwer.css';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(

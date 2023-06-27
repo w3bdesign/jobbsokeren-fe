@@ -1,5 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { FetchedDataModel } from "@/models/fetchedDataModel"
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+import { FetchedDataModel } from '@/models/fetchedDataModel'
 
 // empty fetchedData object
 const emptyFetchedData: FetchedDataModel = {
@@ -23,7 +24,7 @@ const initialState = {
 }
 
 export const editorFetchedDataSlice = createSlice({
-    name: "editorFetchedData",
+    name: 'editorFetchedData',
     initialState,
     reducers: {
         setEditorFetchedData: (state, action: PayloadAction<FetchedDataModel>) => {

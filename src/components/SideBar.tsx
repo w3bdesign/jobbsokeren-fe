@@ -1,10 +1,12 @@
-import { XMarkIcon, ArrowRightOnRectangleIcon, NewspaperIcon, UserIcon } from "@heroicons/react/24/outline";
-import { Link as RouterLink } from "react-router-dom";
+import { XMarkIcon, ArrowRightOnRectangleIcon, NewspaperIcon, UserIcon } from '@heroicons/react/24/outline';
+import { useRef, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import Login from "./Login";
-import Logout from "./logout";
+import { Link as RouterLink } from 'react-router-dom';
+
+import Login from './Login';
+import Logout from './logout';
 import { RootState } from '@/store/store';
-import { useRef, useEffect } from "react";
+
 
 
 interface SideBarProps {
@@ -19,11 +21,12 @@ const SideBar : React.FC<SideBarProps> =({showSideBar, handleSideBar}) => {
 
     // function to handle click outside the sidebar
     // close the sidebar if clicked outside
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside = useCallback((event: MouseEvent) => {
         if (sidebarRef.current && event.target instanceof Node && !sidebarRef.current.contains(event.target)) {
             handleSideBar();
         }
-    };
+    }, [handleSideBar]);
+    
 
     useEffect(() => {
         if (showSideBar) {
@@ -34,7 +37,7 @@ const SideBar : React.FC<SideBarProps> =({showSideBar, handleSideBar}) => {
         return () => {
             window.removeEventListener('mousedown', handleClickOutside);
         };
-    }, [showSideBar]);
+    }, [showSideBar, handleClickOutside]);
 
 
 

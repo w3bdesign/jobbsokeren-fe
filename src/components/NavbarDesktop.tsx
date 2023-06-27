@@ -1,15 +1,15 @@
-// DesktopNav.jsx
-import React from "react";
-import { Link } from "react-scroll";
-import { navigationData } from "@/data/navigationData";
-import BreadCrumbNav from "./NavbarBreadCrumbs";
+import React from 'react';
+import { Link } from 'react-scroll';
+
+import BreadCrumbNav from './NavbarBreadCrumbs';
+import { navigationData } from '@/data/navigationData';
 
 interface PathProps {
     pathname: string;
 }
 
 const DesktopNav: React.FC<PathProps> = ({pathname}) => {
-    if(pathname === "/") {
+    if(pathname === '/') {
         return (
             <nav>
                 <ul className="hidden lg:flex">
@@ -32,7 +32,7 @@ const DesktopNav: React.FC<PathProps> = ({pathname}) => {
         );
     }
 
-    if(pathname !== "/") {
+    if(pathname !== '/') {
         return (
             <BreadCrumbNav pathname={pathname} />
         );

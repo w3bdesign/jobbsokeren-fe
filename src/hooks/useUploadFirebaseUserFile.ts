@@ -1,6 +1,7 @@
-import { useState } from 'react';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { storage } from "@/firebase.config";   
+import { useState } from 'react';
+
+import { storage } from '@/firebase.config';   
 
 const useUploadFirebaseUserFile = () => {
   const [error, setError] = useState<Error | null>(null);
@@ -12,7 +13,7 @@ const useUploadFirebaseUserFile = () => {
 
          // Check if file size is larger than 5MB
          if (file.size > 5 * 1024 * 1024) {
-            const error = new Error('File is too large. Please upload a file smaller than 5MB.');
+            const error = new Error('Filen er for stor! Kan ikke være større enn 5MB.');
             setError(error);
             reject(error);
             return;
@@ -23,7 +24,7 @@ const useUploadFirebaseUserFile = () => {
         const uploadTask = uploadBytesResumable(fileRef, file);
 
         uploadTask.on('state_changed', 
-            (snapshot) => {
+            () => {
                 // Handle progress...
             }, 
             (error) => {

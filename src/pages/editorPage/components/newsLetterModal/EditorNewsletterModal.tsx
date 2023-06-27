@@ -1,7 +1,9 @@
-import NewsLetterModal from "@/components/NewsLetterModal";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
-import { useState, useEffect } from "react"; // new import
+import { useState, useEffect } from 'react'; // new import
+import { useSelector } from 'react-redux';
+
+import NewsLetterModal from '@/components/NewsLetterModal';
+import { RootState } from '@/store/store';
+
 
 const EditorNewsLetterModal : React.FC =  () => {
     const submitCount = useSelector((state: RootState) => state.editorSubmitCount.value);
@@ -10,14 +12,14 @@ const EditorNewsLetterModal : React.FC =  () => {
     const handleModal = (startModal: boolean) => {
         setStartModal(startModal)
         if (startModal === false) {
-            localStorage.setItem("newsLetterModalIsVisible", JSON.stringify(false));
+            localStorage.setItem('newsLetterModalIsVisible', JSON.stringify(false));
         }
    }
 
     useEffect(() => {
         // Ensure storedBannerValue is 'true' (localStorage stores values as strings)
         // and submitCount is over 2 and editorIsLoading is false
-        if ( submitCount > 2 && !editorIsLoading && JSON.parse(localStorage.getItem("newsLetterModalIsVisible") || "true")) {
+        if ( submitCount > 2 && !editorIsLoading && JSON.parse(localStorage.getItem('newsLetterModalIsVisible') || 'true')) {
             setStartModal(true);
         } else {
             setStartModal(false);

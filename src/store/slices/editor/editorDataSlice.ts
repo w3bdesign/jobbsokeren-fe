@@ -1,15 +1,15 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface EditorData {
     value: string;
 }
 
 const initialState : EditorData  = {
-    value: "<h1>Fyll ut skjemaet til venstre for å generere søknaden</h1>"
+    value: '<h1>Fyll ut skjemaet til venstre for å generere søknaden</h1>'
 }
 
 export const editorDataSlice = createSlice({
-    name: "editorData",
+    name: 'editorData',
     initialState,
     reducers: {
         setEditorData: (state, action: PayloadAction<string>) => {

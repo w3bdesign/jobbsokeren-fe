@@ -1,5 +1,6 @@
-import SuccessToast from "./SuccessToast";
 import React from 'react';
+
+import SuccessToast from './SuccessToast';
 
 interface Props {
     success: boolean;

@@ -1,19 +1,20 @@
-import Navbar from './components/Navbar'; 
-import Footer from './components/Footer';
-import LandingPage from './pages/landingPage';
-import EditorPage from './pages/editorPage';
-import ArticlesPage from './pages/articlesPage';
-import ArticlePage from './pages/articlePage';
-import ProfilePage from './pages/profilePage';
-import NotFoundPage from './pages/notFoundpage';
-import LoadingDisplayer from './components/LoadingDisplayerTransparent';
-import {BrowserRouter,Routes, Route} from "react-router-dom";
+import { User } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import {BrowserRouter,Routes, Route} from 'react-router-dom';
+
+import Footer from './components/Footer';
+import LoadingDisplayer from './components/LoadingDisplayerTransparent';
+import Navbar from './components/Navbar'; 
+import ProtectedRoute from './components/ProtectedRoute';
+import ArticlePage from './pages/articlePage';
+import ArticlesPage from './pages/articlesPage';
+import EditorPage from './pages/editorPage';
+import LandingPage from './pages/landingPage';
+import NotFoundPage from './pages/notFoundpage';
+import ProfilePage from './pages/profilePage';
 import { auth } from '@/firebase.config';
 import { loginSuccess, logout } from '@/store/slices/authentication/authSlice';
-import { User } from "firebase/auth";
-import ProtectedRoute from './components/ProtectedRoute';
 import { RootState } from '@/store/store';
 
 

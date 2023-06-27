@@ -1,16 +1,18 @@
-import React, { FormEvent, useEffect, useRef, useState } from 'react';
-import useApi from "@/hooks/useApi";
 import { AxiosError } from 'axios';
-import { useApiInterface } from "@/models/useApiModel";
-import SuccessToast from "./SuccessToast";
-import NewsLetterBannerForm from "./NewsLetterBannerForm";
+import React, { FormEvent, useEffect, useRef, useState } from 'react';
+
+import NewsLetterBannerForm from './NewsLetterBannerForm';
+import SuccessToast from './SuccessToast';
+import useApi from '@/hooks/useApi';
+import { useApiInterface } from '@/models/useApiModel';
 
 const NewsLetterBanner : React.FC = () => {
     const emailRef = useRef<HTMLInputElement | null>(null);
+    const exportEditorContentAPI = useApi('/subscribe-to-mailchimp','post');
     
     // Storing in local store to respect user preference
     const [newsLetterIsVisible, setNewsLetterIsVisible] = useState<boolean>(() => {
-      const saved = localStorage.getItem("newsLetterIsVisible");
+      const saved = localStorage.getItem('newsLetterIsVisible');
       const initialValue = saved ? JSON.parse(saved) : false;
       return initialValue;
     });
@@ -21,7 +23,7 @@ const NewsLetterBanner : React.FC = () => {
     useEffect(() => {
       const checkScroll = () => {
          // Get the stored value
-         const storedValue = localStorage.getItem("newsLetterIsVisible");
+         const storedValue = localStorage.getItem('newsLetterIsVisible');
         // If the user has scrolled, set isVisible to true
         if (window.scrollY > 500 && (!storedValue || JSON.parse(storedValue) !== false)) {
           setNewsLetterIsVisible(true);
@@ -39,7 +41,7 @@ const NewsLetterBanner : React.FC = () => {
   
     const handleClose = () => {
       setNewsLetterIsVisible(false);
-      localStorage.setItem("newsLetterIsVisible", JSON.stringify(false));
+      localStorage.setItem('newsLetterIsVisible', JSON.stringify(false));
     }
   
     
@@ -47,8 +49,7 @@ const NewsLetterBanner : React.FC = () => {
     const onSubmit  = async (e: FormEvent)  =>  {
         e.preventDefault();
         const email_address = emailRef.current?.value;
-        const status = "subscribed";
-        const exportEditorContentAPI = useApi('/subscribe-to-mailchimp','post');
+        const status = 'subscribed';
         try {
           const response = await exportEditorContentAPI({email_address, status});
           if (response.data.statusCode === 200) {

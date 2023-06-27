@@ -1,9 +1,10 @@
-import ArticleCard from './components/ArticleCard';
 import React from 'react';
-import useSanity from '@/hooks/useSanity';
-import { Article } from '@/models/articleModel';
+
+import ArticleCard from './components/ArticleCard';
 import ErrorDisplayer from '@/components/ErrorDisplayer';
 import LoadingDisplayer from '@/components/LoadingDisplayerTransparent';
+import useSanity from '@/hooks/useSanity';
+import { Article } from '@/models/articleModel';
 
   const query = `*[_type == "article"]{
     articleType,

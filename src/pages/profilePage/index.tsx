@@ -1,6 +1,6 @@
 
-import PersonalInfoForm from "./components/PersonalInfoForm"
-import ApplicantInfoForm from "./components/ApplicantInfoForm"
+import ApplicantInfoForm from './components/ApplicantInfoForm'
+import PersonalInfoForm from './components/PersonalInfoForm'
 
 const profilePage: React.FC = () => {
     return (

@@ -1,14 +1,15 @@
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
-import NewsLetterBanner from "./NewsLetterBanner";
-import SideBar from "./SideBar";
-import LogoNav from "./NavbarLogo";
-import DesktopNav from "./NavbarDesktop";
-import MobileNav from "./NavbarMobile";
-import JobbsokerenButton from "./NavbarActionButton";
-import UserIcon from "./NavbarUserIcon";
-import { navigationData } from "@/data/navigationData";
-import MobileNavToggle from "./NavbarMobileToggle";
+import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
+import JobbsokerenButton from './NavbarActionButton';
+import DesktopNav from './NavbarDesktop';
+import LogoNav from './NavbarLogo';
+import MobileNav from './NavbarMobile';
+import MobileNavToggle from './NavbarMobileToggle';
+import UserIcon from './NavbarUserIcon';
+import NewsLetterBanner from './NewsLetterBanner';
+import SideBar from './SideBar';
+import { navigationData } from '@/data/navigationData';
 
 const Navbar : React.FC = () => {
   const [showSideBar, setShowSideBar] = useState(false);

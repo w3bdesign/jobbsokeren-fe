@@ -1,11 +1,12 @@
 import { Transition } from '@headlessui/react'
-import React, { useState, FormEvent, useRef } from 'react'
-import { XMarkIcon } from "@heroicons/react/24/outline";
-import SubmitButton from './SubmitButton';
-import useApi from "@/hooks/useApi";
+import { XMarkIcon } from '@heroicons/react/24/outline';
 import { AxiosError } from 'axios';
-import { useApiInterface } from "@/models/useApiModel";
+import React, { useState, FormEvent, useRef } from 'react'
+
+import SubmitButton from './SubmitButton';
 import SuccessToast from './SuccessToast';
+import useApi from '@/hooks/useApi';
+import { useApiInterface } from '@/models/useApiModel';
 
 interface Props {
   startModal: boolean;
@@ -16,13 +17,13 @@ const NewsLetterModal  : React.FC<Props> = ({startModal, handleModal}) => {
     const emailRef = useRef<HTMLInputElement | null>(null);
     const [apiStatus, setApiStatus] = useState<string>('');
     const [submitted, setSubmitted] = useState<boolean>(false);
+    const exportEditorContentAPI = useApi('/subscribe-to-mailchimp','post');
 
   
     const onSubmit  = async (e: FormEvent)  =>  {
         e.preventDefault();
         const email_address = emailRef.current?.value;
-        const status = "subscribed";
-        const exportEditorContentAPI = useApi('/subscribe-to-mailchimp','post');
+        const status = 'subscribed';
         try {
           const response = await exportEditorContentAPI({email_address, status});
           if (response.data.statusCode === 200) {

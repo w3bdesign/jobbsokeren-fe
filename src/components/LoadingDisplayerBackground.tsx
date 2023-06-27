@@ -1,5 +1,5 @@
-import { ThreeCircles } from "react-loader-spinner";
 import React, { useState, useEffect } from 'react';
+import { ThreeCircles } from 'react-loader-spinner';
 
 const LoadingDisplayer : React.FC = () => {
     const [isVisible, setIsVisible] = useState(false);

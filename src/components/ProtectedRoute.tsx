@@ -1,4 +1,5 @@
 import { Navigate } from 'react-router-dom';
+
 import { FirebaseUser } from '@/models/firebaseUserModel';
 
 interface ProtectedRouteProps {

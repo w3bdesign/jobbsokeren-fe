@@ -1,8 +1,9 @@
-import HeroImage from '@/assets/images/png/heroImage.webp'
-import { Element } from 'react-scroll';
 import { ClipboardDocumentCheckIcon, NewspaperIcon, PencilSquareIcon } from '@heroicons/react/24/solid';
-import {Link as RouterLink} from "react-router-dom";
+import {Link as RouterLink} from 'react-router-dom';
+import { Element } from 'react-scroll';
 import Typewriter from 'typewriter-effect';
+
+import HeroImage from '@/assets/images/png/heroImage.webp'
 
 
 const Hero = () => {  
@@ -17,7 +18,7 @@ const Hero = () => {
                 <div className='text-2xl'> 
                 <Typewriter
                     options={{
-                        strings: ['Unike og skreddersydde søknader', 'Jobbsøknad på minutter', "Siste generasjon AI GPT-4"],
+                        strings: ['Unike og skreddersydde søknader', 'Jobbsøknad på minutter', 'Siste generasjon AI GPT-4'],
                         autoStart: true,
                         loop: true,
                     }} />

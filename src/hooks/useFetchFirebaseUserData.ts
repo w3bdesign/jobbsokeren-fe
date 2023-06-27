@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
-import { FirebasePersonalUserData } from "@/models/firebasePersonalUserDataModel";
-import { db } from "@/firebase.config";
 import { doc, getDoc } from 'firebase/firestore';
+import { useState, useEffect } from 'react';
+
+import { db } from '@/firebase.config';
+import { FirebasePersonalUserData } from '@/models/firebasePersonalUserDataModel';
 
 type UseFetchUserDataProps = {
     loading: boolean,
@@ -23,7 +24,7 @@ const useFetchFirebaseUserData = (user: { uid: string } | null, database: string
                 if (docSnapshot.exists()) {
                     setData(docSnapshot.data() as FirebasePersonalUserData);
                 } else {
-                    console.log("No such document!");                 
+                    console.log('No such document!');                 
                 }
             }).catch((error) => {
                 setError(error);
@@ -32,7 +33,7 @@ const useFetchFirebaseUserData = (user: { uid: string } | null, database: string
         } else {
             setLoading(false);
         }
-    }, [user]);
+    }, [user,database]);
     
 
     return { loading, error, data };

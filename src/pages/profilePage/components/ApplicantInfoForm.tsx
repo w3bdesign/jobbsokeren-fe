@@ -1,25 +1,25 @@
-import React, {useState, useEffect} from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
-import SubmitButton from "@/components/SubmitButton";
-import FileInput from "@/components/FileInput";
-import useUploadFirebaseUserFile from "@/hooks/useUploadFirebaseUserFile";
-import LoadingDisplayer from "@/components/LoadingDisplayerBackground";
-import ErrorDisplayer from "@/components/ErrorDisplayer";
-import SuccessBottomBanner from "@/components/SuccessBottomBanner";
-import MiniPdfViewer from "@/components/MiniPdfViewer";
-import DeleteButton from "@/components/DeleteButton";
-import CloseButton from "@/components/CloseButton";
-import WarningModal from "@/components/WarningModal";
-import useDeleteFirebaseUserFile from "@/hooks/useDeleteFirebaseUserFile";
-import { parsePdf } from "@/utils/extractPdfContent";
-import useApi from "@/hooks/useApi";
+import React, {useState, useEffect} from 'react';
+import { useSelector } from 'react-redux';
+
+import CloseButton from '@/components/CloseButton';
+import DeleteButton from '@/components/DeleteButton';
+import ErrorDisplayer from '@/components/ErrorDisplayer';
+import FileInput from '@/components/FileInput';
+import MiniPdfViewer from '@/components/MiniPdfViewer';
+import SubmitButton from '@/components/SubmitButton';
+import SuccessBottomBanner from '@/components/SuccessBottomBanner';
+import WarningModal from '@/components/WarningModal';
+import useApi from '@/hooks/useApi';
+import useDeleteFirebaseUserFile from '@/hooks/useDeleteFirebaseUserFile';
+import useUploadFirebaseUserFile from '@/hooks/useUploadFirebaseUserFile';
+import { RootState } from '@/store/store';
+import { parsePdf } from '@/utils/extractPdfContent';
 
 const ApplicantInfoForm: React.FC = () => {
     const postCVSummary = useApi('firebase/firebase-store-cv-content','post');
     const user = useSelector((state: RootState) => state.auth.user);
     const { uploadFile, error, isLoading, getFileUrl } = useUploadFirebaseUserFile();
-    const {error: deleteFileError, isLoading: deleteFileIsLoading, deleteFile } = useDeleteFirebaseUserFile();
+    const { deleteFile } = useDeleteFirebaseUserFile();
     const [file, setFile] = useState<File | null>(null);
     const [success, setSuccess] = useState<boolean>(false);
     const [fileUrl, setFileUrl] = useState<string | null>(null);
@@ -84,13 +84,13 @@ const ApplicantInfoForm: React.FC = () => {
 
     return (
         <>
-            {error && <ErrorDisplayer title={"Feil!"} errorMessage="Det skjedde en feil når vi prøvde å hente din profil. Prøv igjen senere"  errorCode={500}  />}
+            {error && <ErrorDisplayer title={'Feil!'} errorMessage="Det skjedde en feil når vi prøvde å hente din profil. Prøv igjen senere"  errorCode={500}  />}
             <WarningModal  
                 show={showModal} 
                 setShow={setShowModal} 
-                title={"Er du sikker på at du vil slette din CV?"} 
-                confirmMessage={"Ja, slett min CV"} 
-                closeMessage={"Nei, behold min CV"}
+                title={'Er du sikker på at du vil slette din CV?'} 
+                confirmMessage={'Ja, slett min CV'} 
+                closeMessage={'Nei, behold min CV'}
                 onConfirm={() => {
                     deleteFile(user);
                     setDeleteSuccess(true);
@@ -118,7 +118,7 @@ const ApplicantInfoForm: React.FC = () => {
                             </div>
                             <div className="sm:w-1/2 ml-auto flex gap-3">
                                 <CloseButton onClick={handleTogglePdf} text="Avbryt" />
-                                <SubmitButton type="submit" isLoading={isLoading} buttonText={fileUrl ? "Last opp ny CV" : "Last opp CV"}/>
+                                <SubmitButton type="submit" isLoading={isLoading} buttonText={fileUrl ? 'Last opp ny CV' : 'Last opp CV'}/>
                             </div>
                         </div>
                     </form>
@@ -141,7 +141,7 @@ const ApplicantInfoForm: React.FC = () => {
                     </div>
                     <div className="sm:w-1/2 ml-auto flex gap-3 z-50">
                         <DeleteButton handleDelete={handleDelete} isLoading={isLoading} buttonText="Slett CV"/>
-                        <SubmitButton handleClick={handleTogglePdf} isLoading={isLoading} buttonText={"Last opp ny CV"}/>
+                        <SubmitButton handleClick={handleTogglePdf} isLoading={isLoading} buttonText={'Last opp ny CV'}/>
                     </div>
                 </div>
             } 

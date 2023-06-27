@@ -1,9 +1,10 @@
-import { configureStore } from "@reduxjs/toolkit";
-import editorFetchedDataReducer from "./slices/editor/editorFetchedDataSlice";
-import editorIsLoadingReducer from "./slices/editor/editorIsLoadingSlice";
-import editorDataReducer from "./slices/editor/editorDataSlice";
-import editorSubmitCountReducer from "./slices/editor/editorSubmitCountSlice";
-import authReducer from "./slices/authentication/authSlice";
+import { configureStore } from '@reduxjs/toolkit';
+
+import authReducer from './slices/authentication/authSlice';
+import editorDataReducer from './slices/editor/editorDataSlice';
+import editorFetchedDataReducer from './slices/editor/editorFetchedDataSlice';
+import editorIsLoadingReducer from './slices/editor/editorIsLoadingSlice';
+import editorSubmitCountReducer from './slices/editor/editorSubmitCountSlice';
 
 
 export const store = configureStore({ 

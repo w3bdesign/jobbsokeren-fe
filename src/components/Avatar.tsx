@@ -5,7 +5,7 @@ interface AvatarProps {
 
 const Avatar: React.FC<AvatarProps> = ({img}) => {
 
-    const defaultImage = "@/assets/images/png/blank-profile-picture-973460_640.png"; 
+    const defaultImage = '@/assets/images/png/blank-profile-picture-973460_640.png'; 
 
     return (
         <div className="relative hover:cursor-pointer">

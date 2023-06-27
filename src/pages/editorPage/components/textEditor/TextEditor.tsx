@@ -1,12 +1,13 @@
 import { Editor as TinyMCEEditor } from '@tinymce/tinymce-react';
-import React,  {useEffect, ReactElement, useRef, useState} from 'react';
+import React,  {useEffect, ReactElement, useRef} from 'react';
 import {ThreeCircles} from 'react-loader-spinner'
-import generateEditorContent from '@/utils/generateEditorContent'
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '@/store/store';
-import { setEditorData } from '@/store/slices/editor/editorDataSlice';
+
 import useApi from '@/hooks/useApi';
+import { setEditorData } from '@/store/slices/editor/editorDataSlice';
+import { RootState } from '@/store/store';
 import {browserDownloadFile} from '@/utils/browserDownloadFile';
+import generateEditorContent from '@/utils/generateEditorContent'
 
 
 const TextEditor: React.FC = (): ReactElement => {
@@ -22,11 +23,11 @@ const TextEditor: React.FC = (): ReactElement => {
     }));
 
     useEffect(() => {
-      if (editorFetchedData?.applicant_cover_letter != "") {
+      if (editorFetchedData?.applicant_cover_letter != '') {
         const { content } = generateEditorContent(editorFetchedData);
         dispatch(setEditorData(content));
       }
-    }, [editorFetchedData]);
+    }, [dispatch, editorFetchedData]);
 
     const exportFunction = async (type: string) => {
         if (editor.current) {
@@ -55,11 +56,11 @@ const TextEditor: React.FC = (): ReactElement => {
     };
 
     const onPdfExport = () => {
-      exportFunction("pdf");
+      exportFunction('pdf');
     }
 
     const onWordExport = () => {
-      exportFunction("docx");
+      exportFunction('docx');
     }
 
     return (
@@ -84,19 +85,19 @@ const TextEditor: React.FC = (): ReactElement => {
               apiKey={ApiKey}
               init={{
                 menubar: true,
-                content_css: "document",
-                height: "100%",
+                content_css: 'document',
+                height: '100%',
                 setup: function (editor) {
-                  editor.ui.registry.addButton("exportPDF", {
-                    icon: "export",
-                    text: "PDF",
-                    tooltip: "Export to PDF",
+                  editor.ui.registry.addButton('exportPDF', {
+                    icon: 'export',
+                    text: 'PDF',
+                    tooltip: 'Export to PDF',
                     onAction: onPdfExport
                   });
-                  editor.ui.registry.addButton("exportWord", {
-                    icon: "export",
-                    text: "Word",
-                    tooltip: "Export to Word",
+                  editor.ui.registry.addButton('exportWord', {
+                    icon: 'export',
+                    text: 'Word',
+                    tooltip: 'Export to Word',
                     onAction: onWordExport
                   });
                 },

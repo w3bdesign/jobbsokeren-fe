@@ -1,6 +1,7 @@
-import { useState } from 'react';
 import { ref, deleteObject } from 'firebase/storage';
-import { storage } from "@/firebase.config";
+import { useState } from 'react';
+
+import { storage } from '@/firebase.config';
 
 interface UseDeleteFirebaseUserFileProps {
     deleteFile: (user: { uid: string } | null | undefined) => Promise<boolean>,

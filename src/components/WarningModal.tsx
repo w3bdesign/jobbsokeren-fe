@@ -1,6 +1,7 @@
-import { XMarkIcon, ExclamationTriangleIcon } from "@heroicons/react/24/outline";
-import DeleteButton from "./DeleteButton";
-import CloseButton from "./CloseButton";
+import { XMarkIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+
+import CloseButton from './CloseButton';
+import DeleteButton from './DeleteButton';
 
 interface WarningModalProps {
     show: boolean;
@@ -12,7 +13,7 @@ interface WarningModalProps {
     onCancel: () => void;   
 }
 
-const WarningModal : React.FC<WarningModalProps> = ({show, setShow, title, confirmMessage, closeMessage, onConfirm, onCancel}) => {
+const WarningModal : React.FC<WarningModalProps> = ({show, title, confirmMessage, closeMessage, onConfirm, onCancel}) => {
 
     if (!show) {
         return null;

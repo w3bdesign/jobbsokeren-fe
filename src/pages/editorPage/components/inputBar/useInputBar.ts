@@ -1,17 +1,20 @@
-import { EditorFormModel} from "@/models/editorFormModel"
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "@/store/store";
-import {setEditorFetchedData} from "@/store/slices/editor/editorFetchedDataSlice";
-import { toggleEditorIsLoading } from "@/store/slices/editor/editorIsLoadingSlice";
-import { setEditorData } from '@/store/slices/editor/editorDataSlice';
-import { incrementSubmitCount } from '@/store/slices/editor/editorSubmitCountSlice'; 
-import useFetchFirebaseUserData from "@/hooks/useFetchFirebaseUserData";
-import useApi from "@/hooks/useApi";
 import { AxiosResponse } from 'axios';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import useApi from '@/hooks/useApi';
+import useFetchFirebaseUserData from '@/hooks/useFetchFirebaseUserData';
+import { EditorFormModel} from '@/models/editorFormModel'
+import { FirebasePersonalUserData } from '@/models/firebasePersonalUserDataModel';
+import { setEditorData } from '@/store/slices/editor/editorDataSlice';
+import {setEditorFetchedData} from '@/store/slices/editor/editorFetchedDataSlice';
+import { toggleEditorIsLoading } from '@/store/slices/editor/editorIsLoadingSlice';
+import { incrementSubmitCount } from '@/store/slices/editor/editorSubmitCountSlice'; 
+import { RootState } from '@/store/store';
 
 
-const errorMessage = "<p>Something went wrong fetching data, please try again later</p>";
+
+const errorMessage = '<p>Something went wrong fetching data, please try again later</p>';
 const emptyFormValues: EditorFormModel = {
     applicant_name: '',
     applicant_email: '',
@@ -30,9 +33,9 @@ export const UseInputBar = () => {
     const dispatch = useDispatch();
     const postJobApplicationData = useApi('openai/job-application-data','post');
     const { error: personalDataError, data : personalData } = useFetchFirebaseUserData(user, 'personalInformation');
-    const {error: cvDataError, data: cvData} = useFetchFirebaseUserData(user, 'cvSummaries');
+    const { data: cvData} = useFetchFirebaseUserData(user, 'cvSummaries');
 
-    const normalizeData = (data: any): EditorFormModel => {
+    const normalizeData = (data: FirebasePersonalUserData): EditorFormModel => {
         return {
             applicant_name: data.applicant_name || '',
             applicant_email: data.applicant_email || '',
@@ -50,7 +53,7 @@ export const UseInputBar = () => {
             setFormValues(normalizeData(personalData));
         }
       
-    }, [personalData]);
+    }, [personalData, personalDataError]);
     
     
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,7 +72,7 @@ export const UseInputBar = () => {
     
         dispatch(incrementSubmitCount());
         dispatch(toggleEditorIsLoading());
-        dispatch(setEditorData(""));
+        dispatch(setEditorData(''));
     
         try {
             const response : AxiosResponse = await postJobApplicationData(dataToSubmit);

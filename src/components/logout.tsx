@@ -1,9 +1,10 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { signOut } from 'firebase/auth';
-import { logout } from '@/store/slices/authentication/authSlice';
-import { auth } from '@/firebase.config';  
+
 import ErrorDisplayer from './ErrorDisplayer';
+import { auth } from '@/firebase.config';
+import { logout } from '@/store/slices/authentication/authSlice';
 
 interface LogOutProps {
     children: React.ReactNode;

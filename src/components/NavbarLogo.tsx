@@ -1,6 +1,6 @@
-import React from "react";
-import { Link as RouterLink } from "react-router-dom";
-import { Link } from "react-scroll";
+import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import { Link } from 'react-scroll';
 
 
 interface PathProps {
@@ -10,7 +10,7 @@ interface PathProps {
 const LogoNav : React.FC<PathProps> = ({pathname}) => {
     return (
         <div>
-            {pathname !== "/" ? (
+            {pathname !== '/' ? (
                 <RouterLink to="/">
                 <h1 className="text-3xl font-bold mr-4 sm:text-4xl hover:cursor-pointer">
                     JOBBSØKEREN

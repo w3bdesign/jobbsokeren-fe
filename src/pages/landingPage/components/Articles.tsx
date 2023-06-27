@@ -1,9 +1,10 @@
+import { ArrowRightIcon, LinkIcon } from '@heroicons/react/24/outline';
+import {Link as RouterLink} from 'react-router-dom';
 import { Element } from 'react-scroll';
-import { ArrowRightIcon, LinkIcon } from "@heroicons/react/24/outline";
-import {Link as RouterLink} from "react-router-dom";
-import { Article } from '@/models/articleModel';
-import useSanity from '@/hooks/useSanity';
+
 import ErrorDisplayer from '@/components/ErrorDisplayer';
+import useSanity from '@/hooks/useSanity';
+import { Article } from '@/models/articleModel';
 
 const query = `*[_type == "article"] | order(publishedAt desc) [0..2] {
     articleType,
@@ -27,6 +28,8 @@ const Articles = () => {
     const { data: articles, error } = useSanity<Article[]>(query);
     return ( 
         <Element name="tips" className="w-full text-white my-24">
+           {error ? <ErrorDisplayer title='Ups!' errorMessage='Noe gikk galt når vi skulle hente artikler. Prøv igjen senere' errorCode={500} /> : 
+           <>
             <div className="w-full h-[800px] bg-slate-900 absolute">
             </div>
                 <div className="max-w-[1240px] m-auto py-12 relative">
@@ -52,7 +55,7 @@ const Articles = () => {
                                     alt={article?.title} />
                                 <div className="p-7 flex flex-col flex-grow">
                                     <h5 className="text-2xl font-bold tracking-tight text-gray-900">{article?.title}</h5>
-                                    <p className="py-5 text-md text-black flex-grow">{article?.intro.length > 100 ? article.intro.substring(0, 100) + "..." : article.intro}</p>
+                                    <p className="py-5 text-md text-black flex-grow">{article?.intro.length > 100 ? article.intro.substring(0, 100) + '...' : article.intro}</p>
                                     <button className="mt-auto inline-flex items-center px-8 py-3 text-center text-white">
                                         Les hele artikkelen
                                         <ArrowRightIcon className="w-4 ml-3 inline-block" />
@@ -63,7 +66,9 @@ const Articles = () => {
                             )
                         })}
                     </div>
-                </div>     
+                </div>
+            </>     
+           } 
         </Element>
     )
 }

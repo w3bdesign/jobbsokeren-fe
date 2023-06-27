@@ -1,8 +1,10 @@
-import { useDispatch } from 'react-redux';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { loginStart, loginSuccess, loginFailure } from '@/store/slices/authentication/authSlice';
+import { User } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
+
 import ErrorDisplayer from './ErrorDisplayer';
-import { User } from "firebase/auth";
+import { loginStart, loginSuccess, loginFailure } from '@/store/slices/authentication/authSlice';
+
 
 
 interface LoginProps {

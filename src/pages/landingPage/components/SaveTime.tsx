@@ -1,5 +1,5 @@
-import { Element } from 'react-scroll';
 import { ClockIcon, CpuChipIcon, InformationCircleIcon } from '@heroicons/react/24/outline';
+import { Element } from 'react-scroll';
 
 const SaveTime = () => {
     return (

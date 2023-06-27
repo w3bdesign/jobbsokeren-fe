@@ -1,8 +1,8 @@
-import {  CheckCircleIcon} from "@heroicons/react/24/solid"
-import { LinkIcon } from "@heroicons/react/24/outline"
+import {  CheckCircleIcon} from '@heroicons/react/24/solid'
 import { Element } from 'react-scroll';
-import { aiPitchData } from "@/data/aiPitchData";
-import {Link as RouterLink} from "react-router-dom";
+
+import { aiPitchData } from '@/data/aiPitchData';
+
 const WhatWeOffer = () => {
 
     return (

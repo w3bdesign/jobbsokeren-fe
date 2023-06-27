@@ -8,7 +8,7 @@ interface FileInputProps {
     file: File | null;
 }
 
-const FileInput: React.FC<FileInputProps> = ({file, setFile, onFileUpload}) => {
+const FileInput: React.FC<FileInputProps> = ({file, setFile}) => {
     const handleDragOver = (event: React.DragEvent<HTMLLabelElement>) => {
         event.preventDefault();
     };
@@ -28,14 +28,14 @@ const FileInput: React.FC<FileInputProps> = ({file, setFile, onFileUpload}) => {
         }
     };
 
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files && event.target.files[0].type === 'application/pdf') {
-            setFile(event.target.files[0]);
-            setFile && setFile(event.target.files[0]);
-        } else {
-            alert('Please upload a PDF file.');
-        }
-    };
+    // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //     if (event.target.files && event.target.files[0].type === 'application/pdf') {
+    //         setFile(event.target.files[0]);
+    //         setFile && setFile(event.target.files[0]);
+    //     } else {
+    //         alert('Please upload a PDF file.');
+    //     }
+    // };
     
 
     return (

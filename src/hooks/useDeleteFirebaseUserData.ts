@@ -1,11 +1,14 @@
-import { useState } from 'react';
-import { GoogleAuthProvider, reauthenticateWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, reauthenticateWithPopup } from 'firebase/auth';
+import { User } from 'firebase/auth';
 import { doc, deleteDoc } from 'firebase/firestore';
-import { db } from "@/firebase.config";
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from "@/store/store";
-import { User } from "firebase/auth";
+
+import { db } from '@/firebase.config';
 import { logout } from '@/store/slices/authentication/authSlice';
+import { RootState } from '@/store/store';
+
+
 
 
 type UseDeleteUserProps = {
@@ -22,7 +25,7 @@ const useDeleteUser = (): UseDeleteUserProps => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState(false);
-    const errorMessage = "Det skjedde en feil under sletting av bruker. Prøv igjen senere.";
+    const errorMessage = 'Det skjedde en feil under sletting av bruker. Prøv igjen senere.';
 
     const deleteUserAndData = async (user: { uid: string } | null) => {
       
@@ -65,7 +68,7 @@ const useDeleteUser = (): UseDeleteUserProps => {
             deleteUserAndData(user);
         }).catch((error) => {
             // Handle error.
-            console.log("Error reauthenticating user", error);
+            console.log('Error reauthenticating user', error);
         });
     };
 

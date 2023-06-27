@@ -1,6 +1,7 @@
-import { CheckIcon } from "@heroicons/react/24/solid";
+import { CheckIcon } from '@heroicons/react/24/solid';
 import { Element } from 'react-scroll';
-import { priceData } from "@/data/priceData";
+
+import { priceData } from '@/data/priceData';
 
 const Pricing = () => {
     return ( 

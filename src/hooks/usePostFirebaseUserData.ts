@@ -1,7 +1,8 @@
-import { db } from "@/firebase.config";
 import { collection, setDoc, doc } from 'firebase/firestore';
 import { useState } from 'react';
-import { FirebasePersonalUserData } from "@/models/firebasePersonalUserDataModel";
+
+import { db } from '@/firebase.config';
+import { FirebasePersonalUserData } from '@/models/firebasePersonalUserDataModel';
 
 const usePostFirebaseUserData = () => {
   const [error, setError] = useState<Error | null>(null);
@@ -13,9 +14,9 @@ const usePostFirebaseUserData = () => {
       await setDoc(doc(collection(db, collectionName), documentId), data);
       setIsLoading(false);
       return documentId;
-    } catch (e : any) {
+    } catch (e) {
       setIsLoading(false);
-      setError(e);
+      setError(e as Error);
       return null;
     }
   };
