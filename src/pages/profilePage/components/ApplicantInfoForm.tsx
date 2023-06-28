@@ -1,14 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import { useSelector } from 'react-redux';
 
-import CloseButton from '@/components/CloseButton';
-import DeleteButton from '@/components/DeleteButton';
-import ErrorDisplayer from '@/components/ErrorDisplayer';
-import FileInput from '@/components/FileInput';
-import MiniPdfViewer from '@/components/MiniPdfViewer';
-import SubmitButton from '@/components/SubmitButton';
-import SuccessBottomBanner from '@/components/SuccessBottomBanner';
-import WarningModal from '@/components/WarningModal';
+import SuccessBottomBanner from '@/components/Banners/SuccessBottomBanner';
+import ErrorDisplayer from '@/components/ErrorHandlers/ErrorDisplayer';
+import WarningModal from '@/components/Modals/WarningModal';
+import MiniPdfViewer from '@/components/PdfViewer/MiniPdfViewer';
+import CloseButton from '@/components/UI/CloseButton';
+import DeleteButton from '@/components/UI/DeleteButton';
+import FileInput from '@/components/UI/FileInput';
+import SubmitButton from '@/components/UI/SubmitButton';
 import useApi from '@/hooks/useApi';
 import useDeleteFirebaseUserFile from '@/hooks/useDeleteFirebaseUserFile';
 import useUploadFirebaseUserFile from '@/hooks/useUploadFirebaseUserFile';
@@ -57,7 +57,6 @@ const ApplicantInfoForm: React.FC = () => {
                     }, 3000);
                     try {
                         const response = await postCVSummary({uid: user.uid, cv_content: text});
-                      
                         if (response.status === 200) {
                               console.log(response);               
                         } else {

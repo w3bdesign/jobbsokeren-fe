@@ -1,11 +1,10 @@
-// UserIcon.jsx
 import React from 'react';
 import { BiUserCircle } from 'react-icons/bi';
 import { RxCrossCircled } from 'react-icons/rx';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
-import Avatar from './Avatar';
+import Avatar from '../UI/Avatar';
 import { RootState } from '@/store/store';
 
 

@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-import ButtonLoadingIndicator from '@/components/ButtonLoadingIndicator';
+import ButtonLoadingIndicator from '@/components/UI/ButtonLoadingIndicator';
 
 interface SubmitButtonProps {
     isLoading: boolean;

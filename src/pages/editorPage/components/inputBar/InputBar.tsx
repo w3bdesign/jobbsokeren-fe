@@ -1,6 +1,6 @@
 import { UseInputBar } from './useInputBar';
-import TextInput from '../../../../components/TextInput';
-import SubmitButton  from '@/components/SubmitButton';
+import TextInput from '../../../../components/UI/TextInput';
+import SubmitButton  from '@/components/UI/SubmitButton';
 import { EditorFormModel } from '@/models/editorFormModel';
 
 

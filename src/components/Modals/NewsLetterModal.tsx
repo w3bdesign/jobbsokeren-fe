@@ -3,8 +3,8 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 import { AxiosError } from 'axios';
 import React, { useState, FormEvent, useRef } from 'react'
 
-import SubmitButton from './SubmitButton';
-import SuccessToast from './SuccessToast';
+import SuccessToast from '../Notifications/SuccessToast';
+import SubmitButton from '../UI/SubmitButton';
 import useApi from '@/hooks/useApi';
 import { useApiInterface } from '@/models/useApiModel';
 

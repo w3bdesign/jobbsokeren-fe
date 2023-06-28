@@ -2,7 +2,7 @@ import { ArrowRightIcon, LinkIcon } from '@heroicons/react/24/outline';
 import {Link as RouterLink} from 'react-router-dom';
 import { Element } from 'react-scroll';
 
-import ErrorDisplayer from '@/components/ErrorDisplayer';
+import ErrorDisplayer from '@/components/ErrorHandlers/ErrorDisplayer';
 import useSanity from '@/hooks/useSanity';
 import { Article } from '@/models/articleModel';
 

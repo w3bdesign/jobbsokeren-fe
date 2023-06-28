@@ -2,7 +2,7 @@ import { AxiosError } from 'axios';
 import React, { FormEvent, useEffect, useRef, useState } from 'react';
 
 import NewsLetterBannerForm from './NewsLetterBannerForm';
-import SuccessToast from './SuccessToast';
+import SuccessToast from '../Notifications/SuccessToast';
 import useApi from '@/hooks/useApi';
 import { useApiInterface } from '@/models/useApiModel';
 

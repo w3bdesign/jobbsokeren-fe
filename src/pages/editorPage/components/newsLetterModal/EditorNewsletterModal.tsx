@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'; // new import
 import { useSelector } from 'react-redux';
 
-import NewsLetterModal from '@/components/NewsLetterModal';
+import NewsLetterModal from '@/components/Modals/NewsLetterModal';
 import { RootState } from '@/store/store';
 
 

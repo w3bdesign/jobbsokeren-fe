@@ -63,16 +63,15 @@ export const UseInputBar = () => {
     
     const handleSubmit = async (event  : React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        dispatch(incrementSubmitCount());
+        dispatch(toggleEditorIsLoading());
+        dispatch(setEditorData(''));
     
         // Merge formValues with cvData
         const dataToSubmit = {
             ...formValues,
             applicant_cv_summary: cvData?.applicant_cv_summary || formValues.applicant_cv_summary
         };
-    
-        dispatch(incrementSubmitCount());
-        dispatch(toggleEditorIsLoading());
-        dispatch(setEditorData(''));
     
         try {
             const response : AxiosResponse = await postJobApplicationData(dataToSubmit);
@@ -84,10 +83,9 @@ export const UseInputBar = () => {
             }
         } catch (error) {
             dispatch(setEditorData(errorMessage));
+        } finally {
+            dispatch(toggleEditorIsLoading());
         }
-    
-        dispatch(toggleEditorIsLoading());
-    
     };
     
 

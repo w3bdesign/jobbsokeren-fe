@@ -2,7 +2,7 @@ import { signOut } from 'firebase/auth';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import ErrorDisplayer from './ErrorDisplayer';
+import ErrorDisplayer from '../ErrorHandlers/ErrorDisplayer';
 import { auth } from '@/firebase.config';
 import { logout } from '@/store/slices/authentication/authSlice';
 

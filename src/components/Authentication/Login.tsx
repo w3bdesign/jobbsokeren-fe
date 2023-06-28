@@ -2,7 +2,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { User } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 
-import ErrorDisplayer from './ErrorDisplayer';
+import ErrorDisplayer from '../ErrorHandlers/ErrorDisplayer';
 import { loginStart, loginSuccess, loginFailure } from '@/store/slices/authentication/authSlice';
 
 

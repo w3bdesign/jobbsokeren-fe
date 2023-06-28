@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {BrowserRouter,Routes, Route} from 'react-router-dom';
 
-import Footer from './components/Footer';
-import LoadingDisplayer from './components/LoadingDisplayerTransparent';
-import Navbar from './components/Navbar'; 
-import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedRoute from './components/Authentication/ProtectedRoute';
+import Footer from './components/Layout/Footer';
+import Navbar from './components/Layout/Navbar'; 
+import LoadingDisplayer from './components/UI/LoadingDisplayerTransparent';
 import ArticlePage from './pages/articlePage';
 import ArticlesPage from './pages/articlesPage';
 import EditorPage from './pages/editorPage';

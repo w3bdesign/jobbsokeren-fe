@@ -1,9 +1,9 @@
  import React from 'react';
  import { useParams } from 'react-router-dom';
 
- import ErrorDisplayer from '@/components/ErrorDisplayer';
-  import LoadingDisplayer from '@/components/LoadingDisplayerTransparent';
- import RichTextComponent from '@/components/RichText';
+ import ErrorDisplayer from '@/components/ErrorHandlers/ErrorDisplayer';
+ import RichTextComponent from '@/components/RichText/RichText';
+  import LoadingDisplayer from '@/components/UI/LoadingDisplayerTransparent';
  import useSanity from '@/hooks/useSanity';
  import { Article } from '@/models/articleModel';
 

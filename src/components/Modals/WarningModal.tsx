@@ -1,7 +1,7 @@
 import { XMarkIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
-import CloseButton from './CloseButton';
-import DeleteButton from './DeleteButton';
+import CloseButton from '../UI/CloseButton';
+import DeleteButton from '../UI/DeleteButton';
 
 interface WarningModalProps {
     show: boolean;

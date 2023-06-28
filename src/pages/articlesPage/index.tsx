@@ -1,8 +1,8 @@
 import React from 'react';
 
 import ArticleCard from './components/ArticleCard';
-import ErrorDisplayer from '@/components/ErrorDisplayer';
-import LoadingDisplayer from '@/components/LoadingDisplayerTransparent';
+import ErrorDisplayer from '@/components/ErrorHandlers/ErrorDisplayer';
+import LoadingDisplayer from '@/components/UI/LoadingDisplayerTransparent';
 import useSanity from '@/hooks/useSanity';
 import { Article } from '@/models/articleModel';
 

@@ -3,8 +3,8 @@ import { useRef, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 
-import Login from './Login';
-import Logout from './logout';
+import Login from '../Authentication/Login';
+import Logout from '../Authentication/logout';
 import { RootState } from '@/store/store';
 
 

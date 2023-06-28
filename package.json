@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && ENV=production vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint src --fix"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.14",

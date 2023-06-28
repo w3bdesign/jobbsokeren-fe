@@ -1,14 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import { useSelector } from 'react-redux';
 
-import AvatarText from '@/components/AvatarText';
-import DeleteButton from '@/components/DeleteButton';
-import ErrorDisplayer from '@/components/ErrorDisplayer';
-import LoadingDisplayer from '@/components/LoadingDisplayerBackground';
-import SubmitButton from '@/components/SubmitButton';
-import SuccessBottomBanner from '@/components/SuccessBottomBanner';
-import TextInput from '@/components/TextInput';
-import WarningModal from '@/components/WarningModal';
+import SuccessBottomBanner from '@/components/Banners/SuccessBottomBanner';
+import ErrorDisplayer from '@/components/ErrorHandlers/ErrorDisplayer';
+import WarningModal from '@/components/Modals/WarningModal';
+import AvatarText from '@/components/UI/AvatarText';
+import DeleteButton from '@/components/UI/DeleteButton';
+import LoadingDisplayer from '@/components/UI/LoadingDisplayerBackground';
+import SubmitButton from '@/components/UI/SubmitButton';
+import TextInput from '@/components/UI/TextInput';
 import useDeleteUser from '@/hooks/useDeleteFirebaseUserData';
 import useFetchFirebaseUserData from '@/hooks/useFetchFirebaseUserData';
 import usePostFirebaseUserData from '@/hooks/usePostFirebaseUserData';
@@ -170,7 +170,7 @@ const PersonalInfoForm: React.FC = () => {
                         </div>
                         <div className="sm:w-1/2 ml-auto flex gap-3">
                             <DeleteButton handleDelete={handleDelete} isLoading={loadingDelete} buttonText="Slett min bruker"/>
-                            <SubmitButton isLoading={postLoading} buttonText={'Lagre endringer'}/>
+                            <SubmitButton isLoading={postLoading} buttonText='Lagre endringer'/>
                         </div>
                     </div>
                 </form>

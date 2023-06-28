@@ -7,8 +7,8 @@ import LogoNav from './NavbarLogo';
 import MobileNav from './NavbarMobile';
 import MobileNavToggle from './NavbarMobileToggle';
 import UserIcon from './NavbarUserIcon';
-import NewsLetterBanner from './NewsLetterBanner';
 import SideBar from './SideBar';
+import NewsLetterBanner from '../Banners/NewsLetterBanner';
 import { navigationData } from '@/data/navigationData';
 
 const Navbar : React.FC = () => {
