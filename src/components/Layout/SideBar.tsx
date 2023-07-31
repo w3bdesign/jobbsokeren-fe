@@ -58,14 +58,14 @@ const SideBar : React.FC<SideBarProps> =({showSideBar, handleSideBar}) => {
                         </div>
                     </RouterLink>
                 </li>
-                <li>
+                {/* <li>
                     <RouterLink onClick={handleSideBar}  to="#" className={`inline-flex items-center p-2 hover:text-indigo-600 ${user ? '' : 'opacity-50 cursor-not-allowed'}`}>
                         <div className="flex items-center">
                             <NewspaperIcon className="w-6 h-6 mr-3 text-indigo-600" aria-hidden="true" />
                                 Mine søknader
                         </div>
                     </RouterLink>
-                </li>
+                </li> */}
                
                {!user && <li>
                     <Login>
