@@ -8,7 +8,6 @@ import ProtectedRoute from './components/Authentication/ProtectedRoute';
 import Footer from './components/Layout/Footer';
 import Navbar from './components/Layout/Navbar'; 
 import LoadingDisplayer from './components/UI/LoadingDisplayerTransparent';
-import usePageTracking from './hooks/usePageTracking';
 import ArticlePage from './pages/articlePage';
 import ArticlesPage from './pages/articlesPage';
 import EditorPage from './pages/editorPage';
@@ -57,8 +56,6 @@ function App() {
   return (
     <BrowserRouter>       
           <Navbar/>
-          { /* Track page views */}
-          usePageTracking();
           { /* Make footer stick to bottom */}
           <div className='grid h-screen grid-rows-[1fr,auto]'>
               <Routes>

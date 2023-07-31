@@ -10,8 +10,10 @@ import UserIcon from './NavbarUserIcon';
 import SideBar from './SideBar';
 import NewsLetterBanner from '../Banners/NewsLetterBanner';
 import { navigationData } from '@/data/navigationData';
+import usePageTracking from '@/hooks/usePageTracking';
 
 const Navbar : React.FC = () => {
+  usePageTracking();
   const [showSideBar, setShowSideBar] = useState(false);
   const [nav, setNav] = useState(false);
   const { pathname } = useLocation();
