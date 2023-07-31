@@ -2,7 +2,6 @@ import { ArrowRightIcon, LinkIcon } from '@heroicons/react/24/outline';
 import {Link as RouterLink} from 'react-router-dom';
 import { Element } from 'react-scroll';
 
-import ErrorDisplayer from '@/components/ErrorHandlers/ErrorDisplayer';
 import useSanity from '@/hooks/useSanity';
 import { Article } from '@/models/articleModel';
 
@@ -25,11 +24,9 @@ const query = `*[_type == "article"] | order(publishedAt desc) [0..2] {
 
 const Articles = () => {
 
-    const { data: articles, error } = useSanity<Article[]>(query);
+    const { data: articles } = useSanity<Article[]>(query);
     return ( 
         <Element name="tips" className="w-full text-white my-24">
-           {error ? <ErrorDisplayer title='Ups!' errorMessage='Noe gikk galt når vi skulle hente artikler. Prøv igjen senere' errorCode={500} /> : 
-           <>
             <div className="w-full h-[800px] bg-slate-900 absolute">
             </div>
                 <div className="max-w-[1240px] m-auto py-12 relative">
@@ -67,8 +64,6 @@ const Articles = () => {
                         })}
                     </div>
                 </div>
-            </>     
-           } 
         </Element>
     )
 }
