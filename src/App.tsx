@@ -1,5 +1,6 @@
 import { User } from 'firebase/auth';
 import { useEffect, useState } from 'react';
+import ReactGA from 'react-ga4';
 import { useDispatch, useSelector } from 'react-redux';
 import {BrowserRouter,Routes, Route} from 'react-router-dom';
 
@@ -7,6 +8,7 @@ import ProtectedRoute from './components/Authentication/ProtectedRoute';
 import Footer from './components/Layout/Footer';
 import Navbar from './components/Layout/Navbar'; 
 import LoadingDisplayer from './components/UI/LoadingDisplayerTransparent';
+import usePageTracking from './hooks/usePageTracking';
 import ArticlePage from './pages/articlePage';
 import ArticlesPage from './pages/articlesPage';
 import EditorPage from './pages/editorPage';
@@ -17,9 +19,12 @@ import { auth } from '@/firebase.config';
 import { loginSuccess, logout } from '@/store/slices/authentication/authSlice';
 import { RootState } from '@/store/store';
 
-
+// Initialize Google Analytics
+const Analytics_ID = import.meta.env.VITE_GOOGLE_ANALYTICS_ID;
+ReactGA.initialize(Analytics_ID);
 
 function App() {
+
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.auth.user);
   
@@ -52,6 +57,8 @@ function App() {
   return (
     <BrowserRouter>       
           <Navbar/>
+          { /* Track page views */}
+          usePageTracking();
           { /* Make footer stick to bottom */}
           <div className='grid h-screen grid-rows-[1fr,auto]'>
               <Routes>
