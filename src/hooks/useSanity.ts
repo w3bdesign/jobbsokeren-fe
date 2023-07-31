@@ -1,22 +1,23 @@
 import { useState, useEffect } from 'react';
+import { useErrorBoundary } from 'react-error-boundary';
 
 import client from '@/sanityClient.config';
 
 interface UseSanityDataResult<T> {
     data: T | undefined;
-    error: string | undefined;
 }
 
-const useSanityData = <T>(query: string | undefined): UseSanityDataResult<T> => {
+const useSanity = <T>(query: string | undefined): UseSanityDataResult<T> => {
 
     const [data, setData] = useState<T>();
-    const [error, setError] = useState<string>();
+    const { showBoundary } = useErrorBoundary();
+    const errorMessage = 'Noe gikk galt i forespørselen';
 
     useEffect(() => {
         // fetch data from sanity
         const fetchData = async () => {
             if (!query) {
-                setError('No query provided');
+                showBoundary(new Error(errorMessage));  
                 return;
             }
             try {
@@ -25,17 +26,18 @@ const useSanityData = <T>(query: string | undefined): UseSanityDataResult<T> => 
                     const data : T = result;
                     setData(data);
                 } else {
-                    setError('No data found');
+                    showBoundary(new Error(errorMessage));  
                 }        
             } catch(e) {
-                setError('Error fetching data');
+                showBoundary(new Error(errorMessage));  
             }
         }
+        
         fetchData();
-    }, [query]);
 
-    return {data, error};
+    }, [query, showBoundary]); 
 
+    return {data};
 }
 
-export default useSanityData;
+export default useSanity;

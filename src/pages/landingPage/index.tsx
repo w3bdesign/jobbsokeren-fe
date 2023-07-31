@@ -7,6 +7,7 @@ import WhatWeOffer from './components/WhatWeOffer';
 
 
 const LandingPage = () => {
+
     return  (
         <> 
             <Hero />
