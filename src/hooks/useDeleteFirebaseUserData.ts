@@ -1,10 +1,11 @@
 import { GoogleAuthProvider, reauthenticateWithPopup } from 'firebase/auth';
 import { User } from 'firebase/auth';
 import { doc, deleteDoc } from 'firebase/firestore';
+import { ref, deleteObject } from 'firebase/storage';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { db } from '@/firebase.config';
+import { storage, db } from '@/firebase.config';
 import { logout } from '@/store/slices/authentication/authSlice';
 import { RootState } from '@/store/store';
 
@@ -31,10 +32,15 @@ const useDeleteUser = (): UseDeleteUserProps => {
       
         if (user && user.uid) {
             setLoading(true);
-            const userRef = doc(db, 'personalInformation', user.uid);
+            // Delete the users personal information and CV summary
+            const userPersonalInfoRef = doc(db, 'personalInformation', user.uid);
+            const userCvRef = doc(db, 'cvSummaries', user.uid);
+            const fileRef = ref(storage, `users_cv_storage/${user.uid}/${user.uid}.pdf`);
             try {
-                // Delete user data from Firestore
-                await deleteDoc(userRef);
+                // Delete all of the users files and data
+                await deleteDoc(userPersonalInfoRef);
+                await deleteDoc(userCvRef);
+                await deleteObject(fileRef);
                 
                 if (authUser) {
                     authUser.delete().then(() => {
