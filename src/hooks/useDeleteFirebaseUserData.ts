@@ -1,7 +1,7 @@
 import { GoogleAuthProvider, reauthenticateWithPopup } from 'firebase/auth';
 import { User } from 'firebase/auth';
 import { doc, deleteDoc } from 'firebase/firestore';
-import { ref, deleteObject } from 'firebase/storage';
+import { ref, deleteObject, getDownloadURL } from 'firebase/storage';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -40,7 +40,14 @@ const useDeleteUser = (): UseDeleteUserProps => {
                 // Delete all of the users files and data
                 await deleteDoc(userPersonalInfoRef);
                 await deleteDoc(userCvRef);
-                await deleteObject(fileRef);
+                 // Check if the file exists before attempting to delete
+                await getDownloadURL(fileRef).then(async () => {
+                    // If file exists, delete it
+                    await deleteObject(fileRef);
+                }).catch((error) => {
+                    // File doesn't exist or there was an error fetching it
+                    console.log('File does not exist or error fetching file:', error);
+                });
                 
                 if (authUser) {
                     authUser.delete().then(() => {
