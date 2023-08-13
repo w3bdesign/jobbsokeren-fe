@@ -3,6 +3,9 @@
 This application lets users use AI to generate job applications. The user can also store their CV content in Firebase and use it to generate job applications. The user can also subscribe to a newsletter using Mailchimp.
 The frontend is built with React and TailwindCSS. The frontend is deployed to Azure App Service using Github Actions.
 
+<img width="1789" alt="Skjermbilde 2023-08-13 kl  17 40 34" src="https://github.com/matsgund/jobbsokeren-fe/assets/25957285/493f75a7-8c26-4625-af10-2a9f733ed795">
+
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
