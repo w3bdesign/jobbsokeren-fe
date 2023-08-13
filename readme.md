@@ -4,6 +4,7 @@ This application lets users use AI to generate job applications. The user can al
 The frontend is built with React and TailwindCSS. The frontend is deployed to Azure App Service using Github Actions.
 
 <img width="1789" alt="Skjermbilde 2023-08-13 kl  17 40 34" src="https://github.com/matsgund/jobbsokeren-fe/assets/25957285/493f75a7-8c26-4625-af10-2a9f733ed795">
+<img width="1788" alt="Skjermbilde 2023-08-13 kl  17 52 18" src="https://github.com/matsgund/jobbsokeren-fe/assets/25957285/253cd288-b6fb-4c2e-bc4f-ed97b998dad1">
 
 
 ## Getting Started
