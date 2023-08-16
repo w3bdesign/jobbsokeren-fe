@@ -60,6 +60,13 @@ const textInputConfigs = [
     },
   ];
 
+  const trackButtonEvent = () => {
+    window.gtag('event', 'Submit', {
+        'event_category': 'Application',
+        'event_label': 'Application Submission'
+    });
+};
+
 
 const InputBar : React.FC = () => {
     const {
@@ -115,6 +122,7 @@ const InputBar : React.FC = () => {
                                 label="FINN.no lenke"
                                 width={100}/>   
                             <SubmitButton
+                                handleClick={trackButtonEvent}
                                 isLoading={editorIsLoading}
                                 buttonText="Generer søknad"/>
                     </div>    
