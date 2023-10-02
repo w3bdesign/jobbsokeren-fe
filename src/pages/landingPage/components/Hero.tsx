@@ -30,7 +30,7 @@ const Hero = () => {
             <div>
                 <img className='w-full' src={HeroImage} alt="/" />
             </div>
-            <div className='hidden absolute xl:flex flex-col py-8 md:min-w-[650px] md:max-w-[500px] bottom-[5%]
+            <div className='hidden absolute 2xl:flex flex-col py-8 md:min-w-[650px] md:max-w-[500px] bottom-[5%]
             mx-1 md:left-1/2 transform md:-translate-x-1/2 bg-zinc-100
             border border-slate-300 rounded-xl text-center shadow-2xl '>
                 <div className='flex justify-between flex-wrap px-4'>
