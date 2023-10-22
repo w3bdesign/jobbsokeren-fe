@@ -1,6 +1,6 @@
 [
     {
-      "origin": ["https://jobbsoknader.no"],
+      "origin": ["https://jobbsoknader.no, https://green-glacier-01420f603.4.azurestaticapps.net"],
       "method": ["GET"],
       "maxAgeSeconds": 3600
     }
