@@ -8,7 +8,7 @@ import { useApiInterface } from '@/models/useApiModel';
 
 const NewsLetterBanner : React.FC = () => {
     const emailRef = useRef<HTMLInputElement | null>(null);
-    const exportEditorContentAPI = useApi('subscribe-to-mailchimp','post');
+    const exportEditorContentAPI = useApi('mailchimp/subscribe-to-mailchimp','post');
     
     // Storing in local store to respect user preference
     const [newsLetterIsVisible, setNewsLetterIsVisible] = useState<boolean>(() => {
