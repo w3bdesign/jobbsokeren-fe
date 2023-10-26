@@ -52,7 +52,8 @@ const NewsLetterBanner : React.FC = () => {
         const status = 'subscribed';
         try {
           const response = await exportEditorContentAPI({email_address, status});
-          if (response.data.statusCode === 200) {
+          console.log(response.data);
+          if (response.data.code === 200) {
             handleClose();
             setSubmitted(true);
         
@@ -60,7 +61,7 @@ const NewsLetterBanner : React.FC = () => {
             setTimeout(() => {
               setSubmitted(false);
             }, 6000);
-          }  else if (response.data.statusCode === 400) {
+          }  else if (response.data.code === 400) {
             setApiStatus('Denne e-postadressen er allerede registrert.');
           }
         } catch (error) {
