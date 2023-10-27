@@ -5,7 +5,7 @@ interface EditorData {
 }
 
 const initialState : EditorData  = {
-    value: '<h1>Fyll ut skjemaet til venstre for å generere søknaden</h1>'
+    value: '<h1>Fyll ut feltene for å generere søknaden</h1>'
 }
 
 export const editorDataSlice = createSlice({
