@@ -17,7 +17,7 @@ const NewsLetterModal  : React.FC<Props> = ({startModal, handleModal}) => {
     const emailRef = useRef<HTMLInputElement | null>(null);
     const [apiStatus, setApiStatus] = useState<string>('');
     const [submitted, setSubmitted] = useState<boolean>(false);
-    const exportEditorContentAPI = useApi('/subscribe-to-mailchimp','post');
+    const exportEditorContentAPI = useApi('mailchimp/subscribe-to-mailchimp','post');
 
   
     const onSubmit  = async (e: FormEvent)  =>  {
@@ -26,12 +26,12 @@ const NewsLetterModal  : React.FC<Props> = ({startModal, handleModal}) => {
         const status = 'subscribed';
         try {
           const response = await exportEditorContentAPI({email_address, status});
-          if (response.data.statusCode === 200) {
+          if (response.data.code === 200) {
             setSubmitted(true);
             setTimeout(() => {
                 handleModal(false);
             }, 4000);
-          }  else if (response.data.statusCode === 400) {
+          }  else if (response.data.code === 400) {
             setApiStatus('Denne e-postadressen er allerede registrert.');
           }
         } catch (error) {
