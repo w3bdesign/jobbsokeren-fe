@@ -2,8 +2,15 @@ import { CheckIcon } from '@heroicons/react/24/solid';
 import { Element } from 'react-scroll';
 
 import { priceData } from '@/data/priceData';
+import useFetchFirebaseProductData from '@/hooks/useFetchFirebaseProductsData';
+
 
 const Pricing = () => {
+
+
+
+    const { data, error, loading } = useFetchFirebaseProductData();
+
     return ( 
         <Element name="pricing" className="w-full text-white my-24">
             <div className="w-full h-[800px] bg-slate-900 absolute">
