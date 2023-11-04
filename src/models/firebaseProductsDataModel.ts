@@ -7,4 +7,14 @@ export interface FirebaseProductsData {
     name: string;
     role: string | null;
     tax_code: string;
+    price: FirebaseProductsDataPrice;
+}
+
+interface FirebaseProductsDataPrice {
+    active: boolean;
+    currency: string;
+    id?: string;
+    unit_amount: number;
+    description: string;
+
 }

@@ -21,10 +21,10 @@ export const navigationData: Array<NavigationLinksModel> = [
         link: '/tips', 
         offset: -150
     },  
-    // {
-    //     name: "Priser", 
-    //     link: "/pricing", 
-    //     offset:-50
-    // },
+    {
+        name: 'Priser', 
+        link: '/pricing', 
+        offset: -50
+    },
 
 ]

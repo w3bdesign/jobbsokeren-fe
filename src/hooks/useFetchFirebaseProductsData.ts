@@ -26,7 +26,16 @@ const useFetchFirebaseProductData = () : UseFetchProductsDataProps => {
                 const data = doc.data() as FirebaseProductsData;
                 return { id: doc.id, ...data };
             });
-            setData(productsData);
+
+            const productsDataPromises = productsData.map(async product => {
+                const querySnapshotprice = await getDocs(collection(db, 'products', product.id, 'prices'));
+                const priceData = querySnapshotprice.docs.map(doc => doc.data());
+                return { ...product, price: priceData[0] as FirebaseProductsData['price'] };
+            });
+            const updatedProductsData = await Promise.all(productsDataPromises);
+
+            setData(updatedProductsData);
+      
         } catch (error) {
             console.log(error);
             setError(error as Error);
