@@ -8,6 +8,7 @@ export interface FirebaseProductsData {
     role: string | null;
     tax_code: string;
     price: FirebaseProductsDataPrice;
+    order: number;
 }
 
 interface FirebaseProductsDataPrice {

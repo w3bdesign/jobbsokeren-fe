@@ -11,18 +11,21 @@ const Pricing = () => {
 
     const { data, error, loading } = useFetchFirebaseProductData();
 
+     // Ensure data is not null or undefined before sorting
+     const sortedData = data ? [...data].sort((a, b) => a.order - b.order) : null;
+
     return ( 
         <Element name="pricing" className="w-full text-white my-24">
             <div className="w-full h-[800px] bg-slate-900 absolute">
             </div>
                 <div className="max-w-[1240px] m-auto py-12 relative">
-                    <div className="text-center py-8 text-slate-300">
+                    <div className="text-center m-4 py-8 text-slate-300">
                         <h2 className="text-3xl uppercase">Priser</h2>
                         <h3 className="text-5xl font-bold text-white py-8">Finn riktig løsning for ditt behov</h3>
                         <p className="text-3xl">Vi tilbyr en rekke prispakker, inkludert en gratis løsing med litt begrenset antall, samt flere betalte pakker med mindre begrensninger.</p>
                     </div>
                     <div className="grid md:grid-cols-3 ">
-                        {data?.map((item, index) => {
+                        {sortedData?.map((item, index) => {
                             return (
                                 <div key={index} className="bg-white text-slate-900 m-4 p-8 rounded-xl shadow-2xl flex flex-col justify-between relative">
                                     <div>
