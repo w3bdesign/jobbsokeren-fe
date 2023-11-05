@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {BrowserRouter,Routes, Route} from 'react-router-dom';
 
 import ProtectedRoute from './components/Authentication/ProtectedRoute';
+//import Footer from './components/Layout/Footer';
 import Footer from './components/Layout/Footer';
 import Navbar from './components/Layout/Navbar'; 
 import LoadingDisplayer from './components/UI/LoadingDisplayerTransparent';
