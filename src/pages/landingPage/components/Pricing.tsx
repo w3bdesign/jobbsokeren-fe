@@ -1,18 +1,54 @@
 import { CheckIcon } from '@heroicons/react/24/solid';
+//import { loadStripe } from '@stripe/stripe-js';
+import { collection, doc, addDoc, onSnapshot } from 'firebase/firestore';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Element } from 'react-scroll';
 
-import { priceData } from '@/data/priceData';
+import ButtonLoadingIndicator from '@/components/UI/ButtonLoadingIndicator';
+import { db } from '@/firebase.config';
+import { useCheckout } from '@/hooks/useCheckoutStripe';
 import useFetchFirebaseProductData from '@/hooks/useFetchFirebaseProductsData';
+import { RootState } from '@/store/store';
 
 
 const Pricing = () => {
 
 
-
+   // const apiKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
+    const user = useSelector((state: RootState) => state.auth.user);
     const { data, error, loading } = useFetchFirebaseProductData();
+    const {checkOut, error: checkOutError, loading: checkOutLoading} = useCheckout(user);
+    const [subscriptionRole, setSubscriptionRole] = useState<string>('');
+    const [subscriptionActive, setSubscriptionActive] = useState<string>('inactive');
+    const sortedData = data ? [...data].sort((a, b) => a.order - b.order) : null;
 
-     // Ensure data is not null or undefined before sorting
-     const sortedData = data ? [...data].sort((a, b) => a.order - b.order) : null;
+
+    const baseButtonClass ='w-full py-4 my-4 text-white transition duration-300 border bg-indigo-600 border-indigo-600 hover:text-indigo-600 hover:border-indigo-600 rounded-md';
+    const buttonLoading = checkOutLoading ? 'hover:bg-indigo-600' : 'hover:bg-transparent';
+
+    
+    useEffect(() => {
+            if (!user) {
+                setSubscriptionRole('unregistered');
+                return;
+            }
+            const customerDocRef = doc(db, 'customers', user.uid);
+            const subscriptionColRef = collection(customerDocRef, 'subscriptions');
+
+            onSnapshot(subscriptionColRef, (snap) => {
+                snap.forEach((doc) => {
+                    const data = doc.data();
+                    setSubscriptionActive(data.status);
+                    setSubscriptionRole(data.items[0].price.product.metadata.role);
+                });
+            });
+            }
+    , [user]);
+
+    if (loading) {
+        return <div>Loading products...</div>; 
+    }
 
     return ( 
         <Element name="pricing" className="w-full text-white my-24">
@@ -31,7 +67,7 @@ const Pricing = () => {
                                     <div>
                                         <span className="uppercase px-3 py-1 bg-indigo-200 rounded-2xl text-sm ">{item.name}</span>
                                         <div>
-                                            <p className="text-6xl font-bold py-4 flex">{item.price?.description}<span className="text-xl text-slate-500 flex flex-col justify-end">,–/Mnd</span></p>
+                                            <p className="text-6xl font-bold py-4 flex">{item.prices?.description }<span className="text-xl text-slate-500 flex flex-col justify-end">,–/Mnd</span></p>
                                         </div>
                                         <p className="text-2xl text-slate-500 lg:h-[120px]">{item.description}</p>
                                         <div className="text-2xl my-3">
@@ -41,7 +77,13 @@ const Pricing = () => {
                                         </div>
                                     </div>
                                     <div>
-                                        <button className="w-full py-4 my-4">Kom i gang!</button>
+                                    {subscriptionActive === 'active' && subscriptionRole === item.metadata.role ? (
+                                            <button disabled className="w-full py-4 my-4 bg-green-600 text-white border-gray-200 hover:border-green-700 cursor-not-allowed">Ditt abonnent</button>
+                                        ) : (
+                                            <button disabled={checkOutLoading} onClick={() => checkOut(item.prices?.id)} className={`${baseButtonClass} ${buttonLoading}`}>
+                                                 {checkOutLoading ? <ButtonLoadingIndicator/> : (user ? 'Bytt abonnent' : 'Kom igang!')}
+                                            </button>
+                                        )}
                                     </div>
                                 </div> 
                             )
