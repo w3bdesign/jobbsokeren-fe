@@ -1,6 +1,7 @@
 import { CheckIcon } from '@heroicons/react/24/solid';
 //import { loadStripe } from '@stripe/stripe-js';
 import { collection, doc, addDoc, onSnapshot } from 'firebase/firestore';
+import { getFunctions, httpsCallable } from 'firebase/functions';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Element } from 'react-scroll';
@@ -12,6 +13,11 @@ import useFetchFirebaseProductData from '@/hooks/useFetchFirebaseProductsData';
 import { RootState } from '@/store/store';
 
 
+interface PortalLinkResponse {
+    url?: string;
+}
+
+
 const Pricing = () => {
 
 
@@ -20,14 +26,49 @@ const Pricing = () => {
     const { data, error, loading } = useFetchFirebaseProductData();
     const {checkOut, error: checkOutError, loading: checkOutLoading} = useCheckout(user);
     const [subscriptionRole, setSubscriptionRole] = useState<string>('');
+    const [loadingChangeSubscription, setLoadingChangeSubscription] = useState<boolean>(false);
     const [subscriptionActive, setSubscriptionActive] = useState<string>('inactive');
     const sortedData = data ? [...data].sort((a, b) => a.order - b.order) : null;
 
 
     const baseButtonClass ='w-full py-4 my-4 text-white transition duration-300 border bg-indigo-600 border-indigo-600 hover:text-indigo-600 hover:border-indigo-600 rounded-md';
-    const buttonLoading = checkOutLoading ? 'hover:bg-indigo-600' : 'hover:bg-transparent';
+    const currentSubscriptionButtonClass ='w-full py-4 transition duration-300 my-4 bg-green-600 text-white border-gray-200 hover:border-green-700';
+    const buttonLoadingClass = checkOutLoading ? 'hover:bg-indigo-600' : 'hover:bg-transparent';
 
+
+    const changeSubscription = async () => {
+
+        if (!user) {
+            return;
+        }
+
+        setLoadingChangeSubscription(true);
+        
+        const functions = getFunctions();
+        const functionRef = httpsCallable<object, PortalLinkResponse>(functions, 'ext-firestore-stripe-payments-createPortalLink');
+
+        functionRef({
+            returnUrl: `${window.location.origin}/abonnent`,
+            locale: 'auto',
+        })
+        .then((result) => {
+            const data = result.data;
+
+            if (data && data.url) {
+                window.location.assign(data.url);
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+        .finally(() => {
+            setLoadingChangeSubscription(false);
+        });
+
+    }
+   
     
+    // this effect is used to check if the user has an active subscription 
     useEffect(() => {
             if (!user) {
                 setSubscriptionRole('unregistered');
@@ -39,6 +80,7 @@ const Pricing = () => {
             onSnapshot(subscriptionColRef, (snap) => {
                 snap.forEach((doc) => {
                     const data = doc.data();
+                    console.log(data)
                     setSubscriptionActive(data.status);
                     setSubscriptionRole(data.items[0].price.product.metadata.role);
                 });
@@ -77,13 +119,22 @@ const Pricing = () => {
                                         </div>
                                     </div>
                                     <div>
-                                    {subscriptionActive === 'active' && subscriptionRole === item.metadata.role ? (
-                                            <button disabled className="w-full py-4 my-4 bg-green-600 text-white border-gray-200 hover:border-green-700 cursor-not-allowed">Ditt abonnent</button>
-                                        ) : (
-                                            <button disabled={checkOutLoading} onClick={() => checkOut(item.prices?.id)} className={`${baseButtonClass} ${buttonLoading}`}>
-                                                 {checkOutLoading ? <ButtonLoadingIndicator/> : (user ? 'Bytt abonnent' : 'Kom igang!')}
+                                        {subscriptionActive === 'active' && subscriptionRole === item.metadata.role && 
+                                            <button disabled={loadingChangeSubscription} onClick={() => changeSubscription()} className={`${currentSubscriptionButtonClass} ${buttonLoadingClass}`}>
+                                                {loadingChangeSubscription ? <ButtonLoadingIndicator/> : 'Ditt Abonnement'} 
                                             </button>
-                                        )}
+                                        } 
+                                        {subscriptionActive === 'active' && subscriptionRole !== item.metadata.role &&
+                                            <button disabled={loadingChangeSubscription} onClick={() => changeSubscription()} className={`${baseButtonClass} ${buttonLoadingClass}`}>
+                                                {loadingChangeSubscription ? <ButtonLoadingIndicator/> : (user ? 'Bytt Abonnement' : 'Kom igang!')}
+                                            </button>
+                                        }
+
+                                        { subscriptionActive !== 'active' && 
+                                            <button disabled={checkOutLoading} onClick={() => checkOut(item.prices?.id)} className={`${baseButtonClass} ${buttonLoadingClass}`}>
+                                                    {checkOutLoading ? <ButtonLoadingIndicator/> : ('Kom igang!')}
+                                            </button>
+                                        }
                                     </div>
                                 </div> 
                             )

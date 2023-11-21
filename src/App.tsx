@@ -14,6 +14,7 @@ import EditorPage from './pages/editorPage';
 import LandingPage from './pages/landingPage';
 import NotFoundPage from './pages/notFoundpage';
 import ProfilePage from './pages/profilePage';
+import SubscriptionPage from './pages/subscriptionPage';
 import { auth } from '@/firebase.config';
 import { loginSuccess, logout } from '@/store/slices/authentication/authSlice';
 import { RootState } from '@/store/store';
@@ -61,6 +62,7 @@ function App() {
               <Routes>
                   <Route path="/" element={<LandingPage/>}/>
                   <Route path="/profil" element={<ProtectedRoute user={user}><ProfilePage/></ProtectedRoute>}/>
+                  <Route path="/abonnent" element={<ProtectedRoute user={user}><SubscriptionPage/></ProtectedRoute>}/>
                   <Route path="/jobbsokeren" element={<EditorPage/>}/>
                   <Route path="/artikler" element={<ArticlesPage/>}/>
                   <Route path="/artikler/:slug" element={<ArticlePage/>}/>
