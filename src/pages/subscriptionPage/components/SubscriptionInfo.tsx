@@ -13,9 +13,6 @@ import { db } from '@/firebase.config';
 import { RootState } from '@/store/store';
 
 
-
-
-
 interface PortalLinkResponse {
     url?: string;
 }
@@ -46,23 +43,22 @@ const SubscriptionInfo: React.FC = () => {
 
       // this effect is used to check if the user has an active subscription 
       useEffect(() => {
-        if (!user) {
-            return;
-        }
-        setSubscriptionInfoLoading(true);
-        const customerDocRef = doc(db, 'customers', user.uid);
-        const subscriptionColRef = collection(customerDocRef, 'subscriptions');
+            if (!user) {
+                return;
+            }
+            setSubscriptionInfoLoading(true);
+            const customerDocRef = doc(db, 'customers', user.uid);
+            const subscriptionColRef = collection(customerDocRef, 'subscriptions');
 
 
-        onSnapshot(subscriptionColRef, (snap) => {
-            snap.forEach((doc) => {
-                const data = doc.data();
-                setSubscriptionInfo(data.items[0].price);
+            onSnapshot(subscriptionColRef, (snap) => {
+                snap.forEach((doc) => {
+                    const data = doc.data();
+                    setSubscriptionInfo(data.items[0].price);
+                });
             });
-        });
-        setSubscriptionInfoLoading(false);
-        }
-, [user]);
+            setSubscriptionInfoLoading(false);
+        }, [user]);
 
 
 

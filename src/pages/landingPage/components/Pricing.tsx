@@ -37,6 +37,7 @@ const Pricing = () => {
 
 
     const changeSubscription = async () => {
+        console.log('change subscription');
 
         if (!user) {
             return;
@@ -70,23 +71,24 @@ const Pricing = () => {
     
     // this effect is used to check if the user has an active subscription 
     useEffect(() => {
+        console.log('use effect');
             if (!user) {
+                setSubscriptionActive('inactive');
                 setSubscriptionRole('unregistered');
                 return;
             }
+
             const customerDocRef = doc(db, 'customers', user.uid);
             const subscriptionColRef = collection(customerDocRef, 'subscriptions');
 
             onSnapshot(subscriptionColRef, (snap) => {
                 snap.forEach((doc) => {
                     const data = doc.data();
-                    console.log(data)
                     setSubscriptionActive(data.status);
                     setSubscriptionRole(data.items[0].price.product.metadata.role);
                 });
             });
-            }
-    , [user]);
+    },[user]);
 
     if (loading) {
         return <div>Loading products...</div>; 

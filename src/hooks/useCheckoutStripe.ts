@@ -1,9 +1,12 @@
 import { loadStripe } from '@stripe/stripe-js';
 import type { User } from 'firebase/auth';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { collection, doc, addDoc, onSnapshot } from 'firebase/firestore';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { db } from '@/firebase.config';
+import { loginStart, loginSuccess, loginFailure } from '@/store/slices/authentication/authSlice';
 
 const apiKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
 
@@ -17,15 +20,30 @@ type UseCheckoutProps = {
 export const useCheckout = (user: User | null) : UseCheckoutProps => {
     const [error, setError] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
+    const dispatch = useDispatch();
+    const auth = getAuth();
 
     const checkOut = async (priceId: string | undefined) => {
         setLoading(true);
         console.log('priceId', priceId);
     
-        if (!user || !priceId) {
-            setError('User or price ID is missing.');
+        if (!priceId) {
+            setError('Price ID is missing.');
             setLoading(false);
             return;
+        }
+
+        // If user is not logged in, authenticate them
+        if (!user) {
+            try {
+                const provider = new GoogleAuthProvider();
+                user = (await signInWithPopup(auth, provider)).user;
+                dispatch(loginSuccess(user));
+            } catch (e) {
+                setLoading(false);
+                dispatch(loginFailure('An error occurred while authenticating.'));
+                return;
+            }
         }
     
         try {
