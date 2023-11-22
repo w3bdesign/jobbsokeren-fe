@@ -36,6 +36,7 @@ const Pricing = () => {
     const buttonLoadingClass = checkOutLoading ? 'hover:bg-indigo-600' : 'hover:bg-transparent';
 
 
+    // TODO make as a custom hook
     const changeSubscription = async () => {
         console.log('change subscription');
 
@@ -71,7 +72,6 @@ const Pricing = () => {
     
     // this effect is used to check if the user has an active subscription 
     useEffect(() => {
-        console.log('use effect');
             if (!user) {
                 setSubscriptionActive('inactive');
                 setSubscriptionRole('unregistered');

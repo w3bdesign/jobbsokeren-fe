@@ -10,6 +10,7 @@ import AvatarText from '@/components/UI/AvatarText';
 import DeleteButton from '@/components/UI/DeleteButton';
 import SubmitButton from '@/components/UI/SubmitButton';
 import { db } from '@/firebase.config';
+import Pricing from '@/pages/landingPage/components/Pricing';
 import { RootState } from '@/store/store';
 
 
@@ -48,12 +49,18 @@ const SubscriptionInfo: React.FC = () => {
             }
             setSubscriptionInfoLoading(true);
             const customerDocRef = doc(db, 'customers', user.uid);
+            console.log(customerDocRef);
             const subscriptionColRef = collection(customerDocRef, 'subscriptions');
 
 
             onSnapshot(subscriptionColRef, (snap) => {
                 snap.forEach((doc) => {
+                    console.log(doc.data());
                     const data = doc.data();
+                    if (!data) {
+                        setSubscriptionInfo({} as SubscriptionInfoProps);
+                        return;
+                    }
                     setSubscriptionInfo(data.items[0].price);
                 });
             });
@@ -101,7 +108,9 @@ const SubscriptionInfo: React.FC = () => {
 
     return (
         <>
+                {  subscriptionInfo && subscriptionInfo.product && subscriptionInfo.product.features.length > 0 ? 
             <div className="w-full">
+
                     <div className="justify-center sm:p-28">
                     <div className="my-6 flex flex-col sm:flex-row justify-between">
                         <h2 className="mb-12 text-3xl font-bold sm:text-5xl">Mitt Abonnement</h2>
@@ -143,8 +152,12 @@ const SubscriptionInfo: React.FC = () => {
                             <SubmitButton  handleClick={changeSubscription}  isLoading={loadingChangeSubscription} buttonText='Endre abonnement'/>
                         </div>
                     </div>
+                    
+                    
                
             </div>
+                   :      <Pricing /> 
+                    }
         </>
         );
     };
