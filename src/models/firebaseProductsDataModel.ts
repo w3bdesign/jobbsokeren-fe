@@ -1,4 +1,5 @@
 export interface FirebaseProductsData {
+    features: string[];
     active: boolean;
     description: string;
     id?: string;

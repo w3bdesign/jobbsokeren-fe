@@ -1,16 +1,16 @@
-import { CheckIcon } from '@heroicons/react/24/solid';
-//import { loadStripe } from '@stripe/stripe-js';
-import { collection, doc, addDoc, onSnapshot } from 'firebase/firestore';
+import { collection, doc, onSnapshot } from 'firebase/firestore';
 import { getFunctions, httpsCallable } from 'firebase/functions';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Element } from 'react-scroll';
 
-import ButtonLoadingIndicator from '@/components/UI/ButtonLoadingIndicator';
+import LoadingDisplayer from '@/components/UI/LoadingDisplayerTransparent';
+import PricingCard from '@/components/UI/PricingCard';
 import { db } from '@/firebase.config';
 import { useCheckout } from '@/hooks/useCheckoutStripe';
 import useFetchFirebaseProductData from '@/hooks/useFetchFirebaseProductsData';
 import { RootState } from '@/store/store';
+
 
 
 interface PortalLinkResponse {
@@ -20,21 +20,13 @@ interface PortalLinkResponse {
 
 const Pricing = () => {
 
-
-   // const apiKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
     const user = useSelector((state: RootState) => state.auth.user);
-    const { data, error, loading } = useFetchFirebaseProductData();
+    const { data: productData, error, loading } = useFetchFirebaseProductData();
     const {checkOut, error: checkOutError, loading: checkOutLoading} = useCheckout(user);
     const [subscriptionRole, setSubscriptionRole] = useState<string>('');
     const [loadingChangeSubscription, setLoadingChangeSubscription] = useState<boolean>(false);
     const [subscriptionActive, setSubscriptionActive] = useState<string>('inactive');
-    const sortedData = data ? [...data].sort((a, b) => a.order - b.order) : null;
-
-
-    const baseButtonClass ='w-full py-4 my-4 text-white transition duration-300 border bg-indigo-600 border-indigo-600 hover:text-indigo-600 hover:border-indigo-600 rounded-md';
-    const currentSubscriptionButtonClass ='w-full py-4 transition duration-300 my-4 bg-green-600 text-white border-gray-200 hover:border-green-700';
-    const buttonLoadingClass = checkOutLoading ? 'hover:bg-indigo-600' : 'hover:bg-transparent';
-
+    
 
     // TODO make as a custom hook
     const changeSubscription = async () => {
@@ -90,10 +82,6 @@ const Pricing = () => {
             });
     },[user]);
 
-    if (loading) {
-        return <div>Loading products...</div>; 
-    }
-
     return ( 
         <Element name="pricing" className="w-full text-white my-24">
             <div className="w-full h-[800px] bg-slate-900 absolute">
@@ -104,48 +92,20 @@ const Pricing = () => {
                         <h3 className="text-5xl font-bold text-white py-8">Finn riktig løsning for ditt behov</h3>
                         <p className="text-3xl">Vi tilbyr en rekke prispakker, inkludert en gratis løsing med litt begrenset antall, samt flere betalte pakker med mindre begrensninger.</p>
                     </div>
-                    <div className="grid md:grid-cols-3 ">
-                        {sortedData?.map((item, index) => {
-                            return (
-                                <div key={index} className="bg-white text-slate-900 m-4 p-8 rounded-xl shadow-2xl flex flex-col justify-between relative">
-                                    <div>
-                                        <span className="uppercase px-3 py-1 bg-indigo-200 rounded-2xl text-sm ">{item.name}</span>
-                                        <div>
-                                            <p className="text-6xl font-bold py-4 flex">{item.prices?.description }<span className="text-xl text-slate-500 flex flex-col justify-end">,–/Mnd</span></p>
-                                        </div>
-                                        <p className="text-2xl text-slate-500 lg:h-[120px]">{item.description}</p>
-                                        <div className="text-2xl my-3">
-                                            <p className="flex py-4 "><CheckIcon className="w-8 mr-5 text-green-600"/>{`Inkluderer ${item.name}`} søknader </p>
-                                            <p className="flex py-4 "><CheckIcon className="w-8 mr-5 text-green-600"/>Siste generasjons AI GPT-4</p>
-                                            <p className="flex py-4 "><CheckIcon className="w-8 mr-5 text-green-600"/>Nedlastbare søknader </p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        {subscriptionActive === 'active' && subscriptionRole === item.metadata.role && 
-                                            <button disabled={loadingChangeSubscription} onClick={() => changeSubscription()} className={`${currentSubscriptionButtonClass} ${buttonLoadingClass}`}>
-                                                {loadingChangeSubscription ? <ButtonLoadingIndicator/> : 'Ditt Abonnement'} 
-                                            </button>
-                                        } 
-                                        {subscriptionActive === 'active' && subscriptionRole !== item.metadata.role &&
-                                            <button disabled={loadingChangeSubscription} onClick={() => changeSubscription()} className={`${baseButtonClass} ${buttonLoadingClass}`}>
-                                                {loadingChangeSubscription ? <ButtonLoadingIndicator/> : (user ? 'Bytt Abonnement' : 'Kom igang!')}
-                                            </button>
-                                        }
-
-                                        { subscriptionActive !== 'active' && 
-                                            <button disabled={checkOutLoading} onClick={() => checkOut(item.prices?.id)} className={`${baseButtonClass} ${buttonLoadingClass}`}>
-                                                    {checkOutLoading ? <ButtonLoadingIndicator/> : ('Kom igang!')}
-                                            </button>
-                                        }
-                                    </div>
-                                </div> 
-                            )
-                        })}
-                    </div>
+                    {loading ?  <LoadingDisplayer/> : 
+                    <div className={`grid md:grid-cols-${productData?.length} justify-items-center`}>
+                        {productData?.map((item, index) => (
+                            <PricingCard 
+                                key={index}
+                                item={item}
+                                isActive={subscriptionActive === 'active' && subscriptionRole === item.metadata.role}
+                                isLoading={subscriptionActive === 'active' ? loadingChangeSubscription : checkOutLoading}
+                                onSubscriptionChange={changeSubscription}
+                                checkOut={checkOut}
+                            />
+                        ))}
+                    </div>}
                 </div>
-            
-
-            
         </Element>
     )
 }

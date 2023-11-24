@@ -35,6 +35,10 @@ const useFetchFirebaseProductData = (): UseFetchProductsDataProps => {
             });
 
             const updatedProductsData = await Promise.all(productsDataPromises);
+            // sort data by order
+
+            await new Promise((resolve) => setTimeout(resolve, 3000));
+            updatedProductsData.sort((a, b) => a.order - b.order);
             setData(updatedProductsData);
 
         } catch (error) {
