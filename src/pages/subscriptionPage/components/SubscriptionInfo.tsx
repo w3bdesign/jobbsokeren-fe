@@ -8,9 +8,12 @@ import { useSelector } from 'react-redux';
 import CardImage from '@/assets/images/png/subcard.webp'
 import AvatarText from '@/components/UI/AvatarText';
 import DeleteButton from '@/components/UI/DeleteButton';
+import LoadingDisplayer from '@/components/UI/LoadingDisplayerBackground';
+import PricingCard from '@/components/UI/PricingCard';
 import SubmitButton from '@/components/UI/SubmitButton';
 import { db } from '@/firebase.config';
-import Pricing from '@/pages/landingPage/components/Pricing';
+import { useCheckout } from '@/hooks/useCheckoutStripe';
+import useFetchFirebaseProductData from '@/hooks/useFetchFirebaseProductsData';
 import { RootState } from '@/store/store';
 
 
@@ -38,6 +41,8 @@ interface SubscriptionFeatures {
 const SubscriptionInfo: React.FC = () => {
 
     const user = useSelector((state: RootState) => state.auth.user);
+    const { data: productData, error, loading } = useFetchFirebaseProductData();
+    const {checkOut, error: checkOutError, loading: checkOutLoading} = useCheckout(user);
     const [subscriptionInfo, setSubscriptionInfo] = useState<SubscriptionInfoProps>({} as SubscriptionInfoProps);
     const [subscriptionInfoLoading, setSubscriptionInfoLoading] = useState<boolean>(false);
     const [loadingChangeSubscription, setLoadingChangeSubscription] = useState<boolean>(false);
@@ -102,16 +107,15 @@ const SubscriptionInfo: React.FC = () => {
 
    
     if (subscriptionInfoLoading) {
-        return <div>Logg inn for å se abonnementet ditt</div>;
+        return <LoadingDisplayer/>;
     }
 
 
     return (
         <>
-                {  subscriptionInfo && subscriptionInfo.product && subscriptionInfo.product.features.length > 0 ? 
+            {  subscriptionInfo && subscriptionInfo.product && subscriptionInfo.product.features.length > 0 ? 
             <div className="w-full">
-
-                    <div className="justify-center sm:p-28">
+                <div className="justify-center sm:p-28">
                     <div className="my-6 flex flex-col sm:flex-row justify-between">
                         <h2 className="mb-12 text-3xl font-bold sm:text-5xl">Mitt Abonnement</h2>
                         <div className="hidden sm:block">
@@ -151,13 +155,41 @@ const SubscriptionInfo: React.FC = () => {
                             <DeleteButton  handleDelete={changeSubscription}  isLoading={loadingChangeSubscription} buttonText="Avslutt abonnement"/>
                             <SubmitButton  handleClick={changeSubscription}  isLoading={loadingChangeSubscription} buttonText='Endre abonnement'/>
                         </div>
-                    </div>
-                    
-                    
-               
+                </div>
             </div>
-                   :      <Pricing /> 
-                    }
+
+            :      
+            
+            <div className="w-full">
+                 <div className="justify-center sm:p-28">
+                    <div className="my-6 flex flex-col sm:flex-row justify-between">
+                        <h2 className="mb-12 text-3xl font-bold sm:text-5xl">Bli Abonnement</h2>
+                        <div className="hidden sm:block">
+                            <AvatarText name={user?.displayName} email={user?.email} image={user?.photoURL} />
+                        </div>
+                    </div>
+                    <div className="mb-5">
+                        <div className="my-8 sm:w-1/2">
+                            <h2 className="text-base font-semibold leading-7 text-gray-900">Ved å bli abonnent får du er rekke fordeler!</h2>
+                            <p className="mt-1 text-sm leading-6 text-gray-600">Et abonnementet hos oss er lett og opprette og administrere. Velg abonnement under:</p>
+                        </div>
+                        {loading ?  <LoadingDisplayer/> : 
+                        <div className={`grid md:grid-cols-${productData?.length} justify-items-center p-10`}>
+                            {productData?.map((item, index) => (
+                                <PricingCard 
+                                key={index}
+                                item={item}
+                                isActive={false}
+                                isLoading={checkOutLoading}
+                                onSubscriptionChange={changeSubscription}
+                                checkOut={checkOut}
+                                />
+                            ))}
+                        </div>}
+                    </div>
+                 </div>
+            </div> 
+            }
         </>
         );
     };
