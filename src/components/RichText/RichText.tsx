@@ -47,7 +47,7 @@ const components : PortableTextComponents = {
     },
 
     block: ({children} ) => <p style={{marginBottom: 20}}>{children}</p>,
-
+    
     list: {
         bullet: ({children}  ) => <ul style={{listStyleType: 'auto'}}>{children}</ul>,
         number: ({children} ) => <ol style={{listStyleType: 'decimal'}}>   {children}</ol>,
