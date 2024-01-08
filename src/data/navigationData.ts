@@ -17,14 +17,15 @@ export const navigationData: Array<NavigationLinksModel> = [
         offset: -100
     },
     {
-        name: 'CV og søknadstips', 
-        link: '/tips', 
-        offset: -150
-    },  
-    {
         name: 'Priser', 
         link: '/pricing', 
         offset: -50
     },
+    {
+        name: 'CV og søknadstips', 
+        link: '/tips', 
+        offset: -150
+    },  
+   
 
 ]

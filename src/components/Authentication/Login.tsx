@@ -32,7 +32,7 @@ const Login: React.FC<LoginProps> = ({ children }) => {
   };
 
   return (
-    <div onClick={signInWithGoogle}>
+    <div className='inline' onClick={signInWithGoogle}>
       {children}
     </div>
   );

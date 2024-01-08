@@ -9,6 +9,7 @@ const EditorNewsLetterModal : React.FC =  () => {
     const submitCount = useSelector((state: RootState) => state.editorSubmitCount.value);
     const editorIsLoading = useSelector((state: RootState) => state.editorIsLoading.value);
     const [startModal, setStartModal] = useState<boolean>(false);
+    
     const handleModal = (startModal: boolean) => {
         setStartModal(startModal)
         if (startModal === false) {

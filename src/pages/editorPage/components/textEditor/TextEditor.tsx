@@ -3,6 +3,7 @@ import React,  {useEffect, ReactElement, useRef} from 'react';
 import {ThreeCircles} from 'react-loader-spinner'
 import { useSelector, useDispatch } from 'react-redux';
 
+import SubscriptionCover from '../subscriptionCover/subscriptionCover';
 import useApi from '@/hooks/useApi';
 import { setEditorData } from '@/store/slices/editor/editorDataSlice';
 import { RootState } from '@/store/store';
@@ -16,6 +17,7 @@ const TextEditor: React.FC = (): ReactElement => {
     const ApiKey = import.meta.env.VITE_TINY_API_KEY;
     const editor = useRef<TinyMCEEditor | null>(null);
     const  dispatch = useDispatch();
+  
     const { editorIsLoading, editorFetchedData, editorData } = useSelector((state: RootState) => ({
       editorIsLoading: state.editorIsLoading.value,
       editorFetchedData: state.editorFetchedData.value,
@@ -70,15 +72,18 @@ const TextEditor: React.FC = (): ReactElement => {
               <ThreeCircles
                  height={100}
                  width={100}
-                  color="#4f46e5"                
-                  wrapperClass="m-auto "
-                  visible={editorIsLoading}
-                  ariaLabel="three-circles-rotating"
+                 color="#4f46e5"                
+                 wrapperClass="m-auto "
+                 visible={editorIsLoading}
+                 ariaLabel="three-circles-rotating"
               />
             </div>
           }
           
-          <div className='p-2 bg-zinc-100 h-full'>
+          <div className='p-2 relative bg-zinc-100 h-full'>
+            { /* display a modal with subscription offers */}
+            <SubscriptionCover/>
+            {/* Editor */}
             <TinyMCEEditor 
               ref={editor}         
               initialValue={editorData}

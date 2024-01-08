@@ -42,7 +42,7 @@ const SideBar : React.FC<SideBarProps> =({showSideBar, handleSideBar}) => {
 
 
     return (
-        <div id="drawer-navigation" ref={sidebarRef} className={`fixed top-20 right-0 z-40 w-72 h-screen p-4 overflow-y-auto transition-transform duration-300 transform bg-zinc-50 drop-shadow-md ${showSideBar ? 'translate-x-0' : 'translate-x-full'}`}  aria-labelledby="drawer-navigation-label">
+        <div id="drawer-navigation" ref={sidebarRef} className={`fixed top-20 right-0 z-50 w-72 h-screen p-4 overflow-y-auto transition-transform duration-300 transform bg-zinc-50 drop-shadow-md ${showSideBar ? 'translate-x-0' : 'translate-x-full'}`}  aria-labelledby="drawer-navigation-label">
              <h5 id="drawer-navigation-label" className="text-base font-semibold text-gray-500 uppercase">{user?.displayName}</h5> 
             <button onClick={handleSideBar} type="button" className="absolute top-3 right-6 text-gray-400 bg-transparent border-none hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
                 <XMarkIcon className="w-6 h-6 text-gray-600" aria-hidden="true" />
