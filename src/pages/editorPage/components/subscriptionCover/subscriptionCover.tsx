@@ -62,14 +62,8 @@ const SubscriptionCover : React.FC = () => {
         }
 
         if (submitCount > 0 && !editorIsLoading && !subscriptionActive) {
-            console.log('submit' + submitCount);
-            console.log('loading' + editorIsLoading);
-            console.log('subscription' + subscriptionActive);
             setDisplaySubscriptionModal(false);
         } else {
-            console.log('submit' + submitCount);
-            console.log('loading' + editorIsLoading);
-            console.log('subscription' + subscriptionActive);
             setDisplaySubscriptionModal(true);
         }
         
