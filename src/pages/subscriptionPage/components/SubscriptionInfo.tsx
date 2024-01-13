@@ -122,7 +122,7 @@ const SubscriptionInfo: React.FC = () => {
                             <AvatarText name={user?.displayName} email={user?.email} image={user?.photoURL} />
                         </div>
                     </div>
-                        <div className="flex my-24 flex-wrap justify-center">
+                        <div className="flex flex-row md:flex-row my-24 justify-center">
                             <div className="flex flex-col max-w-sm bg-white rounded-xl shadow-xl flex-1 m-5">
                                 <img className="rounded-t-lg h-[250px] w-full object-cover"
                                     src={CardImage}
