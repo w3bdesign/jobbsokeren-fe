@@ -38,7 +38,7 @@ const MiniPdfViewer: React.FC<MiniPdfViewerProps> = ({url}) => {
     }
 
     return (
-        <div className="rounded-xl shadow-xl h-[650px] w-[460px]">
+        <div className="rounded-xl shadow-xl h-[635px] sm:w-[460px]">
             <div className="p-2 flex justify-center">
             <div className="relative" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
                 <Document file={url} onLoadSuccess={onDocumentLoadSuccess} >
