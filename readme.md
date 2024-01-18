@@ -60,4 +60,5 @@ Deployed to azure app service using github actions.
 
 
 ## URL to deployed application
-https://www.jobbsoknader.com/
+
+[jobbsoknader.no](https://jobbsoknader.no)
