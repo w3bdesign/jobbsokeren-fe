@@ -54,12 +54,6 @@ Deployed to azure app service using github actions.
 - [OpenAI](https://openai.com/) - AI service
 - [Azure](https://azure.microsoft.com/) - Cloud service
 
-
-## Authors
-
-- **Mats Gundersen**  - [matsgund](https://github.com/matsgund)
-
-
 ## URL to deployed application
 
 - https://jobbsoknader.no/
