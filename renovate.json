@@ -1,0 +1,45 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", "security:openssf-scorecard"],
+  "schedule": ["before 6am on saturday"],
+  "timezone": "Europe/Oslo",
+  "minimumReleaseAge": "7 days",
+  "internalChecksFilter": "strict",
+  "prHourlyLimit": 5,
+  "prConcurrentLimit": 10,
+  "ignoreTests": true,
+  "packageRules": [
+    {
+      "rangeStrategy": "bump",
+      "matchDepTypes": [
+        "dependencies",
+        "devDependencies",
+        "optionalDependencies",
+        "peerDependencies"
+      ]
+    },
+    {
+      "matchUpdateTypes": ["minor", "pin", "digest"],
+      "automerge": true,
+      "ignoreTests": false,
+      "matchDepTypes": [
+        "dependencies",
+        "devDependencies",
+        "optionalDependencies",
+        "peerDependencies"
+      ]
+    },
+    {
+      "matchUpdateTypes": ["patch", "lockFileMaintenance"],
+      "automerge": true,
+      "automergeType": "branch",
+      "ignoreTests": false,
+      "matchDepTypes": [
+        "dependencies",
+        "devDependencies",
+        "optionalDependencies",
+        "peerDependencies"
+      ]
+    }
+  ]
+}
